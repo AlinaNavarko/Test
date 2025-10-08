@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конфигуратор серверов - Выбор категорий</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+        
+        /* MAIN HEADER */
+        .main-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            font-size: 1.3em;
+        }
+        
+        .logo-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1em;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            background: #f5f5f5;
+            color: #667eea;
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .cart-icon-link {
+            position: relative;
+            font-size: 1.5em;
+            padding: 8px 12px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .cart-icon-link:hover {
+            transform: scale(1.1);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: #ff4757;
+            color: white;
+            font-size: 0.5em;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+        
+        .cart-badge.hidden {
+            display: none;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+        }
+        
+        /* SIDEBAR MENU */
+        .sidebar-menu {
+            width: 250px;
+            background: #f8f9fa;
+            border-right: 2px solid #e0e0e0;
+            padding: 20px 0;
+            flex-shrink: 0;
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
+        }
+        
+        .sidebar-header {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #333;
+            padding: 0 20px 15px 20px;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+        
+        .sidebar-section-title {
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #667eea;
+            padding: 0 20px 10px 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .sidebar-section-title.collapsible {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-section-title.collapsible:hover {
+            color: #5568d3;
+        }
+        
+        .toggle-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-icon.open {
+            transform: rotate(-180deg);
+        }
+        
+        .sidebar-link {
+            display: block;
+            padding: 10px 20px 10px 35px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+        
+        .sidebar-link:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 0 60px 60px 60px !important;
+        }
+        
+        .series-models-section {
+            padding: 0 !important;
+            display: none;
+            flex: 1;
+        }
+        
+        .series-models-section.active {
+            display: block;
+        }
+        
+        .sidebar-menu.hidden {
+            display: none !important;
+        }
+        
+        .page-header-models {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 60px;
+            text-align: center;
+        }
+        
+        .page-header-models h1 {
+            font-size: 2.5em;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+        
+        .page-header-subtitle {
+            font-size: 1.1em;
+            margin: 0;
+            opacity: 0.95;
+        }
+        
+        .models-content-area {
+            padding: 30px 60px 60px 60px;
+        }
+        
+        .main-section-title {
+            text-align: center;
+            font-size: 2em;
+            color: #333;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+        }
+        
+        .main-section-subtitle {
+            text-align: center;
+            font-size: 1.1em;
+            color: #666;
+            margin: 0 0 30px 0;
+        }
+        
+        /* Mobile responsive for header */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 12px 15px;
+            }
+            
+            .logo {
+                font-size: 1.2em;
+            }
+            
+            .main-nav {
+                gap: 10px;
+            }
+            
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 0.85em;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+                padding-top: 20px;
+            }
+            
+            .main-section-title {
+                font-size: 1.5em;
+            }
+            
+            .main-section-subtitle {
+                font-size: 0.95em;
+            }
+            
+            .main-content {
+                padding: 0 20px 30px 20px;
+            }
+            
+            .series-models-section {
+                padding: 0 !important;
+            }
+            
+            .page-header-models {
+                padding: 25px 20px;
+            }
+            
+            .page-header-models h1 {
+                font-size: 1.6em;
+            }
+            
+            .page-header-subtitle {
+                font-size: 0.95em;
+            }
+            
+            .models-content-area {
+                padding: 20px 20px 30px 20px;
+            }
+            
+            .sidebar-menu {
+                display: none;
+            }
+        }
+        
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-top: 30px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        /* Категории серверов */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .category-card {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .category-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .category-card.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .category-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .category-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .category-description {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        /* Серии */
+        .series-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        
+        .series-section.active {
+            display: block;
+        }
+        
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .series-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .series-card:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+        
+        .series-card.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .series-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .series-description {
+            font-size: 0.85em;
+            color: #999;
+        }
+        
+        /* Модели серверов */
+        .models-section {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .models-section.active {
+            display: block;
+        }
+        
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .model-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .model-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .model-card.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .model-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .model-specs {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .model-description {
+            font-size: 0.85em;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .back-btn {
+            margin-right: 10px;
+        }
+        
+        .breadcrumb {
+            padding: 15px 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+            color: #666;
+        }
+        
+        .breadcrumb span {
+            margin: 0 5px;
+        }
+        
+        .breadcrumb .active {
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        /* Кнопки поколений */
+        .generation-btn:hover {
+            background: #5568d3 !important;
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* SERIES QUICK NAVIGATION */
+        .series-quick-nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 2px solid #e0e0e0;
+            padding: 12px 20px;
+            margin: -20px -20px 20px -20px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .series-quick-nav-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .series-nav-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        #seriesNavLinks {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .series-nav-link {
+            padding: 6px 14px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .series-nav-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        /* Блоки серий - COMPACT VERSION */
+        .series-block {
+            margin-bottom: 25px;
+            scroll-margin-top: 80px;
+        }
+        
+        .series-header {
+            margin-bottom: 12px;
+        }
+        
+        .series-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #333;
+            margin: 0 0 4px 0;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+        
+        .series-desc {
+            color: #666;
+            font-size: 0.85em;
+            margin: 4px 0 0 0;
+        }
+        
+        .models-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        @media (max-width: 1200px) {
+            .models-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .model-card-compact {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .model-card-compact:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        .series-models-section {
+            display: none;
+        }
+        
+        .series-models-section.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .categories-grid, .models-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .series-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- MAIN HEADER WITH NAVIGATION -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🖥️</span>
+                <span class="logo-text">ServerConfig</span>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="web_configurator_categories.html" class="nav-link active">Каталог/Конфигуратор</a>
+                <a href="contacts.html" class="nav-link">Контакты</a>
+                <a href="web_configurator_components.html" class="cart-icon-link" id="cartIconLink" title="Текущая конфигурация">
+                    🛒
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container" id="mainContainer">
+        <!-- SIDEBAR MENU -->
+        <div class="sidebar-menu" id="sidebarMenu">
+            <div class="sidebar-header">Каталог</div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">🖥️ Серверы</div>
+                <a href="#" class="sidebar-link" onclick="selectCategory('hpe_proliant'); return false;">HPE Proliant</a>
+                <a href="#" class="sidebar-link" onclick="selectCategory('hpe_storageworks'); return false;">HPE StorageWorks</a>
+                <a href="#" class="sidebar-link" onclick="selectCategory('hpe_apollo'); return false;">HPE Apollo</a>
+                <a href="#" class="sidebar-link" onclick="selectCategory('dell_poweredge'); return false;">Dell PowerEdge</a>
+                <a href="#" class="sidebar-link" onclick="selectCategory('dell_powervault'); return false;">Dell PowerVault</a>
+                <a href="#" class="sidebar-link" onclick="selectCategory('dell_equallogic'); return false;">Dell EqualLogic</a>
+                <a href="#" class="sidebar-link" onclick="selectCategory('emc_vnx'); return false;">EMC CX/VNX</a>
+                <a href="#" class="sidebar-link" onclick="selectCategory('ibm_systemx'); return false;">IBM SystemX</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title collapsible" onclick="toggleSidebarSection('components')">
+                    ⚙️ Компоненты <span class="toggle-icon">▼</span>
+                </div>
+                <div class="sidebar-links" id="components" style="display: none;">
+                    <a href="#" class="sidebar-link" onclick="goToStandaloneComponents('processors'); return false;">Процессоры</a>
+                    <a href="#" class="sidebar-link" onclick="goToStandaloneComponents('memory'); return false;">Память</a>
+                    <a href="#" class="sidebar-link" onclick="goToStandaloneComponents('ssd'); return false;">SSD</a>
+                    <a href="#" class="sidebar-link" onclick="goToStandaloneComponents('nvme'); return false;">NVMe</a>
+                    <a href="#" class="sidebar-link" onclick="goToStandaloneComponents('hdd'); return false;">HDD</a>
+                    <a href="#" class="sidebar-link" onclick="goToStandaloneComponents('network'); return false;">Сетевые карты</a>
+                    <a href="#" class="sidebar-link" onclick="goToStandaloneComponents('power_supply'); return false;">Блоки питания</a>
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title collapsible" onclick="toggleSidebarSection('network')">
+                    🌐 Сетевое оборудование <span class="toggle-icon">▼</span>
+                </div>
+                <div class="sidebar-links" id="network" style="display: none;">
+                    <a href="#" class="sidebar-link" onclick="scrollToSection('network-section'); return false;">Оборудование PoE</a>
+                    <a href="#" class="sidebar-link" onclick="scrollToSection('network-section'); return false;">Преобразователи интерфейсов</a>
+                    <a href="#" class="sidebar-link" onclick="scrollToSection('network-section'); return false;">DSL-модемы</a>
+                    <a href="#" class="sidebar-link" onclick="scrollToSection('network-section'); return false;">IP-камеры</a>
+                    <a href="#" class="sidebar-link" onclick="scrollToSection('network-section'); return false;">VoIP-оборудование</a>
+                    <a href="#" class="sidebar-link" onclick="scrollToSection('network-section'); return false;">Беспроводные маршрутизаторы</a>
+                    <a href="#" class="sidebar-link" onclick="scrollToSection('network-section'); return false;">Коммутаторы</a>
+                    <a href="#" class="sidebar-link" onclick="scrollToSection('network-section'); return false;">SFP модули</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <!-- Шаг 1: Выбор категории -->
+            <div id="categoriesSection">
+                <h2 class="section-title">Выберите категорию сервера</h2>
+                <p class="section-subtitle">Все основные производители и типы серверов</p>
+                
+                <div class="categories-grid" id="categoriesGrid"></div>
+                
+                <!-- SEPARATOR -->
+                <div style="margin: 50px 0; border-top: 3px solid #e0e0e0; position: relative;">
+                    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: white; padding: 0 20px; color: #999; font-weight: bold;">
+                        ИЛИ
+                    </div>
+                </div>
+                
+            <!-- STANDALONE COMPONENTS SECTION -->
+            <div style="padding-top: 40px;">
+                <h2 class="main-section-title">Серверные компоненты</h2>
+                <p class="main-section-subtitle">
+                    Выберите категорию для покупки отдельных компонентов
+                </p>
+                    
+                    <div class="categories-grid">
+                        <div class="category-card" onclick="goToStandaloneComponents('processors')">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">CPU</div>
+                            <h3>Процессоры</h3>
+                            <p>Intel Xeon, AMD EPYC</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="goToStandaloneComponents('memory')">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">RAM</div>
+                            <h3>Оперативная память</h3>
+                            <p>DDR4, DDR5 модули</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="goToStandaloneComponents('ssd')">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">SSD</div>
+                            <h3>SSD диски (SATA)</h3>
+                            <p>Твердотельные накопители</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="goToStandaloneComponents('nvme')">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">NVMe</div>
+                            <h3>NVMe диски</h3>
+                            <p>Сверхбыстрые накопители</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="goToStandaloneComponents('hdd')">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">HDD</div>
+                            <h3>HDD диски</h3>
+                            <p>SAS/SATA жесткие диски</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="goToStandaloneComponents('controllers')">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">CTRL</div>
+                            <h3>Контроллеры</h3>
+                            <p>RAID, HBA контроллеры</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="goToStandaloneComponents('network')">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">NET</div>
+                            <h3>Сетевые карты</h3>
+                            <p>1Gb, 10Gb, 25Gb адаптеры</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="goToStandaloneComponents('power_supply')">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">PSU</div>
+                            <h3>Блоки питания</h3>
+                            <p>Серверные PSU</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NETWORK EQUIPMENT SECTION -->
+                <div style="padding-top: 40px;">
+                    <h2 class="main-section-title">Сетевое оборудование</h2>
+                    <p class="main-section-subtitle">
+                        Коммутаторы, маршрутизаторы и сетевые аксессуары
+                    </p>
+                    
+                    <div class="categories-grid">
+                        <div class="category-card" onclick="window.location.href='/setevoe-oborudovanie/oborudovanie-poe/'">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">PoE</div>
+                            <h3>Оборудование PoE</h3>
+                            <p>Коммутаторы и инжекторы</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="window.location.href='/setevoe-oborudovanie/preobrazovateli-interfejsov/'">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">⇄</div>
+                            <h3>Преобразователи интерфейсов</h3>
+                            <p>Медиаконверторы</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="window.location.href='/setevoe-oborudovanie/dsl-modemy-i-marshrutizatory/'">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">DSL</div>
+                            <h3>DSL-модемы и маршрутизаторы</h3>
+                            <p>ADSL, VDSL оборудование</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="window.location.href='/setevoe-oborudovanie/ip-kamery/'">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">📹</div>
+                            <h3>IP-камеры</h3>
+                            <p>Видеонаблюдение</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="window.location.href='/setevoe-oborudovanie/voip-oborudovanie/'">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">☎</div>
+                            <h3>VoIP-оборудование</h3>
+                            <p>IP-телефоны</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="window.location.href='/setevoe-oborudovanie/besprovodnye-marshrutizatory/'">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">📶</div>
+                            <h3>Беспроводные маршрутизаторы</h3>
+                            <p>Wi-Fi роутеры</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="window.location.href='/setevoe-oborudovanie/kommutatory/'">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">⚡</div>
+                            <h3>Коммутаторы</h3>
+                            <p>Managed и Unmanaged</p>
+                        </div>
+                        
+                        <div class="category-card" onclick="window.location.href='/setevoe-oborudovanie/sfp-moduli/'">
+                            <div class="category-icon" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">SFP</div>
+                            <h3>SFP модули</h3>
+                            <p>Оптические трансиверы</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ОТДЕЛЬНЫЙ КОНТЕЙНЕР ДЛЯ ВЫБОРА МОДЕЛЕЙ -->
+    <div class="container" id="modelsContainer" style="display: none;">
+        <!-- Хлебные крошки для страницы моделей -->
+        <div class="breadcrumb" id="breadcrumbModels" style="display: block; padding: 15px 30px; background: #f8f9fa; border-bottom: 2px solid #e0e0e0;">
+            <span id="breadcrumbCategory2"></span>
+        </div>
+        
+        <!-- Шаг 2: Выбор серии и модели -->
+        <div id="seriesModelsSection" class="series-models-section" style="display: block;">
+            <!-- Page Header -->
+            <div class="page-header-models">
+                <h1 id="modelsPageTitle">Выберите модель сервера</h1>
+                <p class="page-header-subtitle" id="seriesModelsSubtitle"></p>
+            </div>
+            
+            <!-- Content Area -->
+            <div class="models-content-area">
+                <!-- QUICK NAVIGATION BY SERIES -->
+                <div id="seriesQuickNav" class="series-quick-nav">
+                    <div class="series-quick-nav-container">
+                        <span class="series-nav-label">Перейти к серии:</span>
+                        <div id="seriesNavLinks"></div>
+                    </div>
+                </div>
+                
+                <div id="seriesModelsContainer"></div>
+                
+                <div class="actions">
+                    <button class="btn btn-secondary back-btn" onclick="goBack(1)">← Назад</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <script>
+        // База данных категорий
+        const categories = [
+            {
+                id: "hpe_proliant",
+                name: "HPE Proliant",
+                icon: "🖥️",
+                description: "Стоечные и башенные серверы HPE",
+                series: [
+                    {
+                        id: "dl_series", 
+                        name: "DL Series", 
+                        description: "Стоечные серверы (Rack-mount)",
+                        generations: [
+                            {id: "g5", name: "G5", models: ["DL120", "DL140", "DL145", "DL160", "DL165", "DL180", "DL185", "DL320", "DL360", "DL365", "DL380", "DL385", "DL580", "DL585"]},
+                            {id: "g6", name: "G6", models: ["DL120", "DL140", "DL160", "DL165", "DL170", "DL180", "DL185", "DL320", "DL360", "DL365", "DL370", "DL380", "DL385", "DL580", "DL585"]},
+                            {id: "g7", name: "G7", models: ["DL120", "DL140", "DL160", "DL165", "DL170", "DL180", "DL185", "DL320", "DL360", "DL365", "DL370", "DL380", "DL385", "DL580", "DL585"]},
+                            {id: "g8", name: "G8", models: ["DL120", "DL160", "DL320e", "DL360e", "DL360p", "DL380e", "DL380p", "DL385p", "DL560", "DL580"]},
+                            {id: "g9", name: "G9", models: ["DL20", "DL60", "DL80", "DL120", "DL160", "DL180", "DL320e", "DL360", "DL380", "DL388", "DL560", "DL580"]},
+                            {id: "g10", name: "G10", models: ["DL20", "DL60", "DL80", "DL120", "DL160", "DL180", "DL325", "DL345", "DL360", "DL365", "DL380", "DL385", "DL560", "DL580"]},
+                            {id: "g10_plus", name: "G10+", models: ["DL20", "DL25", "DL110", "DL160", "DL325", "DL345", "DL360", "DL365", "DL380", "DL385", "DL560"]},
+                            {id: "g11", name: "G11", models: ["DL20", "DL110", "DL325", "DL345", "DL360", "DL365", "DL380", "DL385"]},
+                            {id: "g12", name: "G12", models: ["DL365"]}
+                        ]
+                    },
+                    {
+                        id: "ml_series", 
+                        name: "ML Series", 
+                        description: "Башенные серверы (Tower)",
+                        generations: [
+                            {id: "g4", name: "G4", models: ["ML150", "ML310", "ML350", "ML370"]},
+                            {id: "g5", name: "G5", models: ["ML110", "ML115", "ML150", "ML310", "ML350", "ML370"]},
+                            {id: "g6", name: "G6", models: ["ML110", "ML115", "ML150", "ML310", "ML330", "ML350", "ML370"]},
+                            {id: "g7", name: "G7", models: ["ML110", "ML115", "ML150", "ML310", "ML330", "ML350", "ML370"]},
+                            {id: "g8", name: "G8", models: ["ML110", "ML310e", "ML350e", "ML350p"]},
+                            {id: "g9", name: "G9", models: ["ML10", "ML30", "ML110", "ML150", "ML310e", "ML350"]},
+                            {id: "g10", name: "G10", models: ["ML30", "ML110", "ML350"]},
+                            {id: "g10_plus", name: "G10+", models: ["ML30", "ML110", "ML350"]}
+                        ]
+                    },
+                    {
+                        id: "dx_series", 
+                        name: "DX Series", 
+                        description: "Серверы для объектного хранилища",
+                        models: ["DX380", "DX360", "DX340", "DX320", "DX290", "DX280", "DX270", "DX190", "DX180", "DX160", "DX110"]
+                    },
+                    {
+                        id: "rl_series", 
+                        name: "RL Series", 
+                        description: "Компактные серверы",
+                        models: ["RL300"]
+                    },
+                    {
+                        id: "sl_series", 
+                        name: "SL Series", 
+                        description: "Масштабируемые серверы (Scalable)",
+                        models: ["SL230s", "SL250s", "SL270s", "SL335s", "SL4540", "SL4545"]
+                    },
+                    {
+                        id: "xl_series", 
+                        name: "XL Series", 
+                        description: "Серверы для HPC и Big Data",
+                        models: ["XL170r", "XL190r", "XL230a", "XL230k", "XL250a", "XL270d", "XL450"]
+                    },
+                    {
+                        id: "bl_series", 
+                        name: "BL Series", 
+                        description: "Блейд-серверы (Blade)",
+                        models: ["BL20p", "BL25p", "BL35p", "BL45p", "BL260c", "BL280c", "BL420c", "BL460c", "BL465c", "BL480c", "BL490c", "BL660c", "BL680c", "BL2x220c"]
+                    }
+                ]
+            },
+            {
+                id: "hpe_storageworks",
+                name: "HPE StorageWorks",
+                icon: "💾",
+                description: "Системы хранения данных HPE",
+                series: [
+                    {id: "msa_series", name: "MSA Series", description: "Modular Smart Array"},
+                    {id: "storeeasy", name: "StoreEasy", description: "NAS хранилища"}
+                ],
+                models: []
+            },
+            {
+                id: "hpe_apollo",
+                name: "HPE Apollo",
+                icon: "⚡",
+                description: "Высокопроизводительные вычисления",
+                series: [
+                    {id: "apollo_2000", name: "Apollo 2000"},
+                    {id: "apollo_4000", name: "Apollo 4000"}
+                ],
+                models: []
+            },
+            {
+                id: "dell_poweredge",
+                name: "Dell PowerEdge",
+                icon: "🖥️",
+                description: "Серверы Dell",
+                series: [
+                    {id: "t_series", name: "T Series", description: "Башенные серверы"},
+                    {id: "r_series", name: "R Series", description: "Стоечные серверы"},
+                    {id: "c_series", name: "C Series", description: "Облачные серверы"}
+                ],
+                models: [
+                    {
+                        id: "dell_t140",
+                        name: "Dell PowerEdge T140",
+                        series: "t_series",
+                        specs: "Башенный • 1 процессор • 4 слота памяти • DDR4 • До 64 ГБ",
+                        description: "Начальный башенный сервер Dell"
+                    },
+                    {
+                        id: "dell_r240",
+                        name: "Dell PowerEdge R240",
+                        series: "r_series",
+                        specs: "1U Стоечный • 1 процессор • 4 слота памяти • DDR4 • До 64 ГБ",
+                        description: "Компактный стоечный сервер 1U"
+                    },
+                    {
+                        id: "dell_r440",
+                        name: "Dell PowerEdge R440",
+                        series: "r_series",
+                        specs: "1U Стоечный • 2 процессора • 16 слотов памяти • DDR4 • До 768 ГБ",
+                        description: "Стоечный сервер для рабочих нагрузок"
+                    },
+                    {
+                        id: "dell_r640",
+                        name: "Dell PowerEdge R640",
+                        series: "r_series",
+                        specs: "1U Стоечный • 2 процессора • 24 слота памяти • DDR4 • До 3 ТБ",
+                        description: "Универсальный стоечный сервер 1U"
+                    },
+                    {
+                        id: "dell_r740",
+                        name: "Dell PowerEdge R740",
+                        series: "r_series",
+                        specs: "2U Стоечный • 2 процессора • 24 слота памяти • DDR4 • До 3 ТБ",
+                        description: "Стоечный сервер для бизнес-приложений"
+                    },
+                    {
+                        id: "dell_r940",
+                        name: "Dell PowerEdge R940",
+                        series: "r_series",
+                        specs: "4U Стоечный • 4 процессора • 48 слотов памяти • DDR4 • До 6 ТБ",
+                        description: "Масштабируемый сервер для критичных нагрузок"
+                    }
+                ]
+            },
+            {
+                id: "dell_powervault",
+                name: "Dell PowerVault",
+                icon: "💾",
+                description: "Системы хранения Dell",
+                series: [
+                    {id: "md_series", name: "MD Series"},
+                    {id: "me_series", name: "ME Series"}
+                ],
+                models: []
+            },
+            {
+                id: "dell_equallogic",
+                name: "Dell EqualLogic",
+                icon: "🔷",
+                description: "iSCSI SAN массивы",
+                series: [
+                    {id: "ps_series", name: "PS Series"}
+                ],
+                models: []
+            },
+            {
+                id: "emc_cx_vnx",
+                name: "EMC CX VNX",
+                icon: "💾",
+                description: "Системы хранения EMC",
+                series: [
+                    {id: "vnx_series", name: "VNX Series"},
+                    {id: "vnxe_series", name: "VNXe Series"}
+                ],
+                models: []
+            },
+            {
+                id: "ibm_systemx",
+                name: "IBM SystemX",
+                icon: "🖥️",
+                description: "Серверы IBM x86",
+                series: [
+                    {id: "x3000_series", name: "x3000 Series", description: "Башенные"},
+                    {id: "x3500_series", name: "x3500 Series", description: "Стоечные средние"},
+                    {id: "x3600_series", name: "x3600 Series", description: "Стоечные высокие"}
+                ],
+                models: [
+                    {
+                        id: "ibm_x3250_m6",
+                        name: "IBM System x3250 M6",
+                        series: "x3000_series",
+                        specs: "1U Стоечный • 1 процессор • 4 слота памяти • DDR3 • До 32 ГБ",
+                        description: "Компактный стоечный сервер 1U"
+                    },
+                    {
+                        id: "ibm_x3550_m5",
+                        name: "IBM System x3550 M5",
+                        series: "x3500_series",
+                        specs: "1U Стоечный • 2 процессора • 24 слота памяти • DDR4 • До 768 ГБ",
+                        description: "Стоечный сервер среднего уровня"
+                    },
+                    {
+                        id: "ibm_x3650_m5",
+                        name: "IBM System x3650 M5",
+                        series: "x3600_series",
+                        specs: "2U Стоечный • 2 процессора • 24 слота памяти • DDR4 • До 1.5 ТБ",
+                        description: "Универсальный стоечный сервер 2U"
+                    }
+                ]
+            }
+        ];
+        
+        let selectedCategory = null;
+        let selectedSeries = null;
+        let selectedModel = null;
+        
+        // Инициализация
+        function init() {
+            renderCategories();
+        }
+        
+        // Отрисовка категорий
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            grid.innerHTML = categories.map(cat => `
+                <div class="category-card" onclick="selectCategory('${cat.id}')">
+                    <div class="category-icon">${cat.icon}</div>
+                    <div class="category-name">${cat.name}</div>
+                    <div class="category-description">${cat.description}</div>
+                </div>
+            `).join('');
+        }
+        
+        // Выбор категории
+        function selectCategory(categoryId) {
+            console.log('selectCategory called with:', categoryId);
+            
+            selectedCategory = categories.find(c => c.id === categoryId);
+            console.log('Found category:', selectedCategory);
+            
+            if (!selectedCategory) {
+                console.error('Category not found:', categoryId);
+                alert('Категория не найдена');
+                return;
+            }
+            
+            // Скрыть главный контейнер, показать контейнер с моделями
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('modelsContainer').style.display = 'block';
+            
+            // Обновить хлебные крошки
+            document.getElementById('breadcrumbCategory2').innerHTML = `<span class="active">${selectedCategory.name}</span>`;
+            
+            // Обновить подзаголовок
+            document.getElementById('seriesModelsSubtitle').textContent = selectedCategory.description;
+            
+            console.log('About to call renderSeriesAndModels');
+            renderSeriesAndModels();
+        }
+        
+        // Отрисовка всех серий с моделями
+        function renderSeriesAndModels() {
+            console.log('renderSeriesAndModels called');
+            console.log('selectedCategory:', selectedCategory);
+            
+            const container = document.getElementById('seriesModelsContainer');
+            if (!container) {
+                console.error('seriesModelsContainer not found!');
+                return;
+            }
+            
+            if (!selectedCategory || !selectedCategory.series) {
+                console.error('No category or series data!');
+                container.innerHTML = '<p style="padding: 40px; text-align: center; color: #999;">Нет данных для отображения</p>';
+                return;
+            }
+            
+            console.log('Rendering', selectedCategory.series.length, 'series');
+            
+            // GENERATE QUICK NAVIGATION LINKS
+            const navLinks = document.getElementById('seriesNavLinks');
+            navLinks.innerHTML = selectedCategory.series.map(series => {
+                return `<a class="series-nav-link" onclick="scrollToSeries('${series.id}')">${series.name}</a>`;
+            }).join('');
+            
+            container.innerHTML = selectedCategory.series.map(series => {
+                return `
+                    <div class="series-block" id="series-${series.id}">
+                        <div class="series-header">
+                            <h3 class="series-title">${series.name}</h3>
+                            ${series.description ? `<p class="series-desc">${series.description}</p>` : ''}
+                        </div>
+                        
+                        <div class="models-list">
+                            ${renderModelsForSeries(series)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Отрисовка моделей для серии
+        function renderModelsForSeries(series) {
+            console.log('renderModelsForSeries called for:', series.name);
+            console.log('Series data:', series);
+            
+            // Проверяем структуру данных серии
+            if (!series.generations || series.generations.length === 0) {
+                return '<p style="padding: 20px; color: #999;">Модели скоро будут добавлены</p>';
+            }
+            
+            // GROUP MODELS BY NAME from generations
+            const modelGroups = {};
+            
+            series.generations.forEach(gen => {
+                if (gen.models && gen.models.length > 0) {
+                    gen.models.forEach(modelName => {
+                        if (!modelGroups[modelName]) {
+                            modelGroups[modelName] = [];
+                        }
+                        modelGroups[modelName].push({
+                            id: gen.id,
+                            name: gen.name
+                        });
+                    });
+                }
+            });
+            
+            console.log('Model groups:', modelGroups);
+            
+            // SORT MODELS BY NUMERIC VALUE
+            const sortedModelEntries = Object.entries(modelGroups).sort((a, b) => {
+                const numA = parseInt(a[0].replace(/\D/g, '')) || 0;
+                const numB = parseInt(b[0].replace(/\D/g, '')) || 0;
+                return numA - numB;
+            });
+            
+            // RENDER EACH MODEL GROUP
+            return sortedModelEntries.map(([modelName, generations]) => {
+                // MODEL WITH GENERATIONS
+                return `
+                    <div style="background: white; border: 1.5px solid #e0e0e0; border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 12px;">
+                        <div style="font-size: 0.95em; font-weight: 600; color: #333; white-space: nowrap; min-width: 140px; flex-shrink: 0;">
+                            ${selectedCategory.name.replace('HPE ', '')} ${modelName}
+                        </div>
+                        <div style="display: flex; gap: 6px; flex: 1; overflow-x: auto;">
+                            ${generations.map(gen => {
+                                    const fullModelName = `${selectedCategory.name} ${modelName} ${gen.name}`;
+                                    const modelId = `${selectedCategory.id}_${modelName.toLowerCase().replace(/\s/g, '_')}_${gen.id}`;
+                                    return `
+                                        <button class="generation-btn"
+                                                data-model-id="${modelId}"
+                                                onclick="selectModelDirectly(event, '${modelId}', '${fullModelName}', '${series.name}', '${gen.name}')"
+                                                style="padding: 8px 16px; border: 1.5px solid #667eea; background: white; color: #667eea; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s; flex-shrink: 0; white-space: nowrap;">
+                                            ${gen.name}
+                                        </button>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    `;
+            }).join('');
+        }
+        
+        // Старые функции удалены - теперь используется renderSeriesAndModels()
+        
+        // Placeholder для совместимости (если что-то старое вызывает)
+        function selectSeries(seriesId) {
+            console.warn('selectSeries is deprecated - use renderSeriesAndModels instead');
+        }
+        
+        function renderModels() {
+            console.warn('renderModels is deprecated - use renderSeriesAndModels instead');
+        }
+        
+        // Выбор модели с поколением (старая функция, оставлена для совместимости)
+        function selectModelWithGeneration_OLD(event, modelId, modelName, seriesName, generation) {
+            // Эта функция больше не используется
+            selectModelDirectly(event, modelId, modelName, seriesName, generation);
+        }
+        
+        // Старый код ниже закомментирован
+        /*
+            // Проверяем, есть ли у серии поколения (generations) или просто модели
+            if (selectedSeries.generations) {
+                // Группируем модели по имени и собираем для них все поколения
+                const modelsByName = {};
+                
+                selectedSeries.generations.forEach(gen => {
+                    gen.models.forEach(model => {
+                        if (!modelsByName[model]) {
+                            modelsByName[model] = [];
+                        }
+                        modelsByName[model].push({id: gen.id, name: gen.name});
+                    });
+                });
+                
+                // Сортируем модели
+                const sortedModels = Object.keys(modelsByName).sort((a, b) => {
+                    const numA = parseInt(a.replace(/\D/g, '')) || 0;
+                    const numB = parseInt(b.replace(/\D/g, '')) || 0;
+                    return numA - numB;
+                });
+                
+                // Отображаем модели с кнопками поколений
+                grid.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+                        ${sortedModels.map(model => {
+                            const generations = modelsByName[model];
+                            return `
+                                <div style="background: white; border: 2px solid #e0e0e0; border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 20px;">
+                                    <div style="font-size: 1.2em; font-weight: bold; color: #333; min-width: 180px; flex-shrink: 0;">
+                                        ${selectedCategory.name.replace('HPE ', '')} ${model}
+                                    </div>
+                                    <div style="display: flex; gap: 8px; flex: 1;">
+                                        ${generations.map(gen => {
+                                            const fullModelName = `HPE ProLiant ${model} ${gen.name}`;
+                                            const modelId = `hpe_${model.toLowerCase()}_${gen.id}`;
+                                            return `
+                                                <button class="generation-btn" 
+                                                        data-model-id="${modelId}"
+                                                        onclick="selectModelWithGeneration(event, '${modelId}', '${fullModelName}', '${selectedSeries.name}', '${gen.name}')" 
+                                                        style="padding: 10px 20px; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.95em; transition: all 0.3s;">
+                                                    ${gen.name}
+                                                </button>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            } else if (selectedSeries.models) {
+                // Если нет поколений, показываем просто список моделей
+                grid.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px;">
+                        ${selectedSeries.models.map(model => {
+                            const fullModelName = `HPE ProLiant ${model}`;
+                            const modelId = `hpe_${model.toLowerCase().replace(/\s+/g, '_')}`;
+                            return `
+                                <div class="model-card" onclick="selectModel('${modelId}', '${fullModelName}', '${selectedSeries.name}', '')" style="padding: 18px;">
+                                    <div class="model-name" style="font-size: 1.1em;">${model}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            } else {
+                grid.innerHTML = '<p style="text-align: center; color: #999; padding: 40px;">Модели скоро будут добавлены</p>';
+            }
+        */
+        
+        // Прокрутка к серии
+        function scrollToSeries(seriesId) {
+            const element = document.getElementById('series-' + seriesId);
+            if (element) {
+                const navHeight = 80; // Высота sticky навигации
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.scrollY - navHeight;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Выбор модели напрямую (новая объединенная функция)
+        function selectModelDirectly(event, modelId, modelName, seriesName, generation) {
+            event.stopPropagation();
+            
+            // Снять выделение со всех кнопок поколений
+            document.querySelectorAll('.generation-btn').forEach(btn => {
+                btn.style.background = 'white';
+                btn.style.color = '#667eea';
+            });
+            
+            // Выделить выбранную кнопку
+            if (event.currentTarget.classList.contains('generation-btn')) {
+                event.currentTarget.style.background = '#667eea';
+                event.currentTarget.style.color = 'white';
+            }
+            
+            // Сохранить выбранную модель
+            selectedModel = {
+                id: modelId,
+                name: modelName,
+                series: seriesName,
+                generation: generation
+            };
+            
+            // SAVE SELECTED SERVER TO LOCALSTORAGE
+            localStorage.setItem('selectedServer', JSON.stringify(selectedModel));
+            
+            // AUTOMATICALLY REDIRECT TO COMPONENTS PAGE
+            setTimeout(() => {
+                window.location.href = 'web_configurator_components.html';
+            }, 300);
+        }
+        
+        // Выбор модели с поколением (для кнопок)
+        function selectModelWithGeneration(event, modelId, modelName, seriesName, generation) {
+            event.stopPropagation();
+            
+            // Снять выделение со всех кнопок поколений
+            document.querySelectorAll('.generation-btn').forEach(btn => {
+                btn.style.background = 'white';
+                btn.style.color = '#667eea';
+            });
+            
+            // Выделить выбранную кнопку
+            event.currentTarget.style.background = '#667eea';
+            event.currentTarget.style.color = 'white';
+            
+            // Сохранить выбранную модель
+            selectedModel = {
+                id: modelId,
+                name: modelName,
+                series: seriesName,
+                generation: generation
+            };
+            
+            // Обновить хлебные крошки
+            document.getElementById('breadcrumbModel').innerHTML = ` <span>→</span> <span class="active">${selectedModel.name}</span>`;
+            
+            // AUTOMATICALLY REDIRECT TO COMPONENTS PAGE
+            setTimeout(() => {
+                goToComponents();
+            }, 300);
+        }
+        
+        // Выбор модели (для серий без поколений)
+        function selectModel(modelId, modelName, seriesName, generation) {
+            // Снять выделение с других
+            document.querySelectorAll('.model-card').forEach(card => card.classList.remove('selected'));
+            
+            // Выделить выбранный
+            event.currentTarget.classList.add('selected');
+            
+            // Сохранить выбранную модель
+            selectedModel = {
+                id: modelId,
+                name: modelName,
+                series: seriesName,
+                generation: generation
+            };
+            
+            // Обновить хлебные крошки
+            document.getElementById('breadcrumbModel').innerHTML = ` <span>→</span> <span class="active">${selectedModel.name}</span>`;
+            
+            // AUTOMATICALLY REDIRECT TO COMPONENTS PAGE
+            setTimeout(() => {
+                goToComponents();
+            }, 300);
+        }
+        
+        // Перейти к компонентам
+        function goToComponents() {
+            if (!selectedModel) {
+                alert('Выберите модель сервера');
+                return;
+            }
+            
+            // SAVE SELECTED SERVER TO LOCALSTORAGE
+            localStorage.setItem('selectedServer', JSON.stringify(selectedModel));
+            
+            // REDIRECT TO COMPONENTS PAGE
+            window.location.href = 'web_configurator_components.html';
+        }
+        
+        // STANDALONE COMPONENTS - go to components page with specific category
+        function goToStandaloneComponents(category) {
+            // CLEAR ANY SELECTED SERVER
+            localStorage.removeItem('selectedServer');
+            
+            // SET STANDALONE MODE WITH CATEGORY FILTER
+            localStorage.setItem('standaloneMode', 'true');
+            localStorage.setItem('selectedCategory', category);
+            
+            // REDIRECT TO COMPONENTS PAGE
+            window.location.href = 'web_configurator_components.html';
+        }
+        
+        // Вернуться назад
+        function goBack(toStep) {
+            if (toStep === 1) {
+                // Показать главный контейнер, скрыть контейнер с моделями
+                document.getElementById('mainContainer').style.display = 'flex';
+                document.getElementById('modelsContainer').style.display = 'none';
+            }
+        }
+        
+        
+        // Прокрутка к категории из sidebar
+        function scrollToCategory(categoryId) {
+            const categoryCard = document.querySelector(`[onclick*="${categoryId}"]`);
+            if (categoryCard) {
+                categoryCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                categoryCard.style.animation = 'pulse 0.5s';
+            }
+        }
+        
+        // Прокрутка к секции из sidebar
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        // Сворачивание/разворачивание секций sidebar
+        function toggleSidebarSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const icon = event.target.querySelector('.toggle-icon');
+            
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+                if (icon) icon.classList.add('open');
+            } else {
+                section.style.display = 'none';
+                if (icon) icon.classList.remove('open');
+            }
+        }
+        
+        // Скрыть sidebar на страницах выбора моделей
+        function updateSidebarVisibility() {
+            const sidebar = document.getElementById('sidebarMenu');
+            const categoriesSection = document.getElementById('categoriesSection');
+            const seriesModelsSection = document.getElementById('seriesModelsSection');
+            
+            // Показываем sidebar только на главной странице
+            if (categoriesSection && categoriesSection.style.display !== 'none') {
+                sidebar.classList.remove('hidden');
+            } else if (seriesModelsSection && seriesModelsSection.classList.contains('active')) {
+                sidebar.classList.add('hidden');
+            }
+        }
+        
+        // Обновить счетчик корзины
+        function updateCartBadge() {
+            const selectedServer = localStorage.getItem('selectedServer');
+            const badge = document.getElementById('cartBadge');
+            
+            if (selectedServer) {
+                badge.textContent = '1';
+                badge.classList.remove('hidden');
+            } else {
+                badge.textContent = '0';
+                badge.classList.add('hidden');
+            }
+        }
+        
+        // Запуск
+        init();
+        updateCartBadge();
+        
+        // Обновлять счетчик при изменении localStorage
+        window.addEventListener('storage', updateCartBadge);
+    </script>
+    
+    <style>
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</body>
+</html>
