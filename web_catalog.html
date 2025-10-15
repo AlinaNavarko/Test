@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Конфигуратор серверов и систем хранения - Выбор компонентов</title>
+    <title>Каталог оборудования</title>
     <style>
         * {
             margin: 0;
@@ -280,12 +280,97 @@
         }
         
         /* REMOVE CONTAINER STYLES FOR BACKGROUND LAYOUT */
-        .breadcrumb {
+        
+        /* CATEGORY SELECTION */
+        .category-selection {
             max-width: 1400px;
-            margin: 20px auto;
+            margin: 40px auto;
             padding: 0 30px;
         }
         
+        .category-selection-container {
+            text-align: center;
+        }
+        
+        .category-selection-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #1c2a3c;
+            margin-bottom: 40px;
+        }
+        
+        .category-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: rgb(61, 243, 187);
+        }
+        
+        .category-card.active {
+            border-color: rgba(61, 243, 187, 0.5);
+            background: rgba(61, 243, 187, 0.3);
+        }
+        
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            color: rgb(61, 243, 187);
+        }
+        
+        .category-card.active .category-icon {
+            color: #1c2a3c;
+        }
+        
+        .category-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .category-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1c2a3c;
+            margin-bottom: 15px;
+        }
+        
+        .category-description {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+            .category-cards {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .category-card {
+                width: 100%;
+                min-width: 100%;
+            }
+        }
         
         .server-info {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -370,95 +455,6 @@
         }
         
         
-        .breadcrumb {
-            padding: 30px 30px;
-            background: white;
-            border-bottom: 1px solid rgb(61, 243, 187);
-            color: #666;
-            max-width: 1340px;
-            width: 1340px;
-            margin: 40px auto 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .breadcrumb span {
-            margin: 0 5px;
-        }
-        
-        .breadcrumb .active {
-            color: #1c2a3c;
-            font-weight: 600;
-        }
-        
-        .breadcrumb-step {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .breadcrumb-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: rgb(61, 243, 187);
-            color: #1c2a3c;
-            border-radius: 50%;
-            font-size: 0.9em;
-            font-weight: bold;
-        }
-        
-        .breadcrumb .active .breadcrumb-number {
-            background: rgb(61, 243, 187);
-            color: #1c2a3c;
-        }
-        
-        .breadcrumb .completed .breadcrumb-number {
-            background: #6c757d;
-            color: white;
-        }
-        
-        .breadcrumb .completed a {
-            color: #6c757d;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .breadcrumb .completed a:hover {
-            color: #495057;
-            text-decoration: underline;
-        }
-        
-        .breadcrumb .completed span {
-            color: #6c757d;
-        }
-        
-        .breadcrumb-step:not(.active):not(.completed) {
-            opacity: 0.6;
-        }
-        
-        .breadcrumb-step:not(.active):not(.completed) .breadcrumb-number {
-            background: #e9ecef;
-            color: #6c757d;
-        }
-        
-        .breadcrumb a {
-            color: #666;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .breadcrumb a:hover {
-            text-decoration: underline;
-            color: rgb(61, 243, 187);
-        }
         
         /* PAGE HEADER */
         .page-header {
@@ -504,7 +500,7 @@
         }
         
         .category-nav-link:hover {
-            background: rgba(61, 243, 187, 0.1);
+            background: #f0f4ff;
             border-color: rgb(61, 243, 187);
         }
         
@@ -630,19 +626,6 @@
                 font-size: 0.95em;
             }
             
-            .breadcrumb {
-                width: 100%;
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 8px;
-                text-align: center;
-                margin: 20px auto 0 auto;
-            }
-            
-            .breadcrumb-step {
-                flex-direction: column;
-                gap: 5px;
-            }
         }
         
         .components-area {
@@ -656,8 +639,13 @@
         }
         
         
-        /* CONFIGURATION WIDGET */
+        /* CONFIGURATION WIDGET - HIDDEN ON CATALOG PAGE */
         .config-widget {
+            display: none !important;
+        }
+        
+        /* ORIGINAL WIDGET STYLES (HIDDEN) */
+        .config-widget-original {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -1015,8 +1003,15 @@
         }
         
         .component-card.selected {
-            border-color: rgb(61, 243, 187);
-            background: rgba(61, 243, 187, 0.1);
+            border-color: rgb(61, 243, 187) !important;
+            background: #f0f4ff !important;
+            box-shadow: 0 4px 12px rgba(61, 243, 187, 0.2) !important;
+        }
+        
+        .component-card.selected .btn-add {
+            background: rgba(61, 243, 187, 0.3) !important;
+            color: #1c2a3c !important;
+            border: 2px solid rgba(61, 243, 187, 0.5) !important;
         }
         
         .component-name {
@@ -1888,44 +1883,61 @@
     <!-- HERO SECTION -->
     <div class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title" id="heroTitle">HPE ProLiant DL20 Gen10 Plus</h1>
-            <p class="hero-subtitle" id="heroSubtitle">1U Стоечный • 1 процессор • 4 слота памяти<br>DDR4 UDIMM • До 64 ГБ • 4 отсека 2.5"</p>
+            <h1 class="hero-title" id="heroTitle">Каталог оборудования</h1>
+            <p class="hero-subtitle" id="heroSubtitle">Широкий выбор серверов, компонентов и аксессуаров<br>для корпоративных решений и дата-центров</p>
         </div>
     </div>
     
-    <!-- Breadcrumb -->
-    <div class="breadcrumb" id="breadcrumbBar">
-        <div class="breadcrumb-step completed">
-            <span class="breadcrumb-number">1</span>
-            <a href="web_configurator.html">Выбор платформы</a>
-        </div>
-        <span> → </span>
-        <div class="breadcrumb-step completed">
-            <span class="breadcrumb-number">2</span>
-            <a href="web_configurator_generations.html?platform=hpe_proliant">Выбор модели</a>
-        </div>
-        <span> → </span>
-        <div class="breadcrumb-step active">
-            <span class="breadcrumb-number">3</span>
-            <span id="selectedServerName">Выбор компонентов</span>
+    <!-- CATEGORY SELECTION -->
+    <div class="category-selection">
+        <div class="category-selection-container">
+            <h2 class="category-selection-title">Выберите категорию оборудования</h2>
+            <div class="category-cards">
+                <div class="category-card active" data-category="servers" onclick="selectMainCategory('servers')">
+                    <div class="category-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Серверное оборудование</h3>
+                    <p class="category-description">Процессоры, память, накопители, контроллеры</p>
+                </div>
+                
+                <div class="category-card" data-category="storage" onclick="selectMainCategory('storage')">
+                    <div class="category-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Системы хранения</h3>
+                    <p class="category-description">RAID контроллеры, SSD, NVMe, HDD диски</p>
+                </div>
+                
+                <div class="category-card" data-category="network" onclick="selectMainCategory('network')">
+                    <div class="category-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="category-title">Сетевое оборудование</h3>
+                    <p class="category-description">Сетевые карты, коммутаторы, маршрутизаторы</p>
+                </div>
+            </div>
         </div>
     </div>
-        
-        
         
         <!-- Quick Navigation (for normal mode - switching categories) -->
         <div class="quick-navigation" id="quickNavigation" style="display: block;">
             <div class="quick-nav-container">
                 <span class="quick-nav-label">Перейти к</span>
                 <div class="quick-nav-cards">
-                    <a href="#" class="quick-nav-link normal-nav-link" data-category="processors" onclick="switchCategoryNormal('processors'); return false;">Процессоры</a>
-                    <a href="#" class="quick-nav-link normal-nav-link" data-category="memory" onclick="switchCategoryNormal('memory'); return false;">Память</a>
-                    <a href="#" class="quick-nav-link normal-nav-link" data-category="ssd" onclick="switchCategoryNormal('ssd'); return false;">SSD</a>
-                    <a href="#" class="quick-nav-link normal-nav-link" data-category="nvme" onclick="switchCategoryNormal('nvme'); return false;">NVMe</a>
-                    <a href="#" class="quick-nav-link normal-nav-link" data-category="hdd" onclick="switchCategoryNormal('hdd'); return false;">HDD</a>
-                    <a href="#" class="quick-nav-link normal-nav-link" data-category="controllers" onclick="switchCategoryNormal('controllers'); return false;">Контроллеры</a>
-                    <a href="#" class="quick-nav-link normal-nav-link" data-category="network" onclick="switchCategoryNormal('network'); return false;">Сеть</a>
-                    <a href="#" class="quick-nav-link normal-nav-link" data-category="power_supply" onclick="switchCategoryNormal('power_supply'); return false;">Питание</a>
+                    <!-- Navigation links will be inserted here dynamically -->
                 </div>
             </div>
         </div>
@@ -1935,14 +1947,7 @@
             <div class="quick-nav-container">
                 <span class="quick-nav-label">Перейти к</span>
                 <div class="quick-nav-cards">
-                    <a href="#" class="quick-nav-link standalone-nav-link" data-category="processors" onclick="switchCategory('processors'); return false;">Процессоры</a>
-                    <a href="#" class="quick-nav-link standalone-nav-link" data-category="memory" onclick="switchCategory('memory'); return false;">Память</a>
-                    <a href="#" class="quick-nav-link standalone-nav-link" data-category="ssd" onclick="switchCategory('ssd'); return false;">SSD</a>
-                    <a href="#" class="quick-nav-link standalone-nav-link" data-category="nvme" onclick="switchCategory('nvme'); return false;">NVMe</a>
-                    <a href="#" class="quick-nav-link standalone-nav-link" data-category="hdd" onclick="switchCategory('hdd'); return false;">HDD</a>
-                    <a href="#" class="quick-nav-link standalone-nav-link" data-category="controllers" onclick="switchCategory('controllers'); return false;">Контроллеры</a>
-                    <a href="#" class="quick-nav-link standalone-nav-link" data-category="network" onclick="switchCategory('network'); return false;">Сеть</a>
-                    <a href="#" class="quick-nav-link standalone-nav-link" data-category="power_supply" onclick="switchCategory('power_supply'); return false;">Питание</a>
+                    <!-- Navigation links will be inserted here dynamically -->
                 </div>
             </div>
         </div>
@@ -3004,6 +3009,77 @@
         }
         
         // INITIALIZATION
+        // SELECT MAIN CATEGORY
+        function selectMainCategory(category) {
+            console.log('Selecting main category:', category);
+            
+            // UPDATE ACTIVE CARD
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            
+            console.log('About to call updateQuickNavigation with category:', category);
+            // UPDATE QUICK NAVIGATION BASED ON CATEGORY
+            updateQuickNavigation(category);
+        }
+        
+        // UPDATE QUICK NAVIGATION
+        function updateQuickNavigation(mainCategory) {
+            console.log('updateQuickNavigation called with mainCategory:', mainCategory);
+            const quickNavCards = document.querySelector('.quick-nav-cards');
+            if (!quickNavCards) {
+                console.error('quick-nav-cards not found');
+                return;
+            }
+            
+            let navigationLinks = [];
+            
+            if (mainCategory === 'servers') {
+                navigationLinks = [
+                    { id: 'all', title: 'Все' },
+                    { id: 'processors', title: 'Процессоры' },
+                    { id: 'memory', title: 'Память' },
+                    { id: 'ssd', title: 'SSD' },
+                    { id: 'nvme', title: 'NVMe' },
+                    { id: 'hdd', title: 'HDD' },
+                    { id: 'controllers', title: 'Контроллеры' },
+                    { id: 'network', title: 'Сеть' },
+                    { id: 'power_supply', title: 'Питание' }
+                ];
+            } else if (mainCategory === 'storage') {
+                navigationLinks = [
+                    { id: 'all', title: 'Все' },
+                    { id: 'controllers', title: 'RAID контроллеры' },
+                    { id: 'ssd', title: 'SSD' },
+                    { id: 'nvme', title: 'NVMe' },
+                    { id: 'hdd', title: 'HDD' }
+                ];
+            } else if (mainCategory === 'network') {
+                navigationLinks = [
+                    { id: 'all', title: 'Все' },
+                    { id: 'network', title: 'Сетевые карты' },
+                    { id: 'controllers', title: 'Сетевые контроллеры' }
+                ];
+            }
+            
+            console.log('Navigation links:', navigationLinks);
+            
+            // RENDER NAVIGATION LINKS
+            quickNavCards.innerHTML = navigationLinks.map(link => `
+                <a href="#" class="quick-nav-link normal-nav-link ${link.id === 'all' ? 'active' : ''}" 
+                   data-category="${link.id}" 
+                   onclick="filterByCategory('${link.id}'); return false;">
+                    ${link.title}
+                </a>
+            `).join('');
+            
+            console.log('Generated HTML:', quickNavCards.innerHTML);
+            
+            // SHOW ALL COMPONENTS FOR THE SELECTED CATEGORY
+            showAllComponents();
+        }
+        
         function init() {
             // CHECK IF IN STANDALONE MODE
             const standaloneMode = localStorage.getItem('standaloneMode');
@@ -3011,6 +3087,32 @@
             const selectedServer = localStorage.getItem('selectedServer');
             
             console.log('Init debug:', { standaloneMode, selectedCategory, selectedServer });
+            console.log('Current path:', window.location.pathname);
+            console.log('Current href:', window.location.href);
+            console.log('Is configurator page:', window.location.pathname.includes('web_catalog.html') || window.location.href.includes('web_catalog.html'));
+            
+            // FOR CATALOG PAGE - ALWAYS INITIALIZE CATALOG MODE
+            const isCatalogPage = window.location.pathname.includes('web_catalog.html') || 
+                                 window.location.href.includes('web_catalog.html') ||
+                                 window.location.href.includes('web_catalog') ||
+                                 document.title.includes('Каталог') ||
+                                 document.querySelector('.category-selection') !== null;
+            
+            console.log('Is catalog page:', isCatalogPage);
+            console.log('Page title:', document.title);
+            console.log('Category selection element exists:', document.querySelector('.category-selection') !== null);
+            
+            // FORCE CATALOG MODE IF WE'RE ON CATALOG PAGE
+            if (isCatalogPage) {
+                console.log('Detected catalog page, initializing catalog mode');
+                initCatalogMode();
+                return;
+            }
+            
+            // ALWAYS USE CATALOG MODE FOR CATALOG PAGE
+            console.log('Forcing catalog mode for catalog page');
+            initCatalogMode();
+            return;
             
             if (standaloneMode === 'true' && selectedCategory) {
                 // STANDALONE MODE - only show selected category
@@ -3019,9 +3121,1390 @@
                 // NORMAL MODE - show all categories for server configuration
                 initNormalMode();
             } else {
-                // FALLBACK - redirect to categories
-                window.location.href = 'web_configurator.html';
+                // CATALOG MODE - show main categories selection
+                console.log('No specific mode detected, using catalog mode as fallback');
+                initCatalogMode();
             }
+        }
+        
+        // INIT CATALOG MODE
+        function initCatalogMode() {
+            console.log('Initializing catalog mode');
+            
+            // INITIALIZE EMPTY CONFIGURATION FOR CATALOG
+            currentConfiguration = {
+                server: null, // NO SERVER IN CATALOG MODE
+                processors: [],
+                memory: [],
+                ssd: [],
+                nvme: [],
+                hdd: [],
+                u320: [],
+                powerSupply: [],
+                controllers: [],
+                network: []
+            };
+            
+            // SAVE EMPTY CONFIGURATION
+            localStorage.setItem('currentConfiguration', JSON.stringify(currentConfiguration));
+            
+            // SHOW CATEGORY SELECTION
+            document.querySelector('.category-selection').style.display = 'block';
+            
+            console.log('About to call selectMainCategory("servers")');
+            // INITIALIZE WITH SERVERS CATEGORY
+            selectMainCategory('servers');
+            
+            console.log('About to call showAllComponents()');
+            // SHOW ALL COMPONENTS BY DEFAULT (NOT INDIVIDUAL SECTIONS)
+            showAllComponents();
+            
+            // UPDATE ALL COMPONENT CARDS AFTER A SHORT DELAY TO ENSURE DOM IS READY
+            setTimeout(() => {
+                updateAllComponentCards();
+            }, 100);
+        }
+        
+        // FILTER BY CATEGORY
+        function filterByCategory(categoryId) {
+            console.log('Filtering by category:', categoryId);
+            
+            // UPDATE ACTIVE LINK
+            document.querySelectorAll('.quick-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // FIND AND ACTIVATE THE CORRECT LINK
+            const targetLink = document.querySelector(`[data-category="${categoryId}"]`);
+            if (targetLink) {
+                targetLink.classList.add('active');
+            }
+            
+            // HIDE ALL SECTIONS FIRST
+            document.querySelectorAll('.component-category').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            if (categoryId === 'all') {
+                // SHOW ALL COMPONENTS WITH "ВСЕ" TITLE
+                showAllComponents();
+            } else {
+                // SHOW SPECIFIC CATEGORY COMPONENTS IN "ВСЕ" SECTION
+                showSpecificCategory(categoryId);
+            }
+        }
+        
+        // SHOW ALL COMPONENTS WITH "ВСЕ" TITLE
+        function showAllComponents() {
+            console.log('showAllComponents called');
+            
+            // HIDE ALL COMPONENT SECTIONS
+            const allSections = document.querySelectorAll('.component-category');
+            allSections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // GET SELECTED MAIN CATEGORY
+            const activeCategory = document.querySelector('.category-card.active');
+            const mainCategory = activeCategory ? activeCategory.dataset.category : 'servers';
+            console.log('Active category:', activeCategory, 'Main category:', mainCategory);
+            
+            // CREATE A SINGLE "ВСЕ" SECTION
+            const mainLayout = document.querySelector('.main-layout .components-area');
+            if (mainLayout) {
+                // REMOVE EXISTING ALL SECTION IF IT EXISTS
+                const existingAllSection = document.getElementById('all-components-section');
+                if (existingAllSection) {
+                    existingAllSection.remove();
+                }
+                
+                // CREATE NEW ALL SECTION
+                const allSection = document.createElement('div');
+                allSection.className = 'component-category';
+                allSection.id = 'all-components-section';
+                allSection.style.display = 'block';
+                
+                allSection.innerHTML = `
+                    <div class="category-header">
+                        <div class="category-title">Все</div>
+                        <div class="category-count">0 выбрано</div>
+                    </div>
+                    <div class="filters-panel" id="allFilters">
+                        <div class="filters-container">
+                            <div class="filter-group">
+                                <label class="filter-label">Производитель:</label>
+                                <select class="filter-select" id="filter-all-manufacturer">
+                                    <option value="">Все</option>
+                                    <option value="Intel">Intel</option>
+                                    <option value="HPE">HPE</option>
+                                    <option value="Samsung">Samsung</option>
+                                    <option value="Kingston">Kingston</option>
+                                    <option value="Crucial">Crucial</option>
+                                    <option value="Seagate">Seagate</option>
+                                </select>
+                            </div>
+                            <div class="filter-actions">
+                                <button class="btn-apply-filters" onclick="applyFiltersAll()">Применить</button>
+                                <button class="btn-reset-filters" onclick="resetFiltersAll()" disabled style="opacity: 0.5; cursor: not-allowed;">Сбросить</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="components-grid" id="allComponentsGrid">
+                        <!-- ALL COMPONENTS WILL BE RENDERED HERE -->
+                    </div>
+                `;
+                
+                mainLayout.appendChild(allSection);
+                
+                // RENDER ALL COMPONENTS
+                renderAllComponents(mainCategory);
+            }
+        }
+        
+        // SHOW SPECIFIC CATEGORY COMPONENTS
+        function showSpecificCategory(categoryId) {
+            // HIDE ALL COMPONENT SECTIONS
+            const allSections = document.querySelectorAll('.component-category');
+            allSections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // GET SELECTED MAIN CATEGORY
+            const activeCategory = document.querySelector('.category-card.active');
+            const mainCategory = activeCategory ? activeCategory.dataset.category : 'servers';
+            
+            // CREATE A SINGLE SECTION FOR SPECIFIC CATEGORY
+            const mainLayout = document.querySelector('.main-layout .components-area');
+            if (mainLayout) {
+                // REMOVE EXISTING ALL SECTION IF IT EXISTS
+                const existingAllSection = document.getElementById('all-components-section');
+                if (existingAllSection) {
+                    existingAllSection.remove();
+                }
+                
+                // CREATE NEW SECTION FOR SPECIFIC CATEGORY
+                const categorySection = document.createElement('div');
+                categorySection.className = 'component-category';
+                categorySection.id = 'all-components-section';
+                categorySection.style.display = 'block';
+                
+                // GET CATEGORY TITLE
+                const categoryTitles = {
+                    'processors': 'Процессоры',
+                    'memory': 'Память',
+                    'ssd': 'SSD диски',
+                    'nvme': 'NVMe диски',
+                    'hdd': 'HDD диски',
+                    'controllers': 'Контроллеры',
+                    'network': 'Сетевые карты',
+                    'power_supply': 'Блоки питания'
+                };
+                
+                const categoryTitle = categoryTitles[categoryId] || categoryId;
+                
+                categorySection.innerHTML = `
+                    <div class="category-header">
+                        <div class="category-title">${categoryTitle}</div>
+                        <div class="category-count">0 выбрано</div>
+                    </div>
+                    <div class="filters-panel" id="allFilters">
+                        <div class="filters-container">
+                            <div class="filter-group">
+                                <label class="filter-label">Производитель:</label>
+                                <select class="filter-select" id="filter-all-manufacturer">
+                                    <option value="">Все</option>
+                                    <option value="Intel">Intel</option>
+                                    <option value="HPE">HPE</option>
+                                    <option value="Samsung">Samsung</option>
+                                    <option value="Kingston">Kingston</option>
+                                    <option value="Crucial">Crucial</option>
+                                    <option value="Seagate">Seagate</option>
+                                </select>
+                            </div>
+                            <div class="filter-actions">
+                                <button class="btn-apply-filters" onclick="applyFiltersAll()">Применить</button>
+                                <button class="btn-reset-filters" onclick="resetFiltersAll()" disabled style="opacity: 0.5; cursor: not-allowed;">Сбросить</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="components-grid" id="allComponentsGrid">
+                        <!-- SPECIFIC CATEGORY COMPONENTS WILL BE RENDERED HERE -->
+                    </div>
+                `;
+                
+                mainLayout.appendChild(categorySection);
+                
+                // RENDER SPECIFIC CATEGORY COMPONENTS
+                renderSpecificCategory(categoryId, mainCategory);
+            }
+        }
+        
+        // RENDER SPECIFIC CATEGORY COMPONENTS
+        function renderSpecificCategory(categoryId, mainCategory = 'servers') {
+            const allGrid = document.getElementById('allComponentsGrid');
+            if (!allGrid) return;
+            
+            // GET MANUFACTURER FILTER
+            const manufacturerFilter = document.getElementById('filter-all-manufacturer');
+            const selectedManufacturer = manufacturerFilter ? manufacturerFilter.value : '';
+            
+            // GET ALL COMPONENTS FROM ALL CATEGORIES
+            const allComponents = [
+                // PROCESSORS
+                { id: 'intel_xeon_e2124', name: 'Intel Xeon E-2124', category: 'processors', manufacturer: 'Intel', specs: [
+                    { label: 'Частота:', value: '3.3 ГГц' },
+                    { label: 'Ядер:', value: '4' },
+                    { label: 'Потоков:', value: '4' },
+                    { label: 'Сокет:', value: 'LGA 1151' },
+                    { label: 'TDP:', value: '71 Вт' }
+                ]},
+                { id: 'intel_xeon_e2134', name: 'Intel Xeon E-2134', category: 'processors', manufacturer: 'Intel', specs: [
+                    { label: 'Частота:', value: '3.5 ГГц' },
+                    { label: 'Ядер:', value: '4' },
+                    { label: 'Потоков:', value: '8' },
+                    { label: 'Сокет:', value: 'LGA 1151' },
+                    { label: 'TDP:', value: '71 Вт' }
+                ]},
+                { id: 'intel_xeon_e2144g', name: 'Intel Xeon E-2144G', category: 'processors', manufacturer: 'Intel', specs: [
+                    { label: 'Частота:', value: '3.6 ГГц' },
+                    { label: 'Ядер:', value: '4' },
+                    { label: 'Потоков:', value: '8' },
+                    { label: 'Сокет:', value: 'LGA 1151' },
+                    { label: 'TDP:', value: '71 Вт' }
+                ]},
+                { id: 'intel_xeon_e2174g', name: 'Intel Xeon E-2174G', category: 'processors', manufacturer: 'Intel', specs: [
+                    { label: 'Частота:', value: '3.8 ГГц' },
+                    { label: 'Ядер:', value: '4' },
+                    { label: 'Потоков:', value: '8' },
+                    { label: 'Сокет:', value: 'LGA 1151' },
+                    { label: 'TDP:', value: '71 Вт' }
+                ]},
+                // MEMORY
+                { id: 'hpe_8gb_ddr4_2666', name: 'HPE 8 ГБ DDR4-2666 UDIMM', category: 'memory', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '8 ГБ' },
+                    { label: 'Тип:', value: 'DDR4' },
+                    { label: 'Частота:', value: '2666 МГц' },
+                    { label: 'Форм-фактор:', value: 'UDIMM' }
+                ]},
+                { id: 'hpe_16gb_ddr4_2666', name: 'HPE 16 ГБ DDR4-2666 UDIMM', category: 'memory', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '16 ГБ' },
+                    { label: 'Тип:', value: 'DDR4' },
+                    { label: 'Частота:', value: '2666 МГц' },
+                    { label: 'Форм-фактор:', value: 'UDIMM' }
+                ]},
+                { id: 'kingston_8gb_ddr4_2666', name: 'Kingston 8 ГБ DDR4-2666 UDIMM', category: 'memory', manufacturer: 'Kingston', specs: [
+                    { label: 'Объем:', value: '8 ГБ' },
+                    { label: 'Тип:', value: 'DDR4' },
+                    { label: 'Частота:', value: '2666 МГц' },
+                    { label: 'Форм-фактор:', value: 'UDIMM' }
+                ]},
+                { id: 'crucial_16gb_ddr4_2666', name: 'Crucial 16 ГБ DDR4-2666 UDIMM', category: 'memory', manufacturer: 'Crucial', specs: [
+                    { label: 'Объем:', value: '16 ГБ' },
+                    { label: 'Тип:', value: 'DDR4' },
+                    { label: 'Частота:', value: '2666 МГц' },
+                    { label: 'Форм-фактор:', value: 'UDIMM' }
+                ]},
+                // SSD
+                { id: 'hpe_480gb_ssd_sata', name: 'HPE 480 ГБ SATA SSD', category: 'ssd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '480 ГБ' },
+                    { label: 'Интерфейс:', value: 'SATA' },
+                    { label: 'Форм-фактор:', value: '2.5"' },
+                    { label: 'Чтение:', value: '560 МБ/с' },
+                    { label: 'Запись:', value: '510 МБ/с' }
+                ]},
+                { id: 'hpe_960gb_ssd_sata', name: 'HPE 960 ГБ SATA SSD', category: 'ssd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '960 ГБ' },
+                    { label: 'Интерфейс:', value: 'SATA' },
+                    { label: 'Форм-фактор:', value: '2.5"' },
+                    { label: 'Чтение:', value: '560 МБ/с' },
+                    { label: 'Запись:', value: '530 МБ/с' }
+                ]},
+                { id: 'samsung_480gb_ssd', name: 'Samsung 480 ГБ SATA SSD', category: 'ssd', manufacturer: 'Samsung', specs: [
+                    { label: 'Объем:', value: '480 ГБ' },
+                    { label: 'Интерфейс:', value: 'SATA' },
+                    { label: 'Форм-фактор:', value: '2.5"' },
+                    { label: 'Чтение:', value: '550 МБ/с' },
+                    { label: 'Запись:', value: '520 МБ/с' }
+                ]},
+                { id: 'intel_960gb_ssd', name: 'Intel 960 ГБ SATA SSD', category: 'ssd', manufacturer: 'Intel', specs: [
+                    { label: 'Объем:', value: '960 ГБ' },
+                    { label: 'Интерфейс:', value: 'SATA' },
+                    { label: 'Форм-фактор:', value: '2.5"' },
+                    { label: 'Чтение:', value: '540 МБ/с' },
+                    { label: 'Запись:', value: '490 МБ/с' }
+                ]},
+                // NVMe
+                { id: 'hpe_800gb_nvme', name: 'HPE 800 ГБ NVMe', category: 'nvme', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '800 ГБ' },
+                    { label: 'Интерфейс:', value: 'NVMe PCIe 3.0' },
+                    { label: 'Форм-фактор:', value: 'M.2' },
+                    { label: 'Чтение:', value: '3200 МБ/с' },
+                    { label: 'Запись:', value: '1800 МБ/с' }
+                ]},
+                { id: 'hpe_1.6tb_nvme', name: 'HPE 1.6 ТБ NVMe', category: 'nvme', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '1.6 ТБ' },
+                    { label: 'Интерфейс:', value: 'NVMe PCIe 3.0' },
+                    { label: 'Форм-фактор:', value: 'M.2' },
+                    { label: 'Чтение:', value: '3500 МБ/с' },
+                    { label: 'Запись:', value: '2100 МБ/с' }
+                ]},
+                { id: 'samsung_970_pro_1tb', name: 'Samsung 970 PRO 1 ТБ NVMe', category: 'nvme', manufacturer: 'Samsung', specs: [
+                    { label: 'Объем:', value: '1 ТБ' },
+                    { label: 'Интерфейс:', value: 'NVMe PCIe 3.0' },
+                    { label: 'Форм-фактор:', value: 'M.2' },
+                    { label: 'Чтение:', value: '3500 МБ/с' },
+                    { label: 'Запись:', value: '2700 МБ/с' }
+                ]},
+                // HDD
+                { id: 'hpe_300gb_sas', name: 'HPE 300 ГБ SAS 10K', category: 'hdd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '300 ГБ' },
+                    { label: 'Интерфейс:', value: 'SAS 12Gb/s' },
+                    { label: 'Скорость:', value: '10000 об/мин' },
+                    { label: 'Форм-фактор:', value: '2.5"' }
+                ]},
+                { id: 'hpe_600gb_sas', name: 'HPE 600 ГБ SAS 10K', category: 'hdd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '600 ГБ' },
+                    { label: 'Интерфейс:', value: 'SAS 12Gb/s' },
+                    { label: 'Скорость:', value: '10000 об/мин' },
+                    { label: 'Форм-фактор:', value: '2.5"' }
+                ]},
+                { id: 'hpe_1tb_sata', name: 'HPE 1 ТБ SATA 7.2K', category: 'hdd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '1 ТБ' },
+                    { label: 'Интерфейс:', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость:', value: '7200 об/мин' },
+                    { label: 'Форм-фактор:', value: '3.5"' }
+                ]},
+                { id: 'hpe_2tb_sata', name: 'HPE 2 ТБ SATA 7.2K', category: 'hdd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '2 ТБ' },
+                    { label: 'Интерфейс:', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость:', value: '7200 об/мин' },
+                    { label: 'Форм-фактор:', value: '3.5"' }
+                ]},
+                { id: 'seagate_1tb_sata', name: 'Seagate 1 ТБ SATA 7.2K', category: 'hdd', manufacturer: 'Seagate', specs: [
+                    { label: 'Объем:', value: '1 ТБ' },
+                    { label: 'Интерфейс:', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость:', value: '7200 об/мин' },
+                    { label: 'Форм-фактор:', value: '3.5"' }
+                ]},
+                { id: 'seagate_2tb_sata', name: 'Seagate 2 ТБ SATA 7.2K', category: 'hdd', manufacturer: 'Seagate', specs: [
+                    { label: 'Объем:', value: '2 ТБ' },
+                    { label: 'Интерфейс:', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость:', value: '7200 об/мин' },
+                    { label: 'Форм-фактор:', value: '3.5"' }
+                ]},
+                // CONTROLLERS
+                { id: 'hpe_smart_array_p408i_a', name: 'HPE Smart Array P408i-a', category: 'controllers', manufacturer: 'HPE', specs: [
+                    { label: 'Тип:', value: 'RAID контроллер' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Порты:', value: '8x SATA/SAS' },
+                    { label: 'Кэш:', value: '2 ГБ' }
+                ]},
+                { id: 'hpe_smart_array_p816i_a', name: 'HPE Smart Array P816i-a', category: 'controllers', manufacturer: 'HPE', specs: [
+                    { label: 'Тип:', value: 'RAID контроллер' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Порты:', value: '16x SATA/SAS' },
+                    { label: 'Кэш:', value: '4 ГБ' }
+                ]},
+                { id: 'hpe_smart_array_p408i_a_2gb', name: 'HPE Smart Array P408i-a 2GB', category: 'controllers', manufacturer: 'HPE', specs: [
+                    { label: 'Тип:', value: 'RAID контроллер' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Порты:', value: '8x SATA/SAS' },
+                    { label: 'Кэш:', value: '2 ГБ' }
+                ]},
+                { id: 'hpe_smart_array_p816i_a_4gb', name: 'HPE Smart Array P816i-a 4GB', category: 'controllers', manufacturer: 'HPE', specs: [
+                    { label: 'Тип:', value: 'RAID контроллер' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Порты:', value: '16x SATA/SAS' },
+                    { label: 'Кэш:', value: '4 ГБ' }
+                ]},
+                // NETWORK
+                { id: 'hpe_ethernet_1gb_4port', name: 'HPE Ethernet 1Gb 4-порт', category: 'network', manufacturer: 'HPE', specs: [
+                    { label: 'Скорость:', value: '1 Гбит/с' },
+                    { label: 'Порты:', value: '4x RJ45' },
+                    { label: 'Интерфейс:', value: 'PCIe 2.0 x4' },
+                    { label: 'Протоколы:', value: 'TCP/IP, UDP' }
+                ]},
+                { id: 'hpe_ethernet_10gb_2port', name: 'HPE Ethernet 10Gb 2-порт', category: 'network', manufacturer: 'HPE', specs: [
+                    { label: 'Скорость:', value: '10 Гбит/с' },
+                    { label: 'Порты:', value: '2x SFP+' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Протоколы:', value: 'TCP/IP, UDP' }
+                ]},
+                { id: 'hpe_ethernet_25gb_2port', name: 'HPE Ethernet 25Gb 2-порт', category: 'network', manufacturer: 'HPE', specs: [
+                    { label: 'Скорость:', value: '25 Гбит/с' },
+                    { label: 'Порты:', value: '2x SFP28' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Протоколы:', value: 'TCP/IP, UDP' }
+                ]},
+                // POWER SUPPLY
+                { id: 'hpe_500w_psu', name: 'HPE 500W PSU', category: 'power_supply', manufacturer: 'HPE', specs: [
+                    { label: 'Мощность:', value: '500 Вт' },
+                    { label: 'Эффективность:', value: '80+ Gold' },
+                    { label: 'Форм-фактор:', value: 'ATX' },
+                    { label: 'Разъемы:', value: '24-pin, 8-pin' }
+                ]},
+                { id: 'hpe_750w_psu', name: 'HPE 750W PSU', category: 'power_supply', manufacturer: 'HPE', specs: [
+                    { label: 'Мощность:', value: '750 Вт' },
+                    { label: 'Эффективность:', value: '80+ Gold' },
+                    { label: 'Форм-фактор:', value: 'ATX' },
+                    { label: 'Разъемы:', value: '24-pin, 8-pin' }
+                ]},
+                { id: 'hpe_1000w_psu', name: 'HPE 1000W PSU', category: 'power_supply', manufacturer: 'HPE', specs: [
+                    { label: 'Мощность:', value: '1000 Вт' },
+                    { label: 'Эффективность:', value: '80+ Platinum' },
+                    { label: 'Форм-фактор:', value: 'ATX' },
+                    { label: 'Разъемы:', value: '24-pin, 8-pin' }
+                ]}
+            ];
+            
+            // FILTER COMPONENTS BY SPECIFIC CATEGORY AND MANUFACTURER
+            let filteredComponents = allComponents.filter(component => component.category === categoryId);
+            
+            // FILTER BY MANUFACTURER
+            if (selectedManufacturer) {
+                filteredComponents = filteredComponents.filter(component => 
+                    component.manufacturer === selectedManufacturer
+                );
+            }
+            
+            // RENDER SPECIFIC CATEGORY COMPONENTS
+            allGrid.innerHTML = filteredComponents.map(component => `
+                <div class="component-card" id="card_${component.id}">
+                    <div class="component-name">${component.name}</div>
+                    <div class="component-specs">
+                        ${component.specs ? component.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('') : ''}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('${component.category}', '${component.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // RENDER ALL COMPONENTS IN ONE GRID
+        function renderAllComponents(mainCategory = 'servers') {
+            const allGrid = document.getElementById('allComponentsGrid');
+            if (!allGrid) return;
+            
+            // GET MANUFACTURER FILTER
+            const manufacturerFilter = document.getElementById('filter-all-manufacturer');
+            const selectedManufacturer = manufacturerFilter ? manufacturerFilter.value : '';
+            
+            // GET ALL COMPONENTS FROM ALL CATEGORIES
+            const allComponents = [
+                // PROCESSORS
+                { id: 'intel_xeon_e2124', name: 'Intel Xeon E-2124', category: 'processors', manufacturer: 'Intel', specs: [
+                    { label: 'Частота:', value: '3.3 ГГц' },
+                    { label: 'Ядер:', value: '4' },
+                    { label: 'Потоков:', value: '4' },
+                    { label: 'Сокет:', value: 'LGA 1151' },
+                    { label: 'TDP:', value: '71 Вт' }
+                ]},
+                { id: 'intel_xeon_e2134', name: 'Intel Xeon E-2134', category: 'processors', manufacturer: 'Intel', specs: [
+                    { label: 'Частота:', value: '3.5 ГГц' },
+                    { label: 'Ядер:', value: '4' },
+                    { label: 'Потоков:', value: '8' },
+                    { label: 'Сокет:', value: 'LGA 1151' },
+                    { label: 'TDP:', value: '71 Вт' }
+                ]},
+                { id: 'intel_xeon_e2144g', name: 'Intel Xeon E-2144G', category: 'processors', manufacturer: 'Intel', specs: [
+                    { label: 'Частота:', value: '3.6 ГГц' },
+                    { label: 'Ядер:', value: '4' },
+                    { label: 'Потоков:', value: '8' },
+                    { label: 'Сокет:', value: 'LGA 1151' },
+                    { label: 'TDP:', value: '71 Вт' }
+                ]},
+                { id: 'intel_xeon_e2174g', name: 'Intel Xeon E-2174G', category: 'processors', manufacturer: 'Intel', specs: [
+                    { label: 'Частота:', value: '3.8 ГГц' },
+                    { label: 'Ядер:', value: '4' },
+                    { label: 'Потоков:', value: '8' },
+                    { label: 'Сокет:', value: 'LGA 1151' },
+                    { label: 'TDP:', value: '71 Вт' }
+                ]},
+                // MEMORY
+                { id: 'hpe_8gb_ddr4_2666', name: 'HPE 8 ГБ DDR4-2666 UDIMM', category: 'memory', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '8 ГБ' },
+                    { label: 'Тип:', value: 'DDR4' },
+                    { label: 'Частота:', value: '2666 МГц' },
+                    { label: 'Форм-фактор:', value: 'UDIMM' }
+                ]},
+                { id: 'hpe_16gb_ddr4_2666', name: 'HPE 16 ГБ DDR4-2666 UDIMM', category: 'memory', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '16 ГБ' },
+                    { label: 'Тип:', value: 'DDR4' },
+                    { label: 'Частота:', value: '2666 МГц' },
+                    { label: 'Форм-фактор:', value: 'UDIMM' }
+                ]},
+                { id: 'kingston_8gb_ddr4_2666', name: 'Kingston 8 ГБ DDR4-2666 UDIMM', category: 'memory', manufacturer: 'Kingston', specs: [
+                    { label: 'Объем:', value: '8 ГБ' },
+                    { label: 'Тип:', value: 'DDR4' },
+                    { label: 'Частота:', value: '2666 МГц' },
+                    { label: 'Форм-фактор:', value: 'UDIMM' }
+                ]},
+                { id: 'crucial_16gb_ddr4_2666', name: 'Crucial 16 ГБ DDR4-2666 UDIMM', category: 'memory', manufacturer: 'Crucial', specs: [
+                    { label: 'Объем:', value: '16 ГБ' },
+                    { label: 'Тип:', value: 'DDR4' },
+                    { label: 'Частота:', value: '2666 МГц' },
+                    { label: 'Форм-фактор:', value: 'UDIMM' }
+                ]},
+                // SSD
+                { id: 'hpe_480gb_ssd_sata', name: 'HPE 480 ГБ SATA SSD', category: 'ssd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '480 ГБ' },
+                    { label: 'Интерфейс:', value: 'SATA' },
+                    { label: 'Форм-фактор:', value: '2.5"' },
+                    { label: 'Чтение:', value: '560 МБ/с' },
+                    { label: 'Запись:', value: '510 МБ/с' }
+                ]},
+                { id: 'hpe_960gb_ssd_sata', name: 'HPE 960 ГБ SATA SSD', category: 'ssd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '960 ГБ' },
+                    { label: 'Интерфейс:', value: 'SATA' },
+                    { label: 'Форм-фактор:', value: '2.5"' },
+                    { label: 'Чтение:', value: '560 МБ/с' },
+                    { label: 'Запись:', value: '530 МБ/с' }
+                ]},
+                { id: 'samsung_480gb_ssd', name: 'Samsung 480 ГБ SATA SSD', category: 'ssd', manufacturer: 'Samsung', specs: [
+                    { label: 'Объем:', value: '480 ГБ' },
+                    { label: 'Интерфейс:', value: 'SATA' },
+                    { label: 'Форм-фактор:', value: '2.5"' },
+                    { label: 'Чтение:', value: '550 МБ/с' },
+                    { label: 'Запись:', value: '520 МБ/с' }
+                ]},
+                { id: 'intel_960gb_ssd', name: 'Intel 960 ГБ SATA SSD', category: 'ssd', manufacturer: 'Intel', specs: [
+                    { label: 'Объем:', value: '960 ГБ' },
+                    { label: 'Интерфейс:', value: 'SATA' },
+                    { label: 'Форм-фактор:', value: '2.5"' },
+                    { label: 'Чтение:', value: '540 МБ/с' },
+                    { label: 'Запись:', value: '490 МБ/с' }
+                ]},
+                // NVMe
+                { id: 'hpe_800gb_nvme', name: 'HPE 800 ГБ NVMe', category: 'nvme', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '800 ГБ' },
+                    { label: 'Интерфейс:', value: 'NVMe PCIe 3.0' },
+                    { label: 'Форм-фактор:', value: 'M.2' },
+                    { label: 'Чтение:', value: '3200 МБ/с' },
+                    { label: 'Запись:', value: '1800 МБ/с' }
+                ]},
+                { id: 'hpe_1.6tb_nvme', name: 'HPE 1.6 ТБ NVMe', category: 'nvme', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '1.6 ТБ' },
+                    { label: 'Интерфейс:', value: 'NVMe PCIe 3.0' },
+                    { label: 'Форм-фактор:', value: 'M.2' },
+                    { label: 'Чтение:', value: '3500 МБ/с' },
+                    { label: 'Запись:', value: '2100 МБ/с' }
+                ]},
+                { id: 'samsung_970_pro_1tb', name: 'Samsung 970 PRO 1 ТБ NVMe', category: 'nvme', manufacturer: 'Samsung', specs: [
+                    { label: 'Объем:', value: '1 ТБ' },
+                    { label: 'Интерфейс:', value: 'NVMe PCIe 3.0' },
+                    { label: 'Форм-фактор:', value: 'M.2' },
+                    { label: 'Чтение:', value: '3500 МБ/с' },
+                    { label: 'Запись:', value: '2700 МБ/с' }
+                ]},
+                // HDD
+                { id: 'hpe_300gb_sas', name: 'HPE 300 ГБ SAS 10K', category: 'hdd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '300 ГБ' },
+                    { label: 'Интерфейс:', value: 'SAS 12Gb/s' },
+                    { label: 'Скорость:', value: '10000 об/мин' },
+                    { label: 'Форм-фактор:', value: '2.5"' }
+                ]},
+                { id: 'hpe_600gb_sas', name: 'HPE 600 ГБ SAS 10K', category: 'hdd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '600 ГБ' },
+                    { label: 'Интерфейс:', value: 'SAS 12Gb/s' },
+                    { label: 'Скорость:', value: '10000 об/мин' },
+                    { label: 'Форм-фактор:', value: '2.5"' }
+                ]},
+                { id: 'hpe_1tb_sata', name: 'HPE 1 ТБ SATA 7.2K', category: 'hdd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '1 ТБ' },
+                    { label: 'Интерфейс:', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость:', value: '7200 об/мин' },
+                    { label: 'Форм-фактор:', value: '3.5"' }
+                ]},
+                { id: 'hpe_2tb_sata', name: 'HPE 2 ТБ SATA 7.2K', category: 'hdd', manufacturer: 'HPE', specs: [
+                    { label: 'Объем:', value: '2 ТБ' },
+                    { label: 'Интерфейс:', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость:', value: '7200 об/мин' },
+                    { label: 'Форм-фактор:', value: '3.5"' }
+                ]},
+                { id: 'seagate_1tb_sata', name: 'Seagate 1 ТБ SATA 7.2K', category: 'hdd', manufacturer: 'Seagate', specs: [
+                    { label: 'Объем:', value: '1 ТБ' },
+                    { label: 'Интерфейс:', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость:', value: '7200 об/мин' },
+                    { label: 'Форм-фактор:', value: '3.5"' }
+                ]},
+                { id: 'seagate_2tb_sata', name: 'Seagate 2 ТБ SATA 7.2K', category: 'hdd', manufacturer: 'Seagate', specs: [
+                    { label: 'Объем:', value: '2 ТБ' },
+                    { label: 'Интерфейс:', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость:', value: '7200 об/мин' },
+                    { label: 'Форм-фактор:', value: '3.5"' }
+                ]},
+                // CONTROLLERS
+                { id: 'hpe_smart_array_p408i_a', name: 'HPE Smart Array P408i-a', category: 'controllers', manufacturer: 'HPE', specs: [
+                    { label: 'Тип:', value: 'RAID контроллер' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Порты:', value: '8x SATA/SAS' },
+                    { label: 'Кэш:', value: '2 ГБ' }
+                ]},
+                { id: 'hpe_smart_array_p816i_a', name: 'HPE Smart Array P816i-a', category: 'controllers', manufacturer: 'HPE', specs: [
+                    { label: 'Тип:', value: 'RAID контроллер' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Порты:', value: '16x SATA/SAS' },
+                    { label: 'Кэш:', value: '4 ГБ' }
+                ]},
+                { id: 'hpe_smart_array_p408i_a_2gb', name: 'HPE Smart Array P408i-a 2GB', category: 'controllers', manufacturer: 'HPE', specs: [
+                    { label: 'Тип:', value: 'RAID контроллер' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Порты:', value: '8x SATA/SAS' },
+                    { label: 'Кэш:', value: '2 ГБ' }
+                ]},
+                { id: 'hpe_smart_array_p816i_a_4gb', name: 'HPE Smart Array P816i-a 4GB', category: 'controllers', manufacturer: 'HPE', specs: [
+                    { label: 'Тип:', value: 'RAID контроллер' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Порты:', value: '16x SATA/SAS' },
+                    { label: 'Кэш:', value: '4 ГБ' }
+                ]},
+                // NETWORK
+                { id: 'hpe_ethernet_1gb_4port', name: 'HPE Ethernet 1Gb 4-порт', category: 'network', manufacturer: 'HPE', specs: [
+                    { label: 'Скорость:', value: '1 Гбит/с' },
+                    { label: 'Порты:', value: '4x RJ45' },
+                    { label: 'Интерфейс:', value: 'PCIe 2.0 x4' },
+                    { label: 'Протоколы:', value: 'TCP/IP, UDP' }
+                ]},
+                { id: 'hpe_ethernet_10gb_2port', name: 'HPE Ethernet 10Gb 2-порт', category: 'network', manufacturer: 'HPE', specs: [
+                    { label: 'Скорость:', value: '10 Гбит/с' },
+                    { label: 'Порты:', value: '2x SFP+' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Протоколы:', value: 'TCP/IP, UDP' }
+                ]},
+                { id: 'hpe_ethernet_25gb_2port', name: 'HPE Ethernet 25Gb 2-порт', category: 'network', manufacturer: 'HPE', specs: [
+                    { label: 'Скорость:', value: '25 Гбит/с' },
+                    { label: 'Порты:', value: '2x SFP28' },
+                    { label: 'Интерфейс:', value: 'PCIe 3.0 x8' },
+                    { label: 'Протоколы:', value: 'TCP/IP, UDP' }
+                ]},
+                // POWER SUPPLY
+                { id: 'hpe_500w_psu', name: 'HPE 500W PSU', category: 'power_supply', manufacturer: 'HPE', specs: [
+                    { label: 'Мощность:', value: '500 Вт' },
+                    { label: 'Эффективность:', value: '80+ Gold' },
+                    { label: 'Форм-фактор:', value: 'ATX' },
+                    { label: 'Разъемы:', value: '24-pin, 8-pin' }
+                ]},
+                { id: 'hpe_750w_psu', name: 'HPE 750W PSU', category: 'power_supply', manufacturer: 'HPE', specs: [
+                    { label: 'Мощность:', value: '750 Вт' },
+                    { label: 'Эффективность:', value: '80+ Gold' },
+                    { label: 'Форм-фактор:', value: 'ATX' },
+                    { label: 'Разъемы:', value: '24-pin, 8-pin' }
+                ]},
+                { id: 'hpe_1000w_psu', name: 'HPE 1000W PSU', category: 'power_supply', manufacturer: 'HPE', specs: [
+                    { label: 'Мощность:', value: '1000 Вт' },
+                    { label: 'Эффективность:', value: '80+ Platinum' },
+                    { label: 'Форм-фактор:', value: 'ATX' },
+                    { label: 'Разъемы:', value: '24-pin, 8-pin' }
+                ]}
+            ];
+            
+            // FILTER COMPONENTS BY MAIN CATEGORY AND MANUFACTURER
+            let filteredComponents = allComponents;
+            
+            // FILTER BY MAIN CATEGORY
+            if (mainCategory === 'servers') {
+                // SHOW ALL SERVER COMPONENTS
+                filteredComponents = allComponents;
+            } else if (mainCategory === 'storage') {
+                // SHOW ONLY STORAGE COMPONENTS
+                filteredComponents = allComponents.filter(component => 
+                    ['ssd', 'nvme', 'hdd', 'controllers'].includes(component.category)
+                );
+            } else if (mainCategory === 'network') {
+                // SHOW ONLY NETWORK COMPONENTS
+                filteredComponents = allComponents.filter(component => 
+                    ['network', 'controllers'].includes(component.category)
+                );
+            }
+            
+            // FILTER BY MANUFACTURER
+            if (selectedManufacturer) {
+                filteredComponents = filteredComponents.filter(component => 
+                    component.manufacturer === selectedManufacturer
+                );
+            }
+            
+            // RENDER ALL COMPONENTS
+            allGrid.innerHTML = filteredComponents.map(component => `
+                <div class="component-card" id="card_${component.id}">
+                    <div class="component-name">${component.name}</div>
+                    <div class="component-specs">
+                        ${component.specs ? component.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('') : ''}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('${component.category}', '${component.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            // UPDATE CARD STATES BASED ON CURRENT CONFIGURATION
+            setTimeout(() => {
+                updateAllComponentCards();
+            }, 100);
+        }
+        
+        // APPLY FILTERS FOR "ALL" SECTION
+        function applyFiltersAll() {
+            const activeCategory = document.querySelector('.category-card.active');
+            const mainCategory = activeCategory ? activeCategory.dataset.category : 'servers';
+            renderAllComponents(mainCategory);
+        }
+        
+        // RESET FILTERS FOR "ALL" SECTION
+        function resetFiltersAll() {
+            const manufacturerFilter = document.getElementById('filter-all-manufacturer');
+            if (manufacturerFilter) {
+                manufacturerFilter.value = '';
+            }
+            const activeCategory = document.querySelector('.category-card.active');
+            const mainCategory = activeCategory ? activeCategory.dataset.category : 'servers';
+            renderAllComponents(mainCategory);
+        }
+        
+        // UPDATE COMPONENTS FOR CATEGORY
+        function updateComponentsForCategory(mainCategory) {
+            // HIDE ALL SECTIONS FIRST
+            document.querySelectorAll('.component-category').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            if (mainCategory === 'servers') {
+                // Show all server components
+                document.getElementById('processors-section').style.display = 'block';
+                document.getElementById('memory-section').style.display = 'block';
+                document.getElementById('ssd-section').style.display = 'block';
+                document.getElementById('nvme-section').style.display = 'block';
+                document.getElementById('hdd-section').style.display = 'block';
+                document.getElementById('controllers-section').style.display = 'block';
+                document.getElementById('network-section').style.display = 'block';
+                document.getElementById('power_supply-section').style.display = 'block';
+                
+                // Render components for each section
+                renderProcessors();
+                renderMemory();
+                renderSSD();
+                renderNVMe();
+                renderHDD();
+                renderControllers();
+                renderNetwork();
+                renderPowerSupply();
+            } else if (mainCategory === 'storage') {
+                // Show storage components
+                document.getElementById('controllers-section').style.display = 'block';
+                document.getElementById('ssd-section').style.display = 'block';
+                document.getElementById('nvme-section').style.display = 'block';
+                document.getElementById('hdd-section').style.display = 'block';
+                
+                // Render components
+                renderControllers();
+                renderSSD();
+                renderNVMe();
+                renderHDD();
+            } else if (mainCategory === 'network') {
+                // Show network components
+                document.getElementById('network-section').style.display = 'block';
+                document.getElementById('controllers-section').style.display = 'block';
+                
+                // Render components
+                renderNetwork();
+                renderControllers();
+            }
+        }
+        
+        // RENDER PROCESSORS
+        function renderProcessors() {
+            const grid = document.getElementById('processorsGrid');
+            if (!grid) return;
+            
+            const processors = [
+                { id: 'intel_xeon_e2124', name: 'Intel Xeon E-2124', specs: [
+                    { label: 'Частота', value: '3.3 ГГц' },
+                    { label: 'Ядер', value: '4' },
+                    { label: 'Потоков', value: '4' },
+                    { label: 'Сокет', value: 'LGA 1151' },
+                    { label: 'TDP', value: '71 Вт' }
+                ]},
+                { id: 'intel_xeon_e2134', name: 'Intel Xeon E-2134', specs: [
+                    { label: 'Частота', value: '3.5 ГГц' },
+                    { label: 'Ядер', value: '4' },
+                    { label: 'Потоков', value: '8' },
+                    { label: 'Сокет', value: 'LGA 1151' },
+                    { label: 'TDP', value: '71 Вт' }
+                ]},
+                { id: 'intel_xeon_e2144g', name: 'Intel Xeon E-2144G', specs: [
+                    { label: 'Частота', value: '3.6 ГГц' },
+                    { label: 'Ядер', value: '4' },
+                    { label: 'Потоков', value: '8' },
+                    { label: 'Сокет', value: 'LGA 1151' },
+                    { label: 'TDP', value: '71 Вт' }
+                ]},
+                { id: 'intel_xeon_e2174g', name: 'Intel Xeon E-2174G', specs: [
+                    { label: 'Частота', value: '3.8 ГГц' },
+                    { label: 'Ядер', value: '4' },
+                    { label: 'Потоков', value: '8' },
+                    { label: 'Сокет', value: 'LGA 1151' },
+                    { label: 'TDP', value: '71 Вт' }
+                ]}
+            ];
+            
+            grid.innerHTML = processors.map(processor => `
+                <div class="component-card" id="card_${processor.id}">
+                    <div class="component-name">${processor.name}</div>
+                    <div class="component-specs">
+                        ${processor.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}:</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('processors', '${processor.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // RENDER MEMORY
+        function renderMemory() {
+            const grid = document.getElementById('memoryGrid');
+            if (!grid) return;
+            
+            const memory = [
+                { id: 'hpe_8gb_ddr4_2666', name: 'HPE 8 ГБ DDR4-2666 UDIMM', specs: [
+                    { label: 'Объем', value: '8 ГБ' },
+                    { label: 'Тип', value: 'DDR4' },
+                    { label: 'Частота', value: '2666 МГц' },
+                    { label: 'Форм-фактор', value: 'UDIMM' }
+                ]},
+                { id: 'hpe_16gb_ddr4_2666', name: 'HPE 16 ГБ DDR4-2666 UDIMM', specs: [
+                    { label: 'Объем', value: '16 ГБ' },
+                    { label: 'Тип', value: 'DDR4' },
+                    { label: 'Частота', value: '2666 МГц' },
+                    { label: 'Форм-фактор', value: 'UDIMM' }
+                ]},
+                { id: 'kingston_8gb_ddr4_2666', name: 'Kingston 8 ГБ DDR4-2666 UDIMM', specs: [
+                    { label: 'Объем', value: '8 ГБ' },
+                    { label: 'Тип', value: 'DDR4' },
+                    { label: 'Частота', value: '2666 МГц' },
+                    { label: 'Форм-фактор', value: 'UDIMM' }
+                ]},
+                { id: 'crucial_16gb_ddr4_2666', name: 'Crucial 16 ГБ DDR4-2666 UDIMM', specs: [
+                    { label: 'Объем', value: '16 ГБ' },
+                    { label: 'Тип', value: 'DDR4' },
+                    { label: 'Частота', value: '2666 МГц' },
+                    { label: 'Форм-фактор', value: 'UDIMM' }
+                ]}
+            ];
+            
+            grid.innerHTML = memory.map(mem => `
+                <div class="component-card" id="card_${mem.id}">
+                    <div class="component-name">${mem.name}</div>
+                    <div class="component-specs">
+                        ${mem.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}:</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('memory', '${mem.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // RENDER SSD
+        function renderSSD() {
+            const grid = document.getElementById('ssdGrid');
+            if (!grid) return;
+            
+            const ssds = [
+                { id: 'hpe_480gb_ssd_sata', name: 'HPE 480 ГБ SATA SSD', specs: [
+                    { label: 'Объем', value: '480 ГБ' },
+                    { label: 'Интерфейс', value: 'SATA' },
+                    { label: 'Форм-фактор', value: '2.5"' },
+                    { label: 'Чтение', value: '560 МБ/с' },
+                    { label: 'Запись', value: '510 МБ/с' }
+                ]},
+                { id: 'hpe_960gb_ssd_sata', name: 'HPE 960 ГБ SATA SSD', specs: [
+                    { label: 'Объем', value: '960 ГБ' },
+                    { label: 'Интерфейс', value: 'SATA' },
+                    { label: 'Форм-фактор', value: '2.5"' },
+                    { label: 'Чтение', value: '560 МБ/с' },
+                    { label: 'Запись', value: '530 МБ/с' }
+                ]},
+                { id: 'samsung_480gb_ssd', name: 'Samsung 480 ГБ SATA SSD', specs: [
+                    { label: 'Объем', value: '480 ГБ' },
+                    { label: 'Интерфейс', value: 'SATA' },
+                    { label: 'Форм-фактор', value: '2.5"' },
+                    { label: 'Чтение', value: '550 МБ/с' },
+                    { label: 'Запись', value: '520 МБ/с' }
+                ]},
+                { id: 'intel_960gb_ssd', name: 'Intel 960 ГБ SATA SSD', specs: [
+                    { label: 'Объем', value: '960 ГБ' },
+                    { label: 'Интерфейс', value: 'SATA' },
+                    { label: 'Форм-фактор', value: '2.5"' },
+                    { label: 'Чтение', value: '540 МБ/с' },
+                    { label: 'Запись', value: '490 МБ/с' }
+                ]}
+            ];
+            
+            grid.innerHTML = ssds.map(ssd => `
+                <div class="component-card" id="card_${ssd.id}">
+                    <div class="component-name">${ssd.name}</div>
+                    <div class="component-specs">
+                        ${ssd.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}:</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('ssd', '${ssd.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // RENDER NVME
+        function renderNVMe() {
+            const grid = document.getElementById('nvmeGrid');
+            if (!grid) return;
+            
+            const nvmes = [
+                { id: 'hpe_800gb_nvme', name: 'HPE 800 ГБ NVMe', specs: [
+                    { label: 'Объем', value: '800 ГБ' },
+                    { label: 'Интерфейс', value: 'NVMe PCIe 3.0' },
+                    { label: 'Форм-фактор', value: 'M.2' },
+                    { label: 'Чтение', value: '3200 МБ/с' },
+                    { label: 'Запись', value: '1800 МБ/с' }
+                ]},
+                { id: 'hpe_1.6tb_nvme', name: 'HPE 1.6 ТБ NVMe', specs: [
+                    { label: 'Объем', value: '1.6 ТБ' },
+                    { label: 'Интерфейс', value: 'NVMe PCIe 3.0' },
+                    { label: 'Форм-фактор', value: 'M.2' },
+                    { label: 'Чтение', value: '3500 МБ/с' },
+                    { label: 'Запись', value: '2100 МБ/с' }
+                ]},
+                { id: 'samsung_970_pro_1tb', name: 'Samsung 970 PRO 1 ТБ NVMe', specs: [
+                    { label: 'Объем', value: '1 ТБ' },
+                    { label: 'Интерфейс', value: 'NVMe PCIe 3.0' },
+                    { label: 'Форм-фактор', value: 'M.2' },
+                    { label: 'Чтение', value: '3500 МБ/с' },
+                    { label: 'Запись', value: '2700 МБ/с' }
+                ]}
+            ];
+            
+            grid.innerHTML = nvmes.map(nvme => `
+                <div class="component-card" id="card_${nvme.id}">
+                    <div class="component-name">${nvme.name}</div>
+                    <div class="component-specs">
+                        ${nvme.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}:</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('nvme', '${nvme.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // RENDER HDD
+        function renderHDD() {
+            const grid = document.getElementById('hddGrid');
+            if (!grid) return;
+            
+            const hdds = [
+                { id: 'hpe_300gb_sas', name: 'HPE 300 ГБ SAS 10K', specs: [
+                    { label: 'Объем', value: '300 ГБ' },
+                    { label: 'Интерфейс', value: 'SAS 12Gb/s' },
+                    { label: 'Скорость', value: '10000 об/мин' },
+                    { label: 'Форм-фактор', value: '2.5"' }
+                ]},
+                { id: 'hpe_600gb_sas', name: 'HPE 600 ГБ SAS 10K', specs: [
+                    { label: 'Объем', value: '600 ГБ' },
+                    { label: 'Интерфейс', value: 'SAS 12Gb/s' },
+                    { label: 'Скорость', value: '10000 об/мин' },
+                    { label: 'Форм-фактор', value: '2.5"' }
+                ]},
+                { id: 'hpe_1tb_sata_7.2k', name: 'HPE 1 ТБ SATA 7.2K', specs: [
+                    { label: 'Объем', value: '1 ТБ' },
+                    { label: 'Интерфейс', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость', value: '7200 об/мин' },
+                    { label: 'Форм-фактор', value: '2.5"' }
+                ]},
+                { id: 'hpe_2tb_sata_7.2k', name: 'HPE 2 ТБ SATA 7.2K', specs: [
+                    { label: 'Объем', value: '2 ТБ' },
+                    { label: 'Интерфейс', value: 'SATA 6Gb/s' },
+                    { label: 'Скорость', value: '7200 об/мин' },
+                    { label: 'Форм-фактор', value: '2.5"' }
+                ]},
+                { id: 'seagate_1tb_sas', name: 'Seagate 1 ТБ SAS 7.2K', specs: [
+                    { label: 'Объем', value: '1 ТБ' },
+                    { label: 'Интерфейс', value: 'SAS 12Gb/s' },
+                    { label: 'Скорость', value: '7200 об/мин' },
+                    { label: 'Форм-фактор', value: '2.5"' }
+                ]}
+            ];
+            
+            grid.innerHTML = hdds.map(hdd => `
+                <div class="component-card" id="card_${hdd.id}">
+                    <div class="component-name">${hdd.name}</div>
+                    <div class="component-specs">
+                        ${hdd.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}:</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('hdd', '${hdd.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // RENDER CONTROLLERS
+        function renderControllers() {
+            const grid = document.getElementById('controllersGrid');
+            if (!grid) return;
+            
+            const controllers = [
+                { id: 'hpe_s100i', name: 'HPE Smart Array S100i', specs: [
+                    { label: 'Интерфейс', value: 'SATA' },
+                    { label: 'Портов', value: '4' },
+                    { label: 'RAID', value: '0, 1, 10' }
+                ]},
+                { id: 'hpe_p408i', name: 'HPE Smart Array P408i-a', specs: [
+                    { label: 'Интерфейс', value: 'SAS/SATA' },
+                    { label: 'Портов', value: '8' },
+                    { label: 'RAID', value: '0, 1, 5, 6, 10, 50, 60' },
+                    { label: 'Кэш', value: '2 ГБ' }
+                ]},
+                { id: 'hpe_p816i', name: 'HPE Smart Array P816i-a', specs: [
+                    { label: 'Интерфейс', value: 'SAS/SATA' },
+                    { label: 'Портов', value: '16' },
+                    { label: 'RAID', value: '0, 1, 5, 6, 10, 50, 60' },
+                    { label: 'Кэш', value: '4 ГБ' }
+                ]}
+            ];
+            
+            grid.innerHTML = controllers.map(controller => `
+                <div class="component-card" id="card_${controller.id}">
+                    <div class="component-name">${controller.name}</div>
+                    <div class="component-specs">
+                        ${controller.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}:</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('controllers', '${controller.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // RENDER NETWORK
+        function renderNetwork() {
+            const grid = document.getElementById('networkGrid');
+            if (!grid) return;
+            
+            const network = [
+                { id: 'hpe_1gb_2port', name: 'HPE 1Gb 2-port адаптер', specs: [
+                    { label: 'Скорость', value: '1 Гбит/с' },
+                    { label: 'Портов', value: '2' },
+                    { label: 'Интерфейс', value: 'PCIe' }
+                ]},
+                { id: 'hpe_10gb_2port', name: 'HPE 10Gb 2-port адаптер', specs: [
+                    { label: 'Скорость', value: '10 Гбит/с' },
+                    { label: 'Портов', value: '2' },
+                    { label: 'Интерфейс', value: 'PCIe' }
+                ]},
+                { id: 'intel_i350_quad', name: 'Intel I350 4-port адаптер', specs: [
+                    { label: 'Скорость', value: '1 Гбит/с' },
+                    { label: 'Портов', value: '4' },
+                    { label: 'Интерфейс', value: 'PCIe' }
+                ]}
+            ];
+            
+            grid.innerHTML = network.map(net => `
+                <div class="component-card" id="card_${net.id}">
+                    <div class="component-name">${net.name}</div>
+                    <div class="component-specs">
+                        ${net.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}:</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('network', '${net.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // RENDER POWER SUPPLY
+        function renderPowerSupply() {
+            const grid = document.getElementById('powerSupplyGrid');
+            if (!grid) return;
+            
+            const powerSupplies = [
+                { id: 'hpe_290w_psu', name: 'HPE 290 Вт блок питания', specs: [
+                    { label: 'Мощность', value: '290 Вт' },
+                    { label: 'КПД', value: '80+ Platinum' },
+                    { label: 'Напряжение', value: '100-240V' }
+                ]},
+                { id: 'hpe_500w_psu', name: 'HPE 500 Вт блок питания', specs: [
+                    { label: 'Мощность', value: '500 Вт' },
+                    { label: 'КПД', value: '80+ Platinum' },
+                    { label: 'Напряжение', value: '100-240V' }
+                ]}
+            ];
+            
+            grid.innerHTML = powerSupplies.map(psu => `
+                <div class="component-card" id="card_${psu.id}">
+                    <div class="component-name">${psu.name}</div>
+                    <div class="component-specs">
+                        ${psu.specs.map(spec => `
+                            <div class="component-spec-item">
+                                <span class="spec-label">${spec.label}:</span>
+                                <span class="spec-value">${spec.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="component-actions">
+                        <button class="btn btn-add" onclick="addComponent('powerSupply', '${psu.id}')" title="Добавить">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ADD/REMOVE COMPONENT FUNCTION
+        function addComponent(category, componentId) {
+            console.log(`Adding/removing component: ${componentId} from category: ${category}`);
+            console.log('Current configuration before:', currentConfiguration);
+            
+            const component = componentsDatabase[category].find(c => c.id === componentId);
+            
+            if (!component) {
+                console.error('Component not found in database');
+                console.log('Available components in category:', componentsDatabase[category]);
+                return;
+            }
+            
+            console.log('Found component:', component);
+            
+            // CHECK IF COMPONENT IS ALREADY IN CONFIGURATION
+            const existingIndex = currentConfiguration[category].findIndex(c => c.id === componentId);
+            
+            if (existingIndex !== -1) {
+                // COMPONENT EXISTS - REMOVE IT
+                currentConfiguration[category].splice(existingIndex, 1);
+                console.log(`Removed ${component.name} from ${category}`);
+                
+                // SHOW SUCCESS MESSAGE
+                showSuccessMessage(`${component.name} удален из конфигурации`);
+            } else {
+                // COMPONENT DOESN'T EXIST - ADD IT
+                // CHECK MAX QUANTITY
+                const currentQuantity = currentConfiguration[category].filter(c => c.id === componentId).length;
+                if (component.maxQuantity && currentQuantity >= component.maxQuantity) {
+                    alert(`Достигнуто максимальное количество: ${component.maxQuantity}`);
+                    return;
+                }
+                
+                // ADD COMPONENT TO CONFIGURATION
+                currentConfiguration[category].push({
+                    id: component.id,
+                    name: component.name,
+                    specs: component.specs,
+                    manufacturer: component.manufacturer
+                });
+                
+                console.log(`Added ${component.name} to ${category}`);
+                
+                // SHOW SUCCESS MESSAGE
+                showSuccessMessage(`${component.name} добавлен в конфигурацию`);
+            }
+            
+            console.log('Current configuration after:', currentConfiguration);
+            
+            // SAVE TO LOCALSTORAGE
+            localStorage.setItem('currentConfiguration', JSON.stringify(currentConfiguration));
+            console.log('Saved to localStorage');
+            
+            // UPDATE UI
+            updateConfiguration();
+            
+            // RENDER COMPONENTS TO REFLECT CURRENT STATE
+            renderComponents();
+        }
+        
+        // UPDATE COMPONENT CARD VISUAL STATE
+        function updateComponentCard(componentId, category, isAdded) {
+            console.log(`Updating component card: ${componentId}, isAdded: ${isAdded}`);
+            const card = document.getElementById(`card_${componentId}`);
+            if (!card) {
+                console.error(`Card not found: card_${componentId}`);
+                return;
+            }
+            
+            const addButton = card.querySelector('.btn-add');
+            if (!addButton) {
+                console.error(`Add button not found in card: card_${componentId}`);
+                return;
+            }
+            
+            console.log(`Found card and button for ${componentId}, updating...`);
+            
+            if (isAdded) {
+                // SHOW THAT COMPONENT IS ADDED
+                card.classList.add('selected');
+                addButton.textContent = '✓';
+                addButton.title = 'Добавлено в корзину';
+                // REMOVE INLINE STYLES TO LET CSS TAKE OVER
+                addButton.style.background = '';
+                addButton.style.color = '';
+                addButton.style.border = '';
+                card.style.border = '';
+                card.style.background = '';
+            } else {
+                // RESET TO DEFAULT STATE
+                card.classList.remove('selected');
+                addButton.textContent = '+';
+                addButton.title = 'Добавить';
+                // REMOVE INLINE STYLES TO LET CSS TAKE OVER
+                addButton.style.background = '';
+                addButton.style.color = '';
+                addButton.style.border = '';
+                card.style.border = '';
+                card.style.background = '';
+            }
+        }
+        
+        // UPDATE ALL COMPONENT CARDS BASED ON CURRENT CONFIGURATION
+        function updateAllComponentCards() {
+            console.log('Updating all component cards based on current configuration');
+            console.log('Current configuration:', currentConfiguration);
+            
+            // GET ALL COMPONENT CARDS
+            const allCards = document.querySelectorAll('.component-card');
+            console.log('Found component cards:', allCards.length);
+            
+            allCards.forEach(card => {
+                const componentId = card.id.replace('card_', '');
+                console.log('Checking component:', componentId);
+                
+                // FIND COMPONENT CATEGORY AND CHECK IF IT'S IN CONFIGURATION
+                let isInConfiguration = false;
+                let foundCategory = null;
+                
+                // CHECK ALL POSSIBLE CATEGORIES IN CURRENT CONFIGURATION
+                for (const category in currentConfiguration) {
+                    if (currentConfiguration[category] && Array.isArray(currentConfiguration[category])) {
+                        if (currentConfiguration[category].some(comp => comp.id === componentId)) {
+                            console.log(`Component ${componentId} found in ${category}`);
+                            isInConfiguration = true;
+                            foundCategory = category;
+                            break;
+                        }
+                    }
+                }
+                
+                console.log(`Component ${componentId} is in configuration:`, isInConfiguration);
+                
+                if (isInConfiguration) {
+                    // COMPONENT IS IN CONFIGURATION - SHOW AS ADDED
+                    console.log(`Calling updateComponentCard for ${componentId} with isAdded=true`);
+                    updateComponentCard(componentId, foundCategory, true);
+                } else {
+                    // COMPONENT IS NOT IN CONFIGURATION - SHOW AS NOT ADDED
+                    console.log(`Calling updateComponentCard for ${componentId} with isAdded=false`);
+                    updateComponentCard(componentId, null, false);
+                }
+            });
+        }
+        
+        // SHOW SUCCESS MESSAGE
+        function showSuccessMessage(message) {
+            // CREATE SUCCESS NOTIFICATION
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(61, 243, 187, 0.9);
+                color: #1c2a3c;
+                padding: 15px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                z-index: 1000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // ANIMATE IN
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // REMOVE AFTER 3 SECONDS
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
         }
         
         // INITIALIZE NORMAL MODE (server configuration)
@@ -3054,10 +4537,10 @@
                 const heroTitleEl = document.getElementById('heroTitle');
                 const heroSubtitleEl = document.getElementById('heroSubtitle');
                 if (heroTitleEl) {
-                    heroTitleEl.textContent = serverData.name;
+                    heroTitleEl.textContent = `HPE ProLiant DL20 Gen10 Plus`;
                 }
                 if (heroSubtitleEl) {
-                    heroSubtitleEl.innerHTML = `Выберите компоненты для создания оптимальной конфигурации`;
+                    heroSubtitleEl.innerHTML = `1U Стоечный • 1 процессор • 4 слота памяти<br>DDR4 UDIMM • До 64 ГБ • 4 отсека 2.5"`;
                 }
                 
                 // UPDATE BREADCRUMB FOR SERVER MODE
@@ -3115,10 +4598,10 @@
             const heroTitleEl = document.getElementById('heroTitle');
             const heroSubtitleEl = document.getElementById('heroSubtitle');
             if (heroTitleEl) {
-                heroTitleEl.textContent = `Отдельные компоненты`;
+                heroTitleEl.textContent = `HPE ProLiant DL20 Gen10 Plus`;
             }
             if (heroSubtitleEl) {
-                heroSubtitleEl.innerHTML = `Выберите компоненты для самостоятельной конфигурации`;
+                heroSubtitleEl.innerHTML = `1U Стоечный • 1 процессор • 4 слота памяти<br>DDR4 UDIMM • До 64 ГБ • 4 отсека 2.5"`;
             }
             
             // UPDATE BREADCRUMB FOR STANDALONE MODE
@@ -3280,11 +4763,18 @@
             }
             
             grid.innerHTML = components.map(component => {
-                const isAdded = currentConfiguration[category].some(c => c.id === component.id);
                 const quantity = currentConfiguration[category].filter(c => c.id === component.id).length;
+                const isAdded = quantity > 0;
+                
+                console.log(`Rendering component ${component.id}: isAdded=${isAdded}, quantity=${quantity}`);
+                
+                const buttonText = isAdded ? '✓' : '+';
+                
+                console.log(`Button text for ${component.id}: "${buttonText}"`);
                 
                 return `
-                    <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${component.id}">
+                    <div class="component-card ${isAdded ? 'selected' : ''}" 
+                         id="card_${component.id}">
                         <div class="component-name">${component.name}</div>
                         <div class="component-specs">
                             ${Object.entries(component.specs).map(([key, value]) => `
@@ -3295,17 +4785,11 @@
                             `).join('')}
                         </div>
                         <div class="component-actions">
-                            ${isAdded ? `
-                                <div class="quantity-controls">
-                                    <button class="btn btn-decrease" onclick="removeComponent('${category}', '${component.id}')" title="Уменьшить">-</button>
-                                    <span class="quantity-display">${quantity}</span>
-                                    <button class="btn btn-increase" onclick="addComponent('${category}', '${component.id}')" title="Увеличить">+</button>
-                                </div>
-                            ` : `
-                                <button class="btn btn-add" onclick="addComponent('${category}', '${component.id}')" title="Добавить">
-                                    +
-                                </button>
-                            `}
+                            <button class="btn btn-add" 
+                                    onclick="addComponent('${category}', '${component.id}')" 
+                                    title="${isAdded ? 'Удалить из корзины' : 'Добавить в корзину'}">
+                                ${buttonText}
+                            </button>
                         </div>
                     </div>
                 `;
@@ -3436,6 +4920,8 @@
         
         // UPDATE CONFIGURATION PANEL
         function updateConfiguration() {
+            console.log('Updating configuration...');
+            console.log('Current configuration:', currentConfiguration);
             
             // COUNT TOTAL COMPONENTS
             const totalComponents = 
@@ -3449,109 +4935,34 @@
                 currentConfiguration.controllers.length +
                 currentConfiguration.network.length;
             
+            console.log(`Total components in configuration: ${totalComponents}`);
             
-            // UPDATE CATEGORY COUNTS
-            document.getElementById('processorCount').textContent = 
-                currentConfiguration.processors.length + ' выбрано';
-            document.getElementById('memoryCount').textContent = 
-                currentConfiguration.memory.length + ' выбрано';
-            document.getElementById('ssdCount').textContent = 
-                currentConfiguration.ssd.length + ' выбрано';
-            document.getElementById('nvmeCount').textContent = 
-                currentConfiguration.nvme.length + ' выбрано';
-            document.getElementById('hddCount').textContent = 
-                currentConfiguration.hdd.length + ' выбрано';
-            document.getElementById('u320Count').textContent = 
-                currentConfiguration.u320.length + ' выбрано';
-            document.getElementById('powerSupplyCount').textContent = 
-                currentConfiguration.powerSupply.length + ' выбрано';
-            document.getElementById('controllerCount').textContent = 
-                currentConfiguration.controllers.length + ' выбрано';
-            document.getElementById('networkCount').textContent = 
-                currentConfiguration.network.length + ' выбрано';
+            // UPDATE CATEGORY COUNTS (ONLY IF ELEMENTS EXIST)
+            const categoryCounts = [
+                { id: 'processorCount', count: currentConfiguration.processors.length },
+                { id: 'memoryCount', count: currentConfiguration.memory.length },
+                { id: 'ssdCount', count: currentConfiguration.ssd.length },
+                { id: 'nvmeCount', count: currentConfiguration.nvme.length },
+                { id: 'hddCount', count: currentConfiguration.hdd.length },
+                { id: 'u320Count', count: currentConfiguration.u320.length },
+                { id: 'powerSupplyCount', count: currentConfiguration.powerSupply.length },
+                { id: 'controllerCount', count: currentConfiguration.controllers.length },
+                { id: 'networkCount', count: currentConfiguration.network.length }
+            ];
             
-            // UPDATE CONFIG WIDGET
-            const configWidgetItems = document.getElementById('configWidgetItems');
-            const configWidgetSubmit = document.getElementById('configWidgetSubmit');
-            const configServerName = document.getElementById('configServerName');
+            categoryCounts.forEach(category => {
+                const element = document.getElementById(category.id);
+                if (element) {
+                    element.textContent = category.count + ' выбрано';
+                }
+            });
             
-            // UPDATE SERVER NAME
-            if (configServerName && currentConfiguration.server) {
-                configServerName.textContent = currentConfiguration.server.name;
+            // UPDATE CART BADGE (ONLY IF ELEMENT EXISTS)
+            const cartBadge = document.getElementById('cartBadge');
+            if (cartBadge) {
+                cartBadge.textContent = totalComponents;
+                cartBadge.style.display = totalComponents > 0 ? 'block' : 'none';
             }
-            
-            if (totalComponents > 0) {
-                // RENDER CONFIG ITEMS
-                let html = '';
-                
-                const categories = [
-                    { key: 'processors', title: 'Процессоры' },
-                    { key: 'memory', title: 'Память' },
-                    { key: 'ssd', title: 'SSD' },
-                    { key: 'nvme', title: 'NVMe' },
-                    { key: 'hdd', title: 'HDD' },
-                    { key: 'u320', title: 'U320' },
-                    { key: 'powerSupply', title: 'Питание' },
-                    { key: 'controllers', title: 'Контроллеры' },
-                    { key: 'network', title: 'Сеть' }
-                ];
-                
-                categories.forEach(cat => {
-                    if (currentConfiguration[cat.key].length > 0) {
-                        // Group components by name and count quantity
-                        const componentGroups = {};
-                        currentConfiguration[cat.key].forEach(comp => {
-                            if (componentGroups[comp.name]) {
-                                componentGroups[comp.name]++;
-                            } else {
-                                componentGroups[comp.name] = 1;
-                            }
-                        });
-                        
-                        // Render grouped components
-                        Object.entries(componentGroups).forEach(([name, quantity]) => {
-                            // Find first component to get its ID for removal
-                            const firstComponent = currentConfiguration[cat.key].find(comp => comp.name === name);
-                            html += `
-                                <div class="config-widget-item">
-                                    <div class="config-widget-item-info">
-                                        <div class="config-widget-item-name">${name}</div>
-                                        <div class="config-widget-item-category">${cat.title}</div>
-                                    </div>
-                                    <div class="config-widget-item-actions">
-                                        <div class="config-widget-quantity-controls">
-                                            <button class="config-widget-quantity-btn" onclick="decreaseComponentQuantity('${cat.key}', '${firstComponent.id}')" title="Уменьшить">-</button>
-                                            <div class="config-widget-quantity-display">${quantity}</div>
-                                            <button class="config-widget-quantity-btn" onclick="increaseComponentQuantity('${cat.key}', '${firstComponent.id}')" title="Увеличить">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                    }
-                });
-                
-                if (configWidgetItems) {
-                    configWidgetItems.innerHTML = html;
-                }
-                
-                if (configWidgetSubmit) {
-                    configWidgetSubmit.disabled = false;
-                }
-            } else {
-                // EMPTY CONFIG
-                if (configWidgetItems) {
-                    configWidgetItems.innerHTML = '<div class="config-widget-empty">Добавьте компоненты для завершения конфигурации</div>';
-                }
-                
-                if (configWidgetSubmit) {
-                    configWidgetSubmit.disabled = false;
-                }
-            }
-            
-            
-            // UPDATE CART BADGE
-            updateCartBadge();
         }
         
         // INITIALIZE PAGE ON LOAD
@@ -3560,50 +4971,10 @@
             
             // WAIT A BIT FOR DOM TO BE FULLY READY
             setTimeout(() => {
-                // CHECK IF REQUIRED ELEMENTS EXIST
-                const requiredElements = [
-                    'serverModelDisplay', 'quickNavigation', 'quickNavigationStandalone'
-                ];
+                console.log('DOM ready, calling init()...');
                 
-                const missingElements = requiredElements.filter(id => !document.getElementById(id));
-                if (missingElements.length > 0) {
-                    console.error('Missing required elements:', missingElements);
-                    console.log('Available elements with IDs:', 
-                        Array.from(document.querySelectorAll('[id]')).map(el => el.id));
-                    return;
-                }
-                
-                // CHECK FOR OPTIONAL ELEMENTS
-                const initServerNameEl = document.getElementById('selectedServerName');
-                if (!initServerNameEl) {
-                    console.warn('selectedServerName element not found, but continuing...');
-                }
-            
-                // CHECK URL PARAMETERS TO DETERMINE MODE
-                const urlParams = new URLSearchParams(window.location.search);
-                const category = urlParams.get('category');
-                const platform = urlParams.get('platform');
-                
-                console.log('URL params:', { category, platform });
-                
-                if (category) {
-                    // STANDALONE MODE - show specific category
-                    console.log('Initializing standalone mode for category:', category);
-                    initStandaloneMode(category);
-                } else if (platform) {
-                    // NORMAL MODE - server configuration
-                    console.log('Initializing normal mode for platform:', platform);
-                    initNormalMode();
-                } else {
-                    // DEFAULT - normal mode
-                    console.log('Initializing default normal mode');
-                    initNormalMode();
-                }
-                
-                // SET PROCESSORS AS DEFAULT CATEGORY
-                setTimeout(() => {
-                    switchCategoryNormal('processors');
-                }, 200);
+                // CALL MAIN INIT FUNCTION
+                init();
             }, 100); // Wait 100ms for DOM to be fully ready
         });
         

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конфигуратор серверов</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            padding: 30px;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .component-category {
+            margin-bottom: 25px;
+        }
+        
+        .category-title {
+            font-size: 1.2em;
+            color: #667eea;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-title::before {
+            content: "▸";
+            margin-right: 8px;
+            font-size: 1.3em;
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .component-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .component-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(61, 243, 187, 0.3);
+        }
+        
+        .component-card.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .component-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .component-price {
+            color: #667eea;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        
+        .component-specs {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+        
+        .selected-section {
+            position: sticky;
+            top: 20px;
+        }
+        
+        .config-summary {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .config-item-name {
+            font-weight: 500;
+            color: #333;
+            flex: 1;
+        }
+        
+        .config-item-price {
+            color: #667eea;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+        
+        .remove-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .remove-btn:hover {
+            background: #ff3838;
+        }
+        
+        .total-price {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .total-price h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .total-price .price {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        
+        .action-buttons {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1c2a3c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(61, 243, 187, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .btn-secondary:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .empty-config {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+        
+        .empty-config svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 8px;
+        }
+        
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .selected-section {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖥️ Конфигуратор серверов</h1>
+            <p>Создайте идеальную конфигурацию сервера для ваших задач</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- Доступные компоненты -->
+            <div class="section">
+                <h2 class="section-title">Доступные компоненты</h2>
+                
+                <!-- Серверы -->
+                <div class="component-category">
+                    <h3 class="category-title">Серверы</h3>
+                    <div class="component-grid">
+                        <div class="component-card" onclick="addComponent('server1')">
+                            <div class="component-name">HP ProLiant ML350 G4p</div>
+                            <div class="component-specs">
+                                • 4U Стойка<br>
+                                • До 2 процессоров<br>
+                                • 8 слотов памяти<br>
+                                • Socket 604
+                            </div>
+                            <div class="component-price">1 500 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('server2')">
+                            <div class="component-name">Dell PowerEdge R710</div>
+                            <div class="component-specs">
+                                • 2U Стойка<br>
+                                • До 2 процессоров<br>
+                                • 18 слотов памяти<br>
+                                • Socket 1366
+                            </div>
+                            <div class="component-price">2 000 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('server3')">
+                            <div class="component-name">IBM System x3650 M3</div>
+                            <div class="component-specs">
+                                • 2U Стойка<br>
+                                • До 2 процессоров<br>
+                                • 18 слотов памяти<br>
+                                • Socket 1366
+                            </div>
+                            <div class="component-price">2 500 ₽</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Процессоры -->
+                <div class="component-category">
+                    <h3 class="category-title">Процессоры</h3>
+                    <div class="component-grid">
+                        <div class="component-card" onclick="addComponent('cpu1')">
+                            <div class="component-name">Intel Xeon 3.0 ГГц <span class="badge">Socket 604</span></div>
+                            <div class="component-specs">
+                                • 1 ядро<br>
+                                • 1 МБ кэш<br>
+                                • TDP 89 Вт
+                            </div>
+                            <div class="component-price">150 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('cpu2')">
+                            <div class="component-name">Intel Xeon E5620 <span class="badge">Socket 1366</span></div>
+                            <div class="component-specs">
+                                • 4 ядра<br>
+                                • 12 МБ кэш<br>
+                                • TDP 80 Вт
+                            </div>
+                            <div class="component-price">300 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('cpu3')">
+                            <div class="component-name">Intel Xeon X5670 <span class="badge">Socket 1366</span></div>
+                            <div class="component-specs">
+                                • 6 ядер<br>
+                                • 12 МБ кэш<br>
+                                • TDP 95 Вт
+                            </div>
+                            <div class="component-price">450 ₽</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Память -->
+                <div class="component-category">
+                    <h3 class="category-title">Оперативная память</h3>
+                    <div class="component-grid">
+                        <div class="component-card" onclick="addComponent('ram1')">
+                            <div class="component-name">Kingston 1 ГБ DDR2-400</div>
+                            <div class="component-specs">
+                                • DDR2<br>
+                                • 400 МГц<br>
+                                • 1.8 В
+                            </div>
+                            <div class="component-price">25 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('ram2')">
+                            <div class="component-name">Samsung 4 ГБ DDR3-1333</div>
+                            <div class="component-specs">
+                                • DDR3<br>
+                                • 1333 МГц<br>
+                                • 1.5 В
+                            </div>
+                            <div class="component-price">80 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('ram3')">
+                            <div class="component-name">Crucial 8 ГБ DDR3-1600</div>
+                            <div class="component-specs">
+                                • DDR3<br>
+                                • 1600 МГц<br>
+                                • 1.5 В
+                            </div>
+                            <div class="component-price">150 ₽</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Накопители -->
+                <div class="component-category">
+                    <h3 class="category-title">Накопители</h3>
+                    <div class="component-grid">
+                        <div class="component-card" onclick="addComponent('hdd1')">
+                            <div class="component-name">Seagate 500 ГБ SATA</div>
+                            <div class="component-specs">
+                                • 7200 об/мин<br>
+                                • 16 МБ кэш<br>
+                                • 3.5"
+                            </div>
+                            <div class="component-price">60 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('hdd2')">
+                            <div class="component-name">WD 1 ТБ SATA</div>
+                            <div class="component-specs">
+                                • 7200 об/мин<br>
+                                • 64 МБ кэш<br>
+                                • 3.5"
+                            </div>
+                            <div class="component-price">100 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('ssd1')">
+                            <div class="component-name">Intel SSD 240 ГБ</div>
+                            <div class="component-specs">
+                                • SSD<br>
+                                • 550 МБ/с<br>
+                                • 2.5"
+                            </div>
+                            <div class="component-price">180 ₽</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Блоки питания -->
+                <div class="component-category">
+                    <h3 class="category-title">Блоки питания</h3>
+                    <div class="component-grid">
+                        <div class="component-card" onclick="addComponent('psu1')">
+                            <div class="component-name">HP 460 Вт</div>
+                            <div class="component-specs">
+                                • 80+<br>
+                                • Для HP серверов
+                            </div>
+                            <div class="component-price">120 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('psu2')">
+                            <div class="component-name">Dell 750 Вт</div>
+                            <div class="component-specs">
+                                • 80+ Gold<br>
+                                • Для Dell серверов
+                            </div>
+                            <div class="component-price">180 ₽</div>
+                        </div>
+                        
+                        <div class="component-card" onclick="addComponent('psu3')">
+                            <div class="component-name">IBM 835 Вт</div>
+                            <div class="component-specs">
+                                • 80+ Platinum<br>
+                                • Для IBM серверов
+                            </div>
+                            <div class="component-price">220 ₽</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Выбранная конфигурация -->
+            <div class="selected-section">
+                <div class="section">
+                    <h2 class="section-title">Ваша конфигурация</h2>
+                    
+                    <div id="configList" class="config-summary">
+                        <div class="empty-config">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            <p>Выберите компоненты для создания конфигурации</p>
+                        </div>
+                    </div>
+                    
+                    <div class="total-price">
+                        <h3>Итоговая стоимость</h3>
+                        <div class="price" id="totalPrice">0 ₽</div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">Сохранить конфигурацию</button>
+                        <button class="btn btn-secondary" onclick="clearConfig()">Очистить</button>
+                        <button class="btn btn-secondary">Экспорт в PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Пример простой логики (в реальности это будет API запрос к backend)
+        let config = [];
+        let totalPrice = 0;
+        
+        function addComponent(componentId) {
+            // Здесь должна быть логика проверки совместимости
+            alert('Компонент добавлен: ' + componentId);
+            // В реальной реализации: вызов API, проверка совместимости, обновление UI
+        }
+        
+        function removeComponent(componentId) {
+            alert('Компонент удален: ' + componentId);
+        }
+        
+        function clearConfig() {
+            if (confirm('Вы уверены, что хотите очистить конфигурацию?')) {
+                config = [];
+                totalPrice = 0;
+                document.getElementById('totalPrice').textContent = '0 ₽';
+                document.getElementById('configList').innerHTML = `
+                    <div class="empty-config">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <p>Выберите компоненты для создания конфигурации</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

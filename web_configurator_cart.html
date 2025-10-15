@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - ServerConfig</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* TOP CONTACT HEADER */
+        .top-header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 8px 0;
+            font-size: 0.9em;
+        }
+        
+        .top-header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #1c2a3c;
+        }
+        
+        .contact-icon {
+            width: 16px;
+            height: 16px;
+            fill: #1c2a3c;
+        }
+        
+        /* MAIN HEADER */
+        .main-header {
+            background: #1c2a3c;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.6em;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo-image {
+            height: 40px;
+            width: auto;
+            max-width: 200px;
+        }
+        
+        .custom-logo-link {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .custom-logo-link span {
+            display: block;
+            padding-top: 5px;
+            text-transform: uppercase;
+            color: rgb(61, 243, 187);
+            font-size: 16px;
+            font-weight: normal;
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1em;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            background: rgba(61, 243, 187, 0.1);
+            color: rgb(61, 243, 187);
+        }
+        
+        .nav-link.active {
+            color: rgb(61, 243, 187);
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        
+        .products-link .nav-icon {
+            fill: rgb(61, 243, 187);
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-arrow {
+            width: 12px;
+            height: 12px;
+            margin-left: 4px;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: calc(100% + 16px);
+            left: 0px;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            z-index: 1000;
+            padding: 8px 0;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content {
+            transition: opacity 0.2s ease;
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 35px;
+        }
+        
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: rgb(61, 243, 187);
+            border-radius: 50%;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(61, 243, 187, 0.1);
+            color: #1c2a3c;
+        }
+        
+        .consultation-btn {
+            background: rgba(61, 243, 187, 0.1);
+            color: white;
+            border: none;
+            height: 36px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .consultation-btn:hover {
+            background: rgba(61, 243, 187, 0.15);
+            color: rgb(61, 243, 187);
+        }
+        
+        .cart-icon-link {
+            position: relative;
+            font-size: 1.5em;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .cart-icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+        
+        .cart-icon-link:hover {
+            background: rgba(61, 243, 187, 0.1);
+            color: rgb(61, 243, 187);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: rgb(61, 243, 187);
+            color: #1c2a3c;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        
+        /* PAGE HEADER */
+
+        /* HERO SECTION */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Files/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            min-height: 50vh;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* MAIN CONTENT WRAPPER */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* CONTENT AREA */
+        .content-area {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0;
+            flex: 1;
+        }
+        
+        /* BREADCRUMBS */
+        .breadcrumb {
+            background: #1c2a3c;
+            color: #1c2a3c;
+            padding: 15px 30px;
+            margin: 0 -60px 20px -60px;
+            font-size: 0.9em;
+        }
+        
+        .breadcrumb a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            color: #1c2a3c;
+        }
+        
+        .breadcrumb .active {
+            color: #1c2a3c;
+        }
+        
+        .cart-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            width: 1400px;
+            margin: 0 auto;
+        }
+        
+        
+        
+        
+        .cart-title {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        
+        
+        .cart-content {
+            padding: 30px 60px 60px 60px;
+        }
+        
+        .separator-line {
+            height: 1px;
+            background: rgb(61, 243, 187);
+            margin: 20px 0;
+        }
+        
+        /* CART SECTIONS */
+        .cart-section {
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .cart-section:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, rgb(61, 243, 187) 0%, rgba(61, 243, 187, 0.3) 50%, rgb(61, 243, 187) 100%);
+            border-radius: 1px;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 15px 20px;
+            border-left: 4px solid rgb(61, 243, 187);
+            margin-bottom: 15px;
+            border-radius: 8px 0 0 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .section-header h3 {
+            color: #1c2a3c;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .standalone-info {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 80px 20px;
+            color: #666;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .empty-cart::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(61, 243, 187, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .empty-cart-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .empty-cart-icon {
+            font-size: 5em;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .empty-cart h3 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #1c2a3c;
+            font-weight: 600;
+        }
+        
+        .empty-cart p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: rgb(61, 243, 187);
+            color: #1c2a3c;
+        }
+        
+        .btn-primary:hover {
+            background: rgba(61, 243, 187, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(61, 243, 187, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #2d2d2d;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+            border-color: #ccc;
+        }
+        
+        .server-item {
+            background: white;
+            border: 1px solid rgb(61, 243, 187);
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .server-info h4 {
+            font-size: 1.3em;
+            color: #2d2d2d;
+            margin-bottom: 8px;
+        }
+        
+        .server-details {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .server-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .config-category {
+            margin-bottom: 20px;
+        }
+        
+        .config-category-title {
+            font-weight: bold;
+            color: #2d2d2d;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .remove-btn {
+            background: transparent;
+            color: #2d2d2d;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: all 0.3s;
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .remove-btn:hover {
+            background: #f5f5f5;
+            color: #2d2d2d;
+            border-color: #999;
+            transform: translateY(-1px);
+        }
+        
+        /* QUANTITY CONTROLS */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 15px;
+        }
+        
+        .quantity-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+            background: #f8f9fa;
+            color: #666;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quantity-btn:hover {
+            background: #e9ecef;
+            color: #2d2d2d;
+            border-color: #999;
+        }
+        
+        .quantity-display {
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #2d2d2d;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: rgb(61, 243, 187);
+            border: 2px solid rgb(61, 243, 187);
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-outline:hover {
+            background: rgb(61, 243, 187);
+            color: #1c2a3c;
+            text-decoration: none;
+        }
+        
+        .left-buttons .btn-outline {
+            color: #1c2a3c;
+        }
+        
+        .left-buttons .btn-outline:hover {
+            background: rgb(61, 243, 187);
+            color: #1c2a3c;
+        }
+        
+        .cart-actions {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-total {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2d2d2d;
+        }
+        
+        .action-buttons {
+            display: flex !important;
+            gap: 15px;
+            justify-content: space-between !important;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .left-buttons {
+            display: flex !important;
+            gap: 15px;
+            margin-right: auto;
+        }
+        
+        .right-buttons {
+            display: flex !important;
+            gap: 15px;
+            margin-left: auto;
+        }
+        
+        .action-buttons > a:first-child {
+            margin-right: auto !important;
+        }
+        
+        .cart-actions .action-buttons {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+        
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px 20px;
+            }
+            
+            .main-nav {
+                gap: 15px;
+            }
+            
+            .page-header {
+                padding: 30px 20px;
+            }
+            
+            .content-area {
+                padding: 20px 15px;
+            }
+            
+            .breadcrumb {
+                margin: 0 -15px 20px -15px;
+                padding: 15px 20px;
+            }
+            
+            .cart-content {
+                padding: 20px;
+            }
+            
+            .server-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .cart-actions {
+                flex-direction: column;
+                gap: 20px;
+                align-items: stretch;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .left-buttons, .right-buttons {
+                justify-content: center;
+                margin: 0;
+            }
+        }
+        
+        /* CONTACTS MODAL */
+        .contacts-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .contacts-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .contacts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgb(61, 243, 187);
+            padding-bottom: 15px;
+        }
+        
+        .contacts-title {
+            color: #1c2a3c;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .close-contacts {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        
+        .close-contacts:hover {
+            color: #1c2a3c;
+        }
+        
+        .contacts-info {
+            line-height: 1.6;
+            color: #1c2a3c;
+        }
+        
+        .contacts-info h3 {
+            color: rgb(61, 243, 187);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .contacts-info p {
+            margin: 8px 0;
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: #1c2a3c;
+            color: white;
+            padding: 10px 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 10;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-left {
+            text-align: left;
+        }
+        
+        .footer-center {
+            text-align: center;
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        .footer-text {
+            font-size: 0.8em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+        
+        .footer-rating {
+            font-size: 0.8em;
+            color: #aaa;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP CONTACT HEADER -->
+    <div class="top-header">
+        <div class="top-header-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                    </svg>
+                    <span>г. Минск, ул. Аранская, 8, блок 1, помещение 201, БЦ "CASPIAN PLAZA"</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
+                    </svg>
+                    <span>+375 (29) 391-90-44</span>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+                    </svg>
+                    <span>sales@beltrader.by</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MAIN HEADER WITH NAVIGATION -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo custom-logo-link">
+                <img src="Files/logo_beltrader.svg" alt="BELTRADER" class="logo-image">
+                <span>ООО "БАСИ-ПЛЮС"</span>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link products-link" onclick="toggleDropdown(event)">
+                        <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.71429 0.5C1.25963 0.5 0.823594 0.680612 0.502103 1.0021C0.180612 1.32359 0 1.75963 0 2.21429L0 12.5C0 12.9547 0.180612 13.3907 0.502103 13.7122C0.823594 14.0337 1.25963 14.2143 1.71429 14.2143H8.57143C9.02609 14.2143 9.46212 14.0337 9.78361 13.7122C10.1051 13.3907 10.2857 12.9547 10.2857 12.5V2.21429C10.2857 1.75963 10.1051 1.32359 9.78361 1.0021C9.46212 0.680612 9.02609 0.5 8.57143 0.5H1.71429ZM13.7143 2.21429C13.7143 1.75963 13.8949 1.32359 14.2164 1.0021C14.5379 0.680612 14.9739 0.5 15.4286 0.5L22.2857 0.5C22.7404 0.5 23.1764 0.680612 23.4979 1.0021C23.8194 1.32359 24 1.75963 24 2.21429V5.66C24 6.11466 23.8194 6.55069 23.4979 6.87218C23.1764 7.19367 22.7404 7.37429 22.2857 7.37429H15.4286C14.9739 7.37429 14.5379 7.19367 14.2164 6.87218C13.8949 6.55069 13.7143 6.11466 13.7143 5.66V2.21429ZM13.7143 12.5C13.7143 12.0453 13.8949 11.6093 14.2164 11.2878C14.5379 10.9663 14.9739 10.7857 15.4286 10.7857H22.2857C22.7404 10.7857 23.1764 10.9663 23.4979 11.2878C23.8194 11.6093 24 12.0453 24 12.5V22.7857C24 23.2404 23.8194 23.6764 23.4979 23.9979C23.1764 24.3194 22.7404 24.5 22.2857 24.5H15.4286C14.9739 24.5 14.5379 24.3194 14.2164 23.9979C13.8949 23.6764 13.7143 23.2404 13.7143 22.7857V12.5ZM0 19.34C0 18.8853 0.180612 18.4493 0.502103 18.1278C0.823594 17.8063 1.25963 17.6257 1.71429 17.6257H8.57143C9.02609 17.6257 9.46212 17.8063 9.78361 18.1278C10.1051 18.4493 10.2857 18.8853 10.2857 19.34V22.7857C10.2857 23.2404 10.1051 23.6764 9.78361 23.9979C9.46212 24.3194 9.02609 24.5 8.57143 24.5H1.71429C1.25963 24.5 0.823594 24.3194 0.502103 23.9979C0.180612 23.6764 0 23.2404 0 22.7857V19.34Z" fill="#3DF3BB"/>
+                        </svg>
+                        Продукты и Решения
+                        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="web_configurator.html" class="dropdown-item">Конфигуратор серверов и систем хранения</a>
+                        <a href="web_catalog.html" class="dropdown-item">Каталог оборудования</a>
+                        <a href="information_security.html" class="dropdown-item">Информационная безопасность</a>
+                        <a href="software.html" class="dropdown-item">Программное обеспечение</a>
+                    </div>
+                </div>
+                <a href="contacts.html" class="nav-link">Контакты</a>
+                <button class="consultation-btn" onclick="openConsultationPopup()">Консультация</button>
+                <a href="web_configurator_cart.html" class="cart-icon-link" title="Корзина">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 18C5.9 18 5.01 18.9 5.01 20S5.9 22 7 22 8.99 21.1 8.99 20 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5H5.21L4.27 3H1V2ZM17 18C15.9 18 15.01 18.9 15.01 20S15.9 22 17 22 18.99 21.1 18.99 20 18.1 18 17 18Z" fill="currentColor"/>
+                    </svg>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Корзина</h1>
+                <p>Проверьте выбор и оформите заказ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="main-wrapper">
+        <!-- CONTENT AREA -->
+        <div class="content-area">
+        
+        <!-- CART CONTAINER -->
+        <div class="cart-container">
+            <div class="cart-content">
+            
+            <div id="cartItems"></div>
+            
+            <div class="cart-actions" id="cartActions" style="display: none;">
+                <div class="action-buttons">
+                    <div class="left-buttons">
+                        <a href="web_configurator.html" class="btn btn-outline">Перейти в Конфигуратор</a>
+                        <a href="web_catalog.html" class="btn btn-outline">Перейти в каталог</a>
+                    </div>
+                    <div class="right-buttons">
+                        <button class="btn btn-secondary" onclick="clearCart()">Очистить корзину</button>
+                        <button class="btn btn-primary" onclick="proceedToCheckout()">Отправить заявку менеджеру</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-text">
+                    ООО "БАСИ-плюс"<br>
+                    УНП 191762563
+                </div>
+            </div>
+            <div class="footer-center">
+                <div class="footer-text">
+                    г. Минск, ул. Аранская 8, блок 1, помещение 201<br>
+                    БЦ "CASPIAN PLAZA"
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-text">
+                    +375 (33) 600-67-31<br>
+                    sales@beltrader.by
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // DROPDOWN FUNCTIONS
+        let dropdownTimeout;
+        
+        function toggleDropdown(event) {
+            event.preventDefault();
+            const dropdown = event.currentTarget.closest('.dropdown');
+            const content = dropdown.querySelector('.dropdown-content');
+            const arrow = dropdown.querySelector('.dropdown-arrow');
+            
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.display = 'block';
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+        
+        // Add hover delay for dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('mouseenter', function() {
+                    clearTimeout(dropdownTimeout);
+                    const content = this.querySelector('.dropdown-content');
+                    const arrow = this.querySelector('.dropdown-arrow');
+                    content.style.display = 'block';
+                    arrow.style.transform = 'rotate(180deg)';
+                });
+                
+                dropdown.addEventListener('mouseleave', function() {
+                    dropdownTimeout = setTimeout(() => {
+                        const content = this.querySelector('.dropdown-content');
+                        const arrow = this.querySelector('.dropdown-arrow');
+                        content.style.display = 'none';
+                        arrow.style.transform = 'rotate(0deg)';
+                    }, 300);
+                });
+            });
+        });
+        
+        // CONSULTATION POPUP FUNCTIONS
+        function openConsultationPopup() {
+            const popup = document.getElementById('consultationPopup');
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeConsultationPopup() {
+            const popup = document.getElementById('consultationPopup');
+            popup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Инициализация корзины
+        function initCart() {
+            updateCartDisplay();
+            updateCartBadge();
+        }
+        
+        // Обновить отображение корзины
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartActions = document.getElementById('cartActions');
+            
+            const selectedServer = localStorage.getItem('selectedServer');
+            const currentConfiguration = JSON.parse(localStorage.getItem('currentConfiguration') || '{}');
+            
+            // Проверяем, есть ли сервер или компоненты
+            let hasServer = !!selectedServer;
+            let hasComponents = false;
+            let totalComponents = 0;
+            
+            if (currentConfiguration && typeof currentConfiguration === 'object') {
+                const categories = ['processors', 'memory', 'ssd', 'nvme', 'hdd', 'u320', 'powerSupply', 'controllers', 'network'];
+                categories.forEach(cat => {
+                    if (currentConfiguration[cat] && Array.isArray(currentConfiguration[cat])) {
+                        totalComponents += currentConfiguration[cat].length;
+                    }
+                });
+                hasComponents = totalComponents > 0;
+            }
+            
+            if (!hasServer && !hasComponents) {
+                // Пустая корзина
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-content">
+                            <div class="empty-cart-icon">🛒</div>
+                            <h3>Корзина пуста</h3>
+                            <p>Выберите товары для добавления в корзину</p>
+                        </div>
+                    </div>
+                `;
+                cartActions.style.display = 'flex';
+                return;
+            }
+            
+            
+            let totalPrice = 0;
+            let itemsCount = 0;
+            let itemsHTML = '';
+            
+            // Секция 1: Конфигурация сервера
+            if (hasServer) {
+                const server = JSON.parse(selectedServer);
+                itemsHTML += `
+                    <div class="cart-section">
+                        <div class="server-item">
+                            <div class="server-info">
+                                <h4>${server.name}</h4>
+                                <div class="server-details">
+                                    Категория: Серверы | Серия: ${server.series} | Поколение: ${server.generation}
+                                </div>
+                            </div>
+                            <div class="server-actions">
+                                <button class="remove-btn" onclick="removeServer()" title="Удалить">✕</button>
+                            </div>
+                        </div>
+                `;
+                itemsCount++;
+            }
+            
+            // Добавить компоненты в секцию сервера
+            if (hasComponents) {
+                const categories = [
+                    {key: 'processors', name: 'Процессоры', icon: ''},
+                    {key: 'memory', name: 'Память', icon: ''},
+                    {key: 'ssd', name: 'SSD диски', icon: ''},
+                    {key: 'nvme', name: 'NVMe диски', icon: ''},
+                    {key: 'hdd', name: 'HDD диски', icon: ''},
+                    {key: 'u320', name: 'U320 диски', icon: ''},
+                    {key: 'powerSupply', name: 'Блоки питания', icon: ''},
+                    {key: 'controllers', name: 'Контроллеры', icon: ''},
+                    {key: 'network', name: 'Сетевые карты', icon: ''}
+                ];
+                
+                categories.forEach(category => {
+                    if (currentConfiguration[category.key] && Array.isArray(currentConfiguration[category.key])) {
+                        // Группировать одинаковые компоненты
+                        const componentGroups = {};
+                        currentConfiguration[category.key].forEach(component => {
+                            const componentId = component.id || component.model;
+                            if (!componentGroups[componentId]) {
+                                componentGroups[componentId] = {
+                                    component: component,
+                                    totalQuantity: 0
+                                };
+                            }
+                            componentGroups[componentId].totalQuantity += (component.quantity || 1);
+                        });
+                        
+                        // Отобразить сгруппированные компоненты
+                        Object.values(componentGroups).forEach(group => {
+                            const component = group.component;
+                            const totalQuantity = group.totalQuantity;
+                            itemsHTML += `
+                                <div class="server-item">
+                                    <div class="server-info">
+                                        <h4>${component.name || component.model || 'Компонент'}</h4>
+                                        <div class="server-details">
+                                            Категория: ${category.name}
+                                        </div>
+                                    </div>
+                                    <div class="server-actions">
+                                        <div class="quantity-controls">
+                                            <button class="quantity-btn decrease-btn" onclick="decreaseQuantity('${category.key}', '${component.id || component.model}')" title="Уменьшить">-</button>
+                                            <span class="quantity-display" id="quantity-${category.key}-${component.id || component.model}">${totalQuantity}</span>
+                                            <button class="quantity-btn increase-btn" onclick="increaseQuantity('${category.key}', '${component.id || component.model}')" title="Увеличить">+</button>
+                                        </div>
+                                        <button class="remove-btn" onclick="removeComponent('${category.key}', '${component.id || component.model}')" title="Удалить">✕</button>
+                                    </div>
+                                </div>
+                            `;
+                            itemsCount++;
+                        });
+                    }
+                });
+            }
+            
+            itemsHTML += `</div>`; // Закрыть секцию сервера
+            
+            // Секция 2: Отдельные компоненты (если есть)
+            const standaloneComponents = localStorage.getItem('standaloneComponents');
+            if (standaloneComponents && standaloneComponents !== '{}' && standaloneComponents !== 'null') {
+                itemsHTML += `
+                    <div class="cart-section">
+                        <div class="section-header">
+                            <h3>Отдельные компоненты</h3>
+                        </div>
+                        <div class="standalone-info">
+                            <p>Компоненты, выбранные отдельно из каталога</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            cartItems.innerHTML = itemsHTML;
+            cartActions.style.display = 'flex';
+        }
+        
+        // Удалить сервер
+        function removeServer() {
+            localStorage.removeItem('selectedServer');
+            updateCartDisplay();
+            updateCartBadge();
+        }
+        
+        // Удалить компонент
+        function removeComponent(categoryKey, componentId) {
+            const currentConfiguration = JSON.parse(localStorage.getItem('currentConfiguration') || '{}');
+            
+            if (currentConfiguration[categoryKey] && Array.isArray(currentConfiguration[categoryKey])) {
+                currentConfiguration[categoryKey] = currentConfiguration[categoryKey].filter(comp => 
+                    (comp.id || comp.model) !== componentId
+                );
+                localStorage.setItem('currentConfiguration', JSON.stringify(currentConfiguration));
+            }
+            
+            updateCartDisplay();
+            updateCartBadge();
+        }
+        
+        // Увеличить количество
+        function increaseQuantity(categoryKey, componentId) {
+            const currentConfiguration = JSON.parse(localStorage.getItem('currentConfiguration') || '{}');
+            if (currentConfiguration[categoryKey] && Array.isArray(currentConfiguration[categoryKey])) {
+                // Найти первый компонент с таким ID
+                const component = currentConfiguration[categoryKey].find(c => (c.id || c.model) === componentId);
+                if (component) {
+                    // Добавить новый экземпляр компонента
+                    const newComponent = {
+                        id: component.id,
+                        model: component.model,
+                        name: component.name,
+                        specs: component.specs,
+                        manufacturer: component.manufacturer,
+                        quantity: 1
+                    };
+                    currentConfiguration[categoryKey].push(newComponent);
+                    
+                    localStorage.setItem('currentConfiguration', JSON.stringify(currentConfiguration));
+                    updateCartDisplay();
+                    updateCartBadge();
+                }
+            }
+        }
+        
+        // Уменьшить количество
+        function decreaseQuantity(categoryKey, componentId) {
+            const currentConfiguration = JSON.parse(localStorage.getItem('currentConfiguration') || '{}');
+            if (currentConfiguration[categoryKey] && Array.isArray(currentConfiguration[categoryKey])) {
+                // Найти все компоненты с таким ID
+                const components = currentConfiguration[categoryKey].filter(c => (c.id || c.model) === componentId);
+                
+                if (components.length > 0) {
+                    // Если у первого компонента количество больше 1, уменьшаем его
+                    if (components[0].quantity > 1) {
+                        components[0].quantity = components[0].quantity - 1;
+                    } else {
+                        // Если количество равно 1, удаляем первый компонент
+                        const index = currentConfiguration[categoryKey].findIndex(c => (c.id || c.model) === componentId);
+                        if (index !== -1) {
+                            currentConfiguration[categoryKey].splice(index, 1);
+                        }
+                    }
+                    
+                    localStorage.setItem('currentConfiguration', JSON.stringify(currentConfiguration));
+                    updateCartDisplay();
+                    updateCartBadge();
+                }
+            }
+        }
+        
+        // Очистить корзину
+        function clearCart() {
+            if (confirm('Вы уверены, что хотите очистить корзину?')) {
+                localStorage.removeItem('selectedServer');
+                localStorage.removeItem('currentConfiguration');
+                updateCartDisplay();
+                updateCartBadge();
+            }
+        }
+        
+        // Перейти к оформлению заказа
+        function proceedToCheckout() {
+            alert('Функция оформления заказа будет реализована позже');
+        }
+        
+        // Обновить счетчик корзины
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            let totalItems = 0;
+            
+            // Подсчитать сервер
+            if (localStorage.getItem('selectedServer')) {
+                totalItems += 1;
+            }
+            
+            // Подсчитать компоненты
+            const currentConfiguration = JSON.parse(localStorage.getItem('currentConfiguration') || '{}');
+            if (currentConfiguration && typeof currentConfiguration === 'object') {
+                const categories = ['processors', 'memory', 'ssd', 'nvme', 'hdd', 'u320', 'powerSupply', 'controllers', 'network'];
+                categories.forEach(cat => {
+                    if (currentConfiguration[cat] && Array.isArray(currentConfiguration[cat])) {
+                        totalItems += currentConfiguration[cat].length;
+                    }
+                });
+            }
+            
+            badge.textContent = totalItems;
+            badge.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+        
+        // Обновлять счетчик при изменении localStorage
+        window.addEventListener('storage', updateCartBadge);
+        
+        // Синхронизация с конфигуратором
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'currentConfiguration') {
+                updateCartDisplay();
+                updateCartBadge();
+            }
+        });
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', initCart);
+        
+        // CONTACTS MODAL FUNCTIONS
+        function showContacts() {
+            document.getElementById('contactsModal').style.display = 'block';
+        }
+        
+        function closeContacts() {
+            document.getElementById('contactsModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactsModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+    
+    
+    <!-- CONTACTS MODAL -->
+    <div id="contactsModal" class="contacts-modal">
+        <div class="contacts-content">
+            <div class="contacts-header">
+                <h2 class="contacts-title">Контакты</h2>
+                <button class="close-contacts" onclick="closeContacts()">&times;</button>
+            </div>
+            <div class="contacts-info">
+                <h3>Общество с Ограниченной Ответственностью «БАСИ Плюс»</h3>
+                <p><strong>УНП:</strong> 191762563</p>
+                
+                <h3>Юридический Адрес:</h3>
+                <p>г. Минск , ул. Аранская, 8, блок 1, помещение 201 , БЦ "CASPIAN PLAZA"</p>
+                
+                <h3>Почтовый Адрес:</h3>
+                <p>г. Минск , ул. Аранская, 8, блок 1, помещение 201 , БЦ "CASPIAN PLAZA"</p>
+                
+                <p><strong>Свидетельство о государственной регистрации № 191762563 от 17 августа 2012 г.</strong></p>
+                <p><strong>Интернет-магазин зарегистрирован в Торговом реестре РБ за номером 505542</strong></p>
+                
+                <h3>Режим работы</h3>
+                <p>9:00 – 19:00</p>
+                
+                <h3>Банковские реквизиты</h3>
+                <p><strong>Р.С BY17ALFA30122745920010270000 в BYN</strong><br>
+                в ЗАО 'Альфа-Банк'<br>
+                <strong>БИК: ALFABY2X</strong></p>
+                
+                <p><strong>Р.C: BY54MTBK30120001093300062052</strong><br>
+                в ЗАО «МТБанк», г. Минск, пр. Партизанский, 6-а.<br>
+                <strong>БИК MTBKBY22</strong></p>
+                
+                <h3>Стол заказов</h3>
+                <p><strong>Телефон:</strong> +375(29)3919044</p>
+                <p><strong>Email:</strong> sales@beltrader.by</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
