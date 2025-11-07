@@ -638,6 +638,24 @@
             transition: filter 0.3s ease;
         }
         
+        .kaspersky-logo {
+            max-height: 80px;
+            transform: scale(1.3);
+        }
+        
+        .kaspersky-item {
+            padding: 15px;
+        }
+        
+        .positive-tech-logo {
+            max-height: 80px;
+            transform: scale(1.3);
+        }
+        
+        .positive-tech-item {
+            padding: 15px;
+        }
+        
         .popular-brand-item:hover .popular-brand-logo {
             filter: grayscale(0%);
         }
@@ -857,6 +875,15 @@
             padding: 60px 0;
         }
         
+        .services-cards-title {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #1c2a3c;
+            margin-bottom: 50px;
+            padding: 0 30px;
+        }
+        
         .services-cards-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -874,12 +901,31 @@
             text-align: center;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: rgb(61, 243, 187);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
         }
         
         .service-card:hover {
             border-color: rgb(61, 243, 187);
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(61, 243, 187, 0.15);
+            box-shadow: 0 8px 30px rgba(61, 243, 187, 0.2);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleY(1);
         }
         
         .service-card-icon {
@@ -888,14 +934,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        
-        .service-card h3 {
-            color: #1c2a3c;
-            font-size: 1.1em;
-            font-weight: 600;
-            line-height: 1.4;
-            margin: 0;
         }
         
         /* SERVICES SECTION */
@@ -919,6 +957,8 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
         }
         
         .service-tile:hover {
@@ -972,12 +1012,19 @@
             font-weight: 600;
             font-size: 1em;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
         
         .service-button:hover {
             background: rgb(45, 220, 170);
             color: #1c2a3c;
             transform: translateY(-2px);
+        }
+        
+        .service-content {
+            position: relative;
+            z-index: 2;
         }
         
         
@@ -1013,6 +1060,11 @@
                 gap: 15px;
             }
             
+            .services-cards-title {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+            
             .services-container {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
@@ -1023,6 +1075,11 @@
             .services-cards-container {
                 grid-template-columns: 1fr;
                 gap: 15px;
+            }
+            
+            .services-cards-title {
+                font-size: 1.8em;
+                margin-bottom: 25px;
             }
             
             .services-container {
@@ -1353,13 +1410,13 @@
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
                     </svg>
-                    <span>+375 (33) 600-67-31</span>
+                    <span>+375 (29) 391-90-44</span>
                 </div>
                 <div class="contact-item">
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
                     </svg>
-                    <span>sales@beltrader.by</span>
+                    <span>info@beltrader.by, sales@beltrader.by</span>
                 </div>
             </div>
         </div>
@@ -1392,6 +1449,7 @@
                         <a href="software.html" class="dropdown-item">Программное обеспечение</a>
                     </div>
                 </div>
+                <a href="about.html" class="nav-link">О нас</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
                 <button class="consultation-btn" onclick="openConsultationPopup()">Консультация</button>
                 <a href="web_configurator_cart.html" class="cart-icon-link">
@@ -1424,6 +1482,7 @@
     
     <!-- SERVICES CARDS SECTION -->
     <div class="services-cards-section">
+        <h2 class="services-cards-title">Что мы предлагаем</h2>
         <div class="services-cards-container">
             <div class="service-card">
                 <div class="service-card-icon">
@@ -1431,7 +1490,7 @@
                         <path d="M4 6H20V18H4V6ZM2 4V20H22V4H2ZM6 8H8V10H6V8ZM10 8H12V10H10V8ZM14 8H16V10H14V8ZM6 12H8V14H6V12ZM10 12H12V14H10V12ZM14 12H16V14H14V12Z" fill="currentColor"/>
                     </svg>
                 </div>
-                <h3>Серверное, сетевое и СХД-оборудование</h3>
+                <h3>Серверное и сетевое оборудование</h3>
             </div>
             
             <div class="service-card">
@@ -1449,7 +1508,7 @@
                         <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM10 17L6 13L7.41 11.59L10 14.17L16.59 7.58L18 9L10 17Z" fill="currentColor"/>
                     </svg>
                 </div>
-                <h3>Информационная безопасность и виртуализация</h3>
+                <h3>Информационная безопасность</h3>
             </div>
             
             <div class="service-card">
@@ -1503,9 +1562,6 @@
                 <div class="partner-item">
                     <img src="Files/partners_9_h3c.png" alt="H3C" class="partner-logo">
                 </div>
-                <div class="partner-item">
-                    <img src="Files/partners_91_hitacho-1.png" alt="Hitachi" class="partner-logo">
-                </div>
                 
                 <!-- Дублированный набор логотипов для бесконечной карусели -->
                 <div class="partner-item">
@@ -1532,9 +1588,6 @@
                 <div class="partner-item">
                     <img src="Files/partners_9_h3c.png" alt="H3C" class="partner-logo">
                 </div>
-                <div class="partner-item">
-                    <img src="Files/partners_91_hitacho-1.png" alt="Hitachi" class="partner-logo">
-                </div>
             </div>
         </div>
     </div>
@@ -1542,47 +1595,47 @@
     <!-- SERVICES SECTION -->
     <div class="services-section">
         <div class="services-container">
-            <div class="service-tile">
+            <div class="service-tile" onclick="handleServiceTileClick(event, 'web_configurator.html')">
                 <div class="service-image">
                     <img src="Files/servers1.jpg" alt="Конфигурация серверов">
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Конфигуратор серверов и систем хранения</h3>
                     <p class="service-description">Профессиональный подбор и настройка серверного оборудования под ваши задачи</p>
-                    <a href="web_configurator.html" class="service-button">Перейти к конфигуратору</a>
+                    <a href="web_configurator.html" class="service-button" onclick="event.stopPropagation()">Перейти к конфигуратору</a>
                 </div>
             </div>
             
-            <div class="service-tile">
+            <div class="service-tile" onclick="handleServiceTileClick(event, 'web_catalog.html')">
                 <div class="service-image">
                     <img src="Files/komplect.jpg" alt="Каталог оборудования">
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Каталог<br>оборудования</h3>
                     <p class="service-description">Широкий ассортимент серверного и сетевого оборудования от ведущих производителей</p>
-                    <a href="web_catalog.html" class="service-button">Смотреть каталог</a>
+                    <a href="web_catalog.html" class="service-button" onclick="event.stopPropagation()">Смотреть каталог</a>
                 </div>
             </div>
             
-            <div class="service-tile">
+            <div class="service-tile" onclick="handleServiceTileClick(event, 'information_security.html')">
                 <div class="service-image">
                     <img src="Files/inf_bez.jpg" alt="Информационная безопасность">
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Информационная безопасность</h3>
                     <p class="service-description">Комплексные решения для защиты корпоративных данных и IT-инфраструктуры</p>
-                    <a href="information_security.html" class="service-button">Узнать больше</a>
+                    <a href="information_security.html" class="service-button" onclick="event.stopPropagation()">Узнать больше</a>
                 </div>
             </div>
             
-            <div class="service-tile">
+            <div class="service-tile" onclick="handleServiceTileClick(event, 'software.html')">
                 <div class="service-image">
                     <img src="Files/software.jpg" alt="Программное обеспечение">
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Программное обеспечение</h3>
                     <p class="service-description">Широкий спектр программного обеспечения для решения бизнес-задач</p>
-                    <a href="software.html" class="service-button">Смотреть ПО</a>
+                    <a href="software.html" class="service-button" onclick="event.stopPropagation()">Смотреть ПО</a>
                 </div>
             </div>
         </div>
@@ -1599,8 +1652,8 @@
         <div class="popular-brands-carousel">
             <div class="popular-brands-track">
                 <!-- Первый набор самых популярных брендов -->
-                <div class="popular-brand-item">
-                    <img src="Files/IB_logoc/kaspersky-logo-square.svg" alt="Kaspersky" class="popular-brand-logo">
+                <div class="popular-brand-item kaspersky-item">
+                    <img src="Files/IB_logoc/kaspersky-logo-square.svg" alt="Kaspersky" class="popular-brand-logo kaspersky-logo">
                 </div>
                 <div class="popular-brand-item">
                     <img src="Files/IB_logoc/drweb_vxcube_logo-e1655736141934-768x130.png" alt="Dr.Web" class="popular-brand-logo">
@@ -1614,25 +1667,16 @@
                 <div class="popular-brand-item">
                     <img src="Files/IB_logoc/1200px-check_point_logo.svg-768x490.png" alt="Check Point" class="popular-brand-logo">
                 </div>
-                <div class="popular-brand-item">
-                    <img src="Files/PO_logos/po_postgrespro_logo.svg" alt="PostgreSQL" class="popular-brand-logo">
+                <div class="popular-brand-item positive-tech-item">
+                    <img src="Files/positive_technologies.png" alt="Positive Technologies" class="popular-brand-logo positive-tech-logo">
                 </div>
                 <div class="popular-brand-item">
-                    <img src="Files/IB_logoc/logo1-1024x572.png" alt="Positive Technologies" class="popular-brand-logo">
-                </div>
-                <div class="popular-brand-item">
-                    <img src="Files/IB_logoc/acronis-logo_tcm19-36469-e1654869944831.png" alt="Acronis" class="popular-brand-logo">
-                </div>
-                <div class="popular-brand-item">
-                    <img src="Files/PO_logos/po_7db339fd76437876d6e926659c5f10d4.png" alt="Битрикс24" class="popular-brand-logo">
-                </div>
-                <div class="popular-brand-item">
-                    <img src="Files/IB_logoc/1200px-trend-micro-logo.svg-768x264.png" alt="Trend Micro" class="popular-brand-logo">
+                    <img src="Files/IB_logoc/logotip_kompanii_kod_bezopasnosti_.svg-1536x399.png" alt="Код безопасности" class="popular-brand-logo">
                 </div>
                 
                 <!-- Дублированный набор для бесконечной карусели -->
-                <div class="popular-brand-item">
-                    <img src="Files/IB_logoc/kaspersky-logo-square.svg" alt="Kaspersky" class="popular-brand-logo">
+                <div class="popular-brand-item kaspersky-item">
+                    <img src="Files/IB_logoc/kaspersky-logo-square.svg" alt="Kaspersky" class="popular-brand-logo kaspersky-logo">
                 </div>
                 <div class="popular-brand-item">
                     <img src="Files/IB_logoc/drweb_vxcube_logo-e1655736141934-768x130.png" alt="Dr.Web" class="popular-brand-logo">
@@ -1646,20 +1690,11 @@
                 <div class="popular-brand-item">
                     <img src="Files/IB_logoc/1200px-check_point_logo.svg-768x490.png" alt="Check Point" class="popular-brand-logo">
                 </div>
-                <div class="popular-brand-item">
-                    <img src="Files/PO_logos/po_postgrespro_logo.svg" alt="PostgreSQL" class="popular-brand-logo">
+                <div class="popular-brand-item positive-tech-item">
+                    <img src="Files/positive_technologies.png" alt="Positive Technologies" class="popular-brand-logo positive-tech-logo">
                 </div>
                 <div class="popular-brand-item">
-                    <img src="Files/IB_logoc/logo1-1024x572.png" alt="Positive Technologies" class="popular-brand-logo">
-                </div>
-                <div class="popular-brand-item">
-                    <img src="Files/IB_logoc/acronis-logo_tcm19-36469-e1654869944831.png" alt="Acronis" class="popular-brand-logo">
-                </div>
-                <div class="popular-brand-item">
-                    <img src="Files/PO_logos/po_7db339fd76437876d6e926659c5f10d4.png" alt="Битрикс24" class="popular-brand-logo">
-                </div>
-                <div class="popular-brand-item">
-                    <img src="Files/IB_logoc/1200px-trend-micro-logo.svg-768x264.png" alt="Trend Micro" class="popular-brand-logo">
+                    <img src="Files/IB_logoc/logotip_kompanii_kod_bezopasnosti_.svg-1536x399.png" alt="Код безопасности" class="popular-brand-logo">
                 </div>
             </div>
         </div>
@@ -1726,8 +1761,8 @@
             </div>
             <div class="footer-right">
                 <div class="footer-text">
-                    +375 (33) 600-67-31<br>
-                    sales@beltrader.by
+                    +375 (29) 391-90-44<br>
+                    info@beltrader.by, sales@beltrader.by
                 </div>
             </div>
         </div>
@@ -1912,6 +1947,16 @@
                 });
             }
         });
+        
+        // HANDLE SERVICE TILE CLICK
+        function handleServiceTileClick(event, url) {
+            // If click was on button, don't navigate (button handles it)
+            if (event.target.closest('.service-button')) {
+                return;
+            }
+            // Otherwise navigate to the page
+            window.location.href = url;
+        }
     </script>
 
     <!-- CONSULTATION POPUP -->

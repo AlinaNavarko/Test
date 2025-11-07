@@ -572,11 +572,91 @@
             opacity: 0.95;
         }
         
-        /* SERIES CONTAINER */
+        /* BRANDS CONTAINER */
         #generationsContainer {
             max-width: 1400px;
             width: 1400px;
             margin: 40px auto 0 auto;
+            padding: 0 30px;
+        }
+        
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .brand-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 0;
+            text-align: left;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .brand-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: rgb(61, 243, 187);
+        }
+        
+        .brand-logo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+        }
+        
+        .brand-logo-image {
+            width: 150px;
+            height: 80px;
+            object-fit: contain;
+            object-position: center;
+            margin-bottom: 10px;
+        }
+        
+        .brand-logo-text {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #1c2a3c;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .brand-banner {
+            background: #1c2a3c;
+            color: white;
+            padding: 12px 20px;
+            position: relative;
+            font-weight: 600;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .brand-arrow {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgb(61, 243, 187);
+            font-size: 1.2em;
+            font-weight: bold;
         }
         
         /* BACK BUTTON CONTAINER */
@@ -814,6 +894,18 @@
             }
         }
         
+        @media (max-width: 1400px) {
+            .brands-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .brands-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
         @media (max-width: 768px) {
             .header-container {
                 padding: 12px 15px;
@@ -830,6 +922,10 @@
             .nav-link {
                 padding: 6px 10px;
                 font-size: 0.85em;
+            }
+            
+            .brands-grid {
+                grid-template-columns: 1fr;
             }
             
             .container {
@@ -949,13 +1045,13 @@
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
                     </svg>
-                    <span>+375 (33) 600-67-31</span>
+                    <span>+375 (29) 391-90-44</span>
                 </div>
                 <div class="contact-item">
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
                     </svg>
-                    <span>sales@beltrader.by</span>
+                    <span>info@beltrader.by, sales@beltrader.by</span>
                 </div>
             </div>
         </div>
@@ -987,6 +1083,7 @@
                         <a href="software.html" class="dropdown-item">Программное обеспечение</a>
                     </div>
                 </div>
+                <a href="about.html" class="nav-link">О нас</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
                 <button class="consultation-btn" onclick="openConsultationPopup()">Консультация</button>
                 <a href="web_configurator_cart.html" class="cart-icon-link" id="cartIconLink" title="Корзина">
@@ -1017,7 +1114,7 @@
         <span> → </span>
         <div class="breadcrumb-step active">
             <span class="breadcrumb-number">2</span>
-            <span>Выбор модели</span>
+            <span>Выбор производителя</span>
         </div>
         <span> → </span>
         <div class="breadcrumb-step">
@@ -1031,7 +1128,7 @@
     
     <!-- BACK BUTTON -->
     <div class="back-button-container">
-        <button class="btn btn-secondary back-btn" onclick="goBack()">← Назад к платформам</button>
+        <button class="btn btn-secondary back-btn" onclick="goBack()">← Назад</button>
     </div>
     
     <script>
@@ -1258,75 +1355,85 @@
         
         // Инициализация
         function init() {
-            // Получить выбранную платформу из URL параметров
+            // Получить выбранную категорию из URL параметров
             const urlParams = new URLSearchParams(window.location.search);
-            const platformId = urlParams.get('platform');
+            const categoryType = urlParams.get('category');
             
-            if (!platformId) {
-                alert('Платформа не выбрана');
+            if (!categoryType) {
+                alert('Категория не выбрана');
                 window.location.href = 'web_configurator.html';
                 return;
             }
             
-            // Найти платформу по ID
-            selectedCategory = categories.find(c => c.id === platformId);
-            if (!selectedCategory) {
-                alert('Платформа не найдена');
-                window.location.href = 'web_configurator.html';
-                return;
-            }
-            
-            updatePageHeaders();
-            renderAllSeriesModelsAndGenerations();
+            updatePageHeaders(categoryType);
+            renderBrands(categoryType);
             
             // Обновить счетчик корзины
             updateCartBadge();
         }
         
         // Обновить заголовки страницы
-        function updatePageHeaders() {
-            // UPDATE HERO SECTION DYNAMICALLY
-            if (selectedCategory) {
-                document.getElementById('heroTitle').textContent = selectedCategory.name;
-                document.getElementById('heroSubtitle').textContent = `Выберите модель для создания оптимальной конфигурации под ваши задачи`;
-            }
+        function updatePageHeaders(categoryType) {
+            const categoryName = categoryType === 'servers' ? 'Серверы' : 'Системы хранения данных';
+            document.getElementById('heroTitle').textContent = 'Выбор производителя';
+            document.getElementById('heroSubtitle').textContent = `Выберите производителя для категории: ${categoryName}`;
         }
         
-        
-        // Отрисовка всех серий с моделями и поколениями
-        function renderAllSeriesModelsAndGenerations() {
+        // Отрисовка карточек брендов
+        function renderBrands(categoryType) {
             const container = document.getElementById('generationsContainer');
             if (!container) {
                 console.error('Container not found');
                 return;
             }
             
-            let allHTML = '';
+            const brands = [
+                { id: 'hpe', name: 'HPE', logo: 'Files/New folder/partners_1_hpe.svg' },
+                { id: 'dell', name: 'Dell', logo: 'Files/New folder/partners_2_dell.svg' },
+                { id: 'lenovo', name: 'Lenovo', logo: 'Files/New folder/partners_3_lenovo.svg' },
+                { id: 'ibm', name: 'IBM', logo: 'Files/New folder/partners_4_ibm.svg' },
+                { id: 'xfusion', name: 'xFusion', logo: 'Files/New folder/partners_5_xfusion.svg' },
+                { id: 'h3c', name: 'H3C', logo: 'Files/New folder/partners_6_h3c.svg' },
+                { id: 'supermicro', name: 'Supermicro', logo: 'Files/New folder/partners_7_supermicro.svg' },
+                { id: 'inspur', name: 'Inspur', logo: 'Files/New folder/partners_8_inspur.svg' },
+                { id: 'none', name: 'Не выбрано', logo: null }
+            ];
             
-            // Проходим по всем сериям в категории
-            selectedCategory.series.forEach(series => {
-                allHTML += `
-                    <div class="series-card">
-                        <div class="series-header" onclick="toggleSeries('${series.id}')">
-                            <div class="series-header-content">
-                                <div class="series-title">${series.name}</div>
-                                <div class="series-description">${series.description || 'Описание не указано'}</div>
-                            </div>
-                            <div class="series-toggle" id="toggle-${series.id}">▶</div>
+            let brandsHTML = '<div class="brands-grid">';
+            
+            brands.forEach(brand => {
+                brandsHTML += `
+                    <div class="brand-card" onclick="selectBrand('${categoryType}', '${brand.id}')">
+                        <div class="brand-logo">
+                            ${brand.logo ? `<img src="${brand.logo}" alt="${brand.name} Logo" class="brand-logo-image">` : `<div class="brand-logo-text">${brand.name}</div>`}
                         </div>
-                        <div id="series-${series.id}" class="series-content" style="display: none;">
-                            <div class="models-grid" id="models-${series.id}"></div>
+                        <div class="brand-banner">
+                            <div>${brand.name}</div>
                         </div>
+                        <div class="brand-arrow">›</div>
                     </div>
                 `;
             });
             
-            container.innerHTML = allHTML;
-            
-            // Отрисовываем модели для каждой серии
-            selectedCategory.series.forEach(series => {
-                renderSeriesModelsAndGenerations(series);
-            });
+            brandsHTML += '</div>';
+            container.innerHTML = brandsHTML;
+        }
+        
+        // Выбор бренда
+        function selectBrand(category, brand) {
+            console.log('Selected category:', category, 'brand:', brand);
+            // Save selected category and brand to localStorage
+            localStorage.setItem('selectedCategory', category);
+            localStorage.setItem('selectedBrand', brand);
+            // Redirect to options page
+            window.location.href = 'web_configurator_options.html?category=' + category + '&brand=' + brand;
+        }
+        
+        
+        // Отрисовка всех серий с моделями и поколениями (оставлена для совместимости, но не используется)
+        function renderAllSeriesModelsAndGenerations() {
+            // This function is no longer used in the new flow
+            // Brands are rendered instead
         }
         
         // Отрисовка моделей с поколениями для конкретной серии
@@ -1674,8 +1781,8 @@
                 <strong>БИК MTBKBY22</strong></p>
                 
                 <h3>Стол заказов</h3>
-                <p><strong>Телефон:</strong> +375(33)6006731</p>
-                <p><strong>Email:</strong> sales@beltrader.by</p>
+                <p><strong>Телефон:</strong> +375 (29) 391-90-44</p>
+                <p><strong>Email:</strong> info@beltrader.by, sales@beltrader.by</p>
             </div>
         </div>
     </div>
@@ -1697,8 +1804,8 @@
             </div>
             <div class="footer-right">
                 <div class="footer-text">
-                    +375 (33) 600-67-31<br>
-                    sales@beltrader.by
+                    +375 (29) 391-90-44<br>
+                    info@beltrader.by, sales@beltrader.by
                 </div>
             </div>
         </div>

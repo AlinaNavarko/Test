@@ -1004,14 +1004,44 @@
         
         .component-card.selected {
             border-color: rgb(61, 243, 187) !important;
-            background: #f0f4ff !important;
-            box-shadow: 0 4px 12px rgba(61, 243, 187, 0.2) !important;
+            background: rgba(61, 243, 187, 0.1) !important;
+            box-shadow: 0 4px 12px rgba(61, 243, 187, 0.3) !important;
+            transform: translateY(-3px) !important;
+            transition: all 0.3s !important;
         }
         
         .component-card.selected .btn-add {
-            background: rgba(61, 243, 187, 0.3) !important;
-            color: #1c2a3c !important;
-            border: 2px solid rgba(61, 243, 187, 0.5) !important;
+            background: rgb(61, 243, 187) !important;
+            color: white !important;
+            border: 2px solid rgb(61, 243, 187) !important;
+            font-weight: bold !important;
+        }
+        
+        /* ADDITIONAL VISUAL FEEDBACK FOR SELECTED CARDS */
+        .component-card.selected::before {
+            content: "✓";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgb(61, 243, 187);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 10;
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        /* PULSE ANIMATION FOR SELECTED STATE */
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
         }
         
         .component-name {
@@ -1812,6 +1842,61 @@
                 width: 100%;
             }
         }
+        
+        /* FORCE SELECTED CARD STYLES - ADDED AT THE END */
+        .component-card.selected {
+            border-color: rgb(61, 243, 187) !important;
+            background: rgba(61, 243, 187, 0.1) !important;
+            box-shadow: 0 4px 12px rgba(61, 243, 187, 0.3) !important;
+            transform: translateY(-3px) !important;
+            transition: all 0.3s !important;
+        }
+        
+        .component-card.selected .btn-add {
+            background: rgb(61, 243, 187) !important;
+            color: white !important;
+            border: 2px solid rgb(61, 243, 187) !important;
+            font-weight: bold !important;
+        }
+        
+        /* QUANTITY CONTROLS STYLES */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .btn-decrease, .btn-increase {
+            background: rgb(61, 243, 187) !important;
+            color: white !important;
+            border: 2px solid rgb(61, 243, 187) !important;
+            font-weight: bold !important;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-decrease:hover, .btn-increase:hover {
+            background: rgba(61, 243, 187, 0.8) !important;
+            transform: scale(1.05);
+        }
+        
+        .quantity-display {
+            background: rgba(61, 243, 187, 0.1);
+            color: rgb(61, 243, 187);
+            border: 2px solid rgb(61, 243, 187);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -1835,7 +1920,7 @@
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
                     </svg>
-                    <span>sales@beltrader.by</span>
+                    <span>info@beltrader.by, sales@beltrader.by</span>
                 </div>
             </div>
         </div>
@@ -1868,6 +1953,7 @@
                         <a href="software.html" class="dropdown-item">Программное обеспечение</a>
                     </div>
                 </div>
+                <a href="about.html" class="nav-link">О нас</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
                 <button class="consultation-btn" onclick="openConsultationPopup()">Консультация</button>
                 <a href="web_configurator_cart.html" class="cart-icon-link">
@@ -3141,6 +3227,7 @@
                 hdd: [],
                 u320: [],
                 powerSupply: [],
+                power_supply: [], // Also add power_supply for compatibility
                 controllers: [],
                 network: []
             };
@@ -3157,12 +3244,19 @@
             
             console.log('About to call showAllComponents()');
             // SHOW ALL COMPONENTS BY DEFAULT (NOT INDIVIDUAL SECTIONS)
-            showAllComponents();
-            
-            // UPDATE ALL COMPONENT CARDS AFTER A SHORT DELAY TO ENSURE DOM IS READY
+            // ADD DELAY TO ENSURE DOM IS READY
             setTimeout(() => {
-                updateAllComponentCards();
+                console.log('Calling showAllComponents after delay...');
+                showAllComponents();
             }, 100);
+            
+            // ALSO TRY TO CALL filterByCategory('all') TO ENSURE PROPER INITIALIZATION
+            setTimeout(() => {
+                console.log('Calling filterByCategory("all") to ensure proper initialization...');
+                filterByCategory('all');
+            }, 200);
+            
+            // COMPONENT CARDS ARE UPDATED BY renderComponents() - NO NEED FOR updateAllComponentCards()
         }
         
         // FILTER BY CATEGORY
@@ -3256,8 +3350,12 @@
                 
                 mainLayout.appendChild(allSection);
                 
-                // RENDER ALL COMPONENTS
-                renderAllComponents(mainCategory);
+                // RENDER ALL COMPONENTS - use setTimeout to ensure DOM is updated
+                console.log('About to call renderAllComponents with mainCategory:', mainCategory);
+                setTimeout(() => {
+                    renderAllComponents(mainCategory);
+                    console.log('renderAllComponents completed');
+                }, 50);
             }
         }
         
@@ -3590,8 +3688,13 @@
         
         // RENDER ALL COMPONENTS IN ONE GRID
         function renderAllComponents(mainCategory = 'servers') {
+            console.log('renderAllComponents called with mainCategory:', mainCategory);
             const allGrid = document.getElementById('allComponentsGrid');
-            if (!allGrid) return;
+            console.log('allGrid element found:', allGrid);
+            if (!allGrid) {
+                console.error('allGrid element not found!');
+                return;
+            }
             
             // GET MANUFACTURER FILTER
             const manufacturerFilter = document.getElementById('filter-all-manufacturer');
@@ -3810,8 +3913,10 @@
             let filteredComponents = allComponents;
             
             // FILTER BY MAIN CATEGORY
+            console.log('Filtering by mainCategory:', mainCategory);
             if (mainCategory === 'servers') {
                 // SHOW ALL SERVER COMPONENTS
+                console.log('Showing all server components');
                 filteredComponents = allComponents;
             } else if (mainCategory === 'storage') {
                 // SHOW ONLY STORAGE COMPONENTS
@@ -3832,30 +3937,83 @@
                 );
             }
             
-            // RENDER ALL COMPONENTS
-            allGrid.innerHTML = filteredComponents.map(component => `
-                <div class="component-card" id="card_${component.id}">
-                    <div class="component-name">${component.name}</div>
-                    <div class="component-specs">
-                        ${component.specs ? component.specs.map(spec => `
-                            <div class="component-spec-item">
-                                <span class="spec-label">${spec.label}</span>
-                                <span class="spec-value">${spec.value}</span>
-                            </div>
-                        `).join('') : ''}
-                    </div>
-                    <div class="component-actions">
-                        <button class="btn btn-add" onclick="addComponent('${component.category}', '${component.id}')" title="Добавить">
-                            +
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+            console.log('Filtered components count:', filteredComponents.length);
+            console.log('Selected manufacturer:', selectedManufacturer);
             
-            // UPDATE CARD STATES BASED ON CURRENT CONFIGURATION
-            setTimeout(() => {
-                updateAllComponentCards();
-            }, 100);
+            // RENDER ALL COMPONENTS
+            console.log('About to render components...');
+            try {
+                console.log('Starting to map components...');
+                // Ensure all categories exist in currentConfiguration
+                if (!currentConfiguration) {
+                    currentConfiguration = {
+                        processors: [],
+                        memory: [],
+                        ssd: [],
+                        nvme: [],
+                        hdd: [],
+                        controllers: [],
+                        network: [],
+                        power_supply: [],
+                        powerSupply: [] // Also add powerSupply for compatibility
+                    };
+                }
+                
+                // Initialize category if it doesn't exist
+                filteredComponents.forEach(component => {
+                    if (!currentConfiguration[component.category]) {
+                        currentConfiguration[component.category] = [];
+                    }
+                });
+                
+                const htmlContent = filteredComponents.map(component => {
+                    const category = currentConfiguration[component.category] || [];
+                    const isAdded = category.some(c => c.id === component.id);
+                    const quantity = category.filter(c => c.id === component.id).length;
+                    
+                    console.log(`Rendering ${component.id}: isAdded=${isAdded}, quantity=${quantity}`);
+                    
+                    return `
+                    <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${component.id}">
+                        <div class="component-name">${component.name}</div>
+                        <div class="component-specs">
+                            ${component.specs ? component.specs.map(spec => `
+                                <div class="component-spec-item">
+                                    <span class="spec-label">${spec.label}</span>
+                                    <span class="spec-value">${spec.value}</span>
+                                </div>
+                            `).join('') : ''}
+                        </div>
+                        <div class="component-actions">
+                            ${isAdded ? `
+                                <div class="quantity-controls">
+                                    <button class="btn btn-decrease" onclick="removeComponent('${component.category}', '${component.id}')" title="Уменьшить">-</button>
+                                    <span class="quantity-display">${quantity}</span>
+                                    <button class="btn btn-increase" onclick="addComponent('${component.category}', '${component.id}')" title="Увеличить">+</button>
+                                </div>
+                            ` : `
+                                <button class="btn btn-add" onclick="addComponent('${component.category}', '${component.id}')" title="Добавить">
+                                    +
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `;
+                }).join('');
+                
+                console.log('HTML content generated, length:', htmlContent.length);
+                console.log('First 200 chars of HTML:', htmlContent.substring(0, 200));
+                
+                allGrid.innerHTML = htmlContent;
+                
+                console.log('HTML updated, length:', allGrid.innerHTML.length);
+                console.log('Grid children count:', allGrid.children.length);
+            } catch (error) {
+                console.error('Error rendering components:', error);
+                console.error('Error stack:', error.stack);
+            }
+            
+            // COMPONENT CARDS ARE UPDATED BY renderComponents() - NO NEED FOR updateAllComponentCards()
         }
         
         // APPLY FILTERS FOR "ALL" SECTION
@@ -3962,8 +4120,12 @@
                 ]}
             ];
             
-            grid.innerHTML = processors.map(processor => `
-                <div class="component-card" id="card_${processor.id}">
+            grid.innerHTML = processors.map(processor => {
+                const isAdded = currentConfiguration.processors && currentConfiguration.processors.some(c => c.id === processor.id);
+                const quantity = currentConfiguration.processors ? currentConfiguration.processors.filter(c => c.id === processor.id).length : 0;
+                
+                return `
+                <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${processor.id}">
                     <div class="component-name">${processor.name}</div>
                     <div class="component-specs">
                         ${processor.specs.map(spec => `
@@ -3974,12 +4136,21 @@
                         `).join('')}
                     </div>
                     <div class="component-actions">
-                        <button class="btn btn-add" onclick="addComponent('processors', '${processor.id}')" title="Добавить">
-                            +
-                        </button>
+                        ${isAdded ? `
+                            <div class="quantity-controls">
+                                <button class="btn btn-decrease" onclick="removeComponent('processors', '${processor.id}')" title="Уменьшить">-</button>
+                                <span class="quantity-display">${quantity}</span>
+                                <button class="btn btn-increase" onclick="addComponent('processors', '${processor.id}')" title="Увеличить">+</button>
+                            </div>
+                        ` : `
+                            <button class="btn btn-add" onclick="addComponent('processors', '${processor.id}')" title="Добавить">
+                                +
+                            </button>
+                        `}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
         
         // RENDER MEMORY
@@ -4014,8 +4185,12 @@
                 ]}
             ];
             
-            grid.innerHTML = memory.map(mem => `
-                <div class="component-card" id="card_${mem.id}">
+            grid.innerHTML = memory.map(mem => {
+                const isAdded = currentConfiguration.memory && currentConfiguration.memory.some(c => c.id === mem.id);
+                const quantity = currentConfiguration.memory ? currentConfiguration.memory.filter(c => c.id === mem.id).length : 0;
+                
+                return `
+                <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${mem.id}">
                     <div class="component-name">${mem.name}</div>
                     <div class="component-specs">
                         ${mem.specs.map(spec => `
@@ -4026,12 +4201,21 @@
                         `).join('')}
                     </div>
                     <div class="component-actions">
-                        <button class="btn btn-add" onclick="addComponent('memory', '${mem.id}')" title="Добавить">
-                            +
-                        </button>
+                        ${isAdded ? `
+                            <div class="quantity-controls">
+                                <button class="btn btn-decrease" onclick="removeComponent('memory', '${mem.id}')" title="Уменьшить">-</button>
+                                <span class="quantity-display">${quantity}</span>
+                                <button class="btn btn-increase" onclick="addComponent('memory', '${mem.id}')" title="Увеличить">+</button>
+                            </div>
+                        ` : `
+                            <button class="btn btn-add" onclick="addComponent('memory', '${mem.id}')" title="Добавить">
+                                +
+                            </button>
+                        `}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
         
         // RENDER SSD
@@ -4070,8 +4254,12 @@
                 ]}
             ];
             
-            grid.innerHTML = ssds.map(ssd => `
-                <div class="component-card" id="card_${ssd.id}">
+            grid.innerHTML = ssds.map(ssd => {
+                const isAdded = currentConfiguration.ssd && currentConfiguration.ssd.some(c => c.id === ssd.id);
+                const quantity = currentConfiguration.ssd ? currentConfiguration.ssd.filter(c => c.id === ssd.id).length : 0;
+                
+                return `
+                <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${ssd.id}">
                     <div class="component-name">${ssd.name}</div>
                     <div class="component-specs">
                         ${ssd.specs.map(spec => `
@@ -4082,12 +4270,21 @@
                         `).join('')}
                     </div>
                     <div class="component-actions">
-                        <button class="btn btn-add" onclick="addComponent('ssd', '${ssd.id}')" title="Добавить">
-                            +
-                        </button>
+                        ${isAdded ? `
+                            <div class="quantity-controls">
+                                <button class="btn btn-decrease" onclick="removeComponent('ssd', '${ssd.id}')" title="Уменьшить">-</button>
+                                <span class="quantity-display">${quantity}</span>
+                                <button class="btn btn-increase" onclick="addComponent('ssd', '${ssd.id}')" title="Увеличить">+</button>
+                            </div>
+                        ` : `
+                            <button class="btn btn-add" onclick="addComponent('ssd', '${ssd.id}')" title="Добавить">
+                                +
+                            </button>
+                        `}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
         
         // RENDER NVME
@@ -4119,8 +4316,12 @@
                 ]}
             ];
             
-            grid.innerHTML = nvmes.map(nvme => `
-                <div class="component-card" id="card_${nvme.id}">
+            grid.innerHTML = nvmes.map(nvme => {
+                const isAdded = currentConfiguration.nvme && currentConfiguration.nvme.some(c => c.id === nvme.id);
+                const quantity = currentConfiguration.nvme ? currentConfiguration.nvme.filter(c => c.id === nvme.id).length : 0;
+                
+                return `
+                <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${nvme.id}">
                     <div class="component-name">${nvme.name}</div>
                     <div class="component-specs">
                         ${nvme.specs.map(spec => `
@@ -4131,12 +4332,21 @@
                         `).join('')}
                     </div>
                     <div class="component-actions">
-                        <button class="btn btn-add" onclick="addComponent('nvme', '${nvme.id}')" title="Добавить">
-                            +
-                        </button>
+                        ${isAdded ? `
+                            <div class="quantity-controls">
+                                <button class="btn btn-decrease" onclick="removeComponent('nvme', '${nvme.id}')" title="Уменьшить">-</button>
+                                <span class="quantity-display">${quantity}</span>
+                                <button class="btn btn-increase" onclick="addComponent('nvme', '${nvme.id}')" title="Увеличить">+</button>
+                            </div>
+                        ` : `
+                            <button class="btn btn-add" onclick="addComponent('nvme', '${nvme.id}')" title="Добавить">
+                                +
+                            </button>
+                        `}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
         
         // RENDER HDD
@@ -4177,8 +4387,12 @@
                 ]}
             ];
             
-            grid.innerHTML = hdds.map(hdd => `
-                <div class="component-card" id="card_${hdd.id}">
+            grid.innerHTML = hdds.map(hdd => {
+                const isAdded = currentConfiguration.hdd && currentConfiguration.hdd.some(c => c.id === hdd.id);
+                const quantity = currentConfiguration.hdd ? currentConfiguration.hdd.filter(c => c.id === hdd.id).length : 0;
+                
+                return `
+                <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${hdd.id}">
                     <div class="component-name">${hdd.name}</div>
                     <div class="component-specs">
                         ${hdd.specs.map(spec => `
@@ -4189,12 +4403,21 @@
                         `).join('')}
                     </div>
                     <div class="component-actions">
-                        <button class="btn btn-add" onclick="addComponent('hdd', '${hdd.id}')" title="Добавить">
-                            +
-                        </button>
+                        ${isAdded ? `
+                            <div class="quantity-controls">
+                                <button class="btn btn-decrease" onclick="removeComponent('hdd', '${hdd.id}')" title="Уменьшить">-</button>
+                                <span class="quantity-display">${quantity}</span>
+                                <button class="btn btn-increase" onclick="addComponent('hdd', '${hdd.id}')" title="Увеличить">+</button>
+                            </div>
+                        ` : `
+                            <button class="btn btn-add" onclick="addComponent('hdd', '${hdd.id}')" title="Добавить">
+                                +
+                            </button>
+                        `}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
         
         // RENDER CONTROLLERS
@@ -4222,8 +4445,12 @@
                 ]}
             ];
             
-            grid.innerHTML = controllers.map(controller => `
-                <div class="component-card" id="card_${controller.id}">
+            grid.innerHTML = controllers.map(controller => {
+                const isAdded = currentConfiguration.controllers && currentConfiguration.controllers.some(c => c.id === controller.id);
+                const quantity = currentConfiguration.controllers ? currentConfiguration.controllers.filter(c => c.id === controller.id).length : 0;
+                
+                return `
+                <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${controller.id}">
                     <div class="component-name">${controller.name}</div>
                     <div class="component-specs">
                         ${controller.specs.map(spec => `
@@ -4234,12 +4461,21 @@
                         `).join('')}
                     </div>
                     <div class="component-actions">
-                        <button class="btn btn-add" onclick="addComponent('controllers', '${controller.id}')" title="Добавить">
-                            +
-                        </button>
+                        ${isAdded ? `
+                            <div class="quantity-controls">
+                                <button class="btn btn-decrease" onclick="removeComponent('controllers', '${controller.id}')" title="Уменьшить">-</button>
+                                <span class="quantity-display">${quantity}</span>
+                                <button class="btn btn-increase" onclick="addComponent('controllers', '${controller.id}')" title="Увеличить">+</button>
+                            </div>
+                        ` : `
+                            <button class="btn btn-add" onclick="addComponent('controllers', '${controller.id}')" title="Добавить">
+                                +
+                            </button>
+                        `}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
         
         // RENDER NETWORK
@@ -4265,8 +4501,12 @@
                 ]}
             ];
             
-            grid.innerHTML = network.map(net => `
-                <div class="component-card" id="card_${net.id}">
+            grid.innerHTML = network.map(net => {
+                const isAdded = currentConfiguration.network && currentConfiguration.network.some(c => c.id === net.id);
+                const quantity = currentConfiguration.network ? currentConfiguration.network.filter(c => c.id === net.id).length : 0;
+                
+                return `
+                <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${net.id}">
                     <div class="component-name">${net.name}</div>
                     <div class="component-specs">
                         ${net.specs.map(spec => `
@@ -4277,12 +4517,21 @@
                         `).join('')}
                     </div>
                     <div class="component-actions">
-                        <button class="btn btn-add" onclick="addComponent('network', '${net.id}')" title="Добавить">
-                            +
-                        </button>
+                        ${isAdded ? `
+                            <div class="quantity-controls">
+                                <button class="btn btn-decrease" onclick="removeComponent('network', '${net.id}')" title="Уменьшить">-</button>
+                                <span class="quantity-display">${quantity}</span>
+                                <button class="btn btn-increase" onclick="addComponent('network', '${net.id}')" title="Увеличить">+</button>
+                            </div>
+                        ` : `
+                            <button class="btn btn-add" onclick="addComponent('network', '${net.id}')" title="Добавить">
+                                +
+                            </button>
+                        `}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
         
         // RENDER POWER SUPPLY
@@ -4303,8 +4552,14 @@
                 ]}
             ];
             
-            grid.innerHTML = powerSupplies.map(psu => `
-                <div class="component-card" id="card_${psu.id}">
+            grid.innerHTML = powerSupplies.map(psu => {
+                // Check both powerSupply and power_supply categories
+                const powerSupplyConfig = currentConfiguration.powerSupply || currentConfiguration.power_supply || [];
+                const isAdded = powerSupplyConfig.some(c => c.id === psu.id);
+                const quantity = powerSupplyConfig.filter(c => c.id === psu.id).length;
+                
+                return `
+                <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${psu.id}">
                     <div class="component-name">${psu.name}</div>
                     <div class="component-specs">
                         ${psu.specs.map(spec => `
@@ -4315,18 +4570,29 @@
                         `).join('')}
                     </div>
                     <div class="component-actions">
-                        <button class="btn btn-add" onclick="addComponent('powerSupply', '${psu.id}')" title="Добавить">
-                            +
-                        </button>
+                        ${isAdded ? `
+                            <div class="quantity-controls">
+                                <button class="btn btn-decrease" onclick="removeComponent('powerSupply', '${psu.id}')" title="Уменьшить">-</button>
+                                <span class="quantity-display">${quantity}</span>
+                                <button class="btn btn-increase" onclick="addComponent('powerSupply', '${psu.id}')" title="Увеличить">+</button>
+                            </div>
+                        ` : `
+                            <button class="btn btn-add" onclick="addComponent('powerSupply', '${psu.id}')" title="Добавить">
+                                +
+                            </button>
+                        `}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
         
         // ADD/REMOVE COMPONENT FUNCTION
         function addComponent(category, componentId) {
             console.log(`Adding/removing component: ${componentId} from category: ${category}`);
             console.log('Current configuration before:', currentConfiguration);
+            console.log('Available categories in currentConfiguration:', Object.keys(currentConfiguration));
+            console.log('Category exists:', category in currentConfiguration);
             
             const component = componentsDatabase[category].find(c => c.id === componentId);
             
@@ -4377,11 +4643,46 @@
             localStorage.setItem('currentConfiguration', JSON.stringify(currentConfiguration));
             console.log('Saved to localStorage');
             
-            // UPDATE UI
-            updateConfiguration();
+            // RENDER COMPONENTS TO REFLECT CURRENT STATE FIRST
+            console.log('About to call renderAllComponents()');
+            console.log('Current configuration after adding component:', currentConfiguration);
             
-            // RENDER COMPONENTS TO REFLECT CURRENT STATE
-            renderComponents();
+            // GET ACTIVE MAIN CATEGORY
+            const activeCategory = document.querySelector('.category-card.active');
+            const mainCategory = activeCategory ? activeCategory.dataset.category : 'servers';
+            console.log('Active main category:', mainCategory);
+            
+            // Update "Все" section
+            renderAllComponents(mainCategory);
+            console.log('renderAllComponents() completed');
+            
+            // Also update individual category sections
+            if (category === 'processors') {
+                renderProcessors();
+            } else if (category === 'memory') {
+                renderMemory();
+            } else if (category === 'ssd') {
+                renderSSD();
+            } else if (category === 'nvme') {
+                renderNVMe();
+            } else if (category === 'hdd') {
+                renderHDD();
+            } else if (category === 'controllers') {
+                renderControllers();
+            } else if (category === 'network') {
+                renderNetwork();
+            } else if (category === 'power_supply' || category === 'powerSupply') {
+                renderPowerSupply();
+            }
+            
+            // Update all component cards to ensure consistency
+            updateAllComponentCards();
+            
+            // THEN UPDATE CONFIGURATION
+            console.log('About to call updateConfiguration()');
+            updateConfiguration();
+            console.log('updateConfiguration() completed');
+            
         }
         
         // UPDATE COMPONENT CARD VISUAL STATE
@@ -4404,6 +4705,7 @@
             if (isAdded) {
                 // SHOW THAT COMPONENT IS ADDED
                 card.classList.add('selected');
+                console.log(`Added 'selected' class to card: ${componentId}`);
                 addButton.textContent = '✓';
                 addButton.title = 'Добавлено в корзину';
                 // REMOVE INLINE STYLES TO LET CSS TAKE OVER
@@ -4412,9 +4714,14 @@
                 addButton.style.border = '';
                 card.style.border = '';
                 card.style.background = '';
+                
+                // FORCE STYLE RECALCULATION
+                card.offsetHeight; // Trigger reflow
+                console.log('Forced style recalculation for card:', componentId);
             } else {
                 // RESET TO DEFAULT STATE
                 card.classList.remove('selected');
+                console.log(`Removed 'selected' class from card: ${componentId}`);
                 addButton.textContent = '+';
                 addButton.title = 'Добавить';
                 // REMOVE INLINE STYLES TO LET CSS TAKE OVER
@@ -4726,6 +5033,9 @@
         
         // RENDER ALL COMPONENTS
         function renderComponents() {
+            console.log('renderComponents() called');
+            console.log('Current configuration:', currentConfiguration);
+            
             renderCategoryComponents('processors', 'processorsGrid');
             renderCategoryComponents('memory', 'memoryGrid');
             renderCategoryComponents('ssd', 'ssdGrid');
@@ -4735,6 +5045,8 @@
             renderCategoryComponents('powerSupply', 'powerSupplyGrid');
             renderCategoryComponents('controllers', 'controllersGrid');
             renderCategoryComponents('network', 'networkGrid');
+            
+            console.log('renderComponents() completed for all categories');
         }
         
         // RENDER COMPONENTS FOR A CATEGORY
@@ -4743,6 +5055,8 @@
             let components = componentsDatabase[category];
             
             console.log(`Rendering ${category} components:`, components?.length || 0);
+            console.log(`Grid element found:`, grid);
+            console.log(`Grid ID: ${gridId}, Element:`, grid);
             
             if (!components || components.length === 0) {
                 grid.innerHTML = '<p style="color: #999; padding: 20px;">Компоненты скоро будут добавлены</p>';
@@ -4763,18 +5077,15 @@
             }
             
             grid.innerHTML = components.map(component => {
+                const isAdded = currentConfiguration[category].some(c => c.id === component.id);
                 const quantity = currentConfiguration[category].filter(c => c.id === component.id).length;
-                const isAdded = quantity > 0;
                 
-                console.log(`Rendering component ${component.id}: isAdded=${isAdded}, quantity=${quantity}`);
-                
-                const buttonText = isAdded ? '✓' : '+';
-                
-                console.log(`Button text for ${component.id}: "${buttonText}"`);
+                console.log(`Rendering ${component.id}: isAdded=${isAdded}, quantity=${quantity}`);
+                console.log(`Category ${category} in currentConfiguration:`, currentConfiguration[category]);
+                console.log(`Component ${component.id} in category:`, currentConfiguration[category].filter(c => c.id === component.id));
                 
                 return `
-                    <div class="component-card ${isAdded ? 'selected' : ''}" 
-                         id="card_${component.id}">
+                    <div class="component-card ${isAdded ? 'selected' : ''}" id="card_${component.id}">
                         <div class="component-name">${component.name}</div>
                         <div class="component-specs">
                             ${Object.entries(component.specs).map(([key, value]) => `
@@ -4785,17 +5096,25 @@
                             `).join('')}
                         </div>
                         <div class="component-actions">
-                            <button class="btn btn-add" 
-                                    onclick="addComponent('${category}', '${component.id}')" 
-                                    title="${isAdded ? 'Удалить из корзины' : 'Добавить в корзину'}">
-                                ${buttonText}
-                            </button>
+                            ${isAdded ? `
+                                <div class="quantity-controls">
+                                    <button class="btn btn-decrease" onclick="removeComponent('${category}', '${component.id}')" title="Уменьшить">-</button>
+                                    <span class="quantity-display">${quantity}</span>
+                                    <button class="btn btn-increase" onclick="addComponent('${category}', '${component.id}')" title="Увеличить">+</button>
+                                </div>
+                            ` : `
+                                <button class="btn btn-add" onclick="addComponent('${category}', '${component.id}')" title="Добавить">
+                                    +
+                                </button>
+                            `}
                         </div>
                     </div>
                 `;
             }).join('');
             
             console.log(`Rendered ${components.length} components for ${category}`);
+            console.log(`Grid innerHTML updated, length:`, grid.innerHTML.length);
+            console.log(`Grid children count:`, grid.children.length);
         }
         
         // ADD COMPONENT
@@ -4918,6 +5237,15 @@
             }
         }
         
+        // ALIASES FOR QUANTITY CONTROLS
+        function increaseComponent(category, componentId) {
+            increaseComponentQuantity(category, componentId);
+        }
+        
+        function decreaseComponent(category, componentId) {
+            decreaseComponentQuantity(category, componentId);
+        }
+        
         // UPDATE CONFIGURATION PANEL
         function updateConfiguration() {
             console.log('Updating configuration...');
@@ -4963,6 +5291,143 @@
                 cartBadge.textContent = totalComponents;
                 cartBadge.style.display = totalComponents > 0 ? 'block' : 'none';
             }
+            
+        }
+        
+        // UPDATE CONFIGURATION WIDGET
+        function updateConfigWidget() {
+            console.log('Updating config widget...');
+            
+            const configWidgetItems = document.getElementById('configWidgetItems');
+            if (!configWidgetItems) {
+                console.log('Config widget items element not found');
+                return;
+            }
+            
+            // COUNT TOTAL COMPONENTS
+            const totalComponents = 
+                currentConfiguration.processors.length +
+                currentConfiguration.memory.length +
+                currentConfiguration.ssd.length +
+                currentConfiguration.nvme.length +
+                currentConfiguration.hdd.length +
+                currentConfiguration.u320.length +
+                currentConfiguration.powerSupply.length +
+                currentConfiguration.controllers.length +
+                currentConfiguration.network.length;
+            
+            if (totalComponents === 0) {
+                configWidgetItems.innerHTML = '<div class="config-widget-empty">Добавьте компоненты для завершения конфигурации</div>';
+                return;
+            }
+            
+            // BUILD ITEMS HTML
+            let itemsHtml = '';
+            
+            // ADD PROCESSORS
+            if (currentConfiguration.processors.length > 0) {
+                const processorGroups = {};
+                currentConfiguration.processors.forEach(proc => {
+                    const key = proc.id;
+                    if (!processorGroups[key]) {
+                        processorGroups[key] = { component: proc, count: 0 };
+                    }
+                    processorGroups[key].count++;
+                });
+                
+                Object.values(processorGroups).forEach(group => {
+                    itemsHtml += `
+                        <div class="config-widget-item">
+                            <div class="config-widget-item-info">
+                                <div class="config-widget-item-name">${group.component.name}</div>
+                                <div class="config-widget-item-category">Процессоры</div>
+                            </div>
+                            <div class="config-widget-item-actions">
+                                <div class="config-widget-quantity-controls">
+                                    <button class="config-widget-quantity-btn" onclick="decreaseComponentQuantity('processors', '${group.component.id}')" title="Уменьшить">-</button>
+                                    <span class="config-widget-quantity-display">${group.count}</span>
+                                    <button class="config-widget-quantity-btn" onclick="increaseComponentQuantity('processors', '${group.component.id}')" title="Увеличить">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            // ADD MEMORY
+            if (currentConfiguration.memory.length > 0) {
+                const memoryGroups = {};
+                currentConfiguration.memory.forEach(mem => {
+                    const key = mem.id;
+                    if (!memoryGroups[key]) {
+                        memoryGroups[key] = { component: mem, count: 0 };
+                    }
+                    memoryGroups[key].count++;
+                });
+                
+                Object.values(memoryGroups).forEach(group => {
+                    itemsHtml += `
+                        <div class="config-widget-item">
+                            <div class="config-widget-item-info">
+                                <div class="config-widget-item-name">${group.component.name}</div>
+                                <div class="config-widget-item-category">Память</div>
+                            </div>
+                            <div class="config-widget-item-actions">
+                                <div class="config-widget-quantity-controls">
+                                    <button class="config-widget-quantity-btn" onclick="decreaseComponentQuantity('memory', '${group.component.id}')" title="Уменьшить">-</button>
+                                    <span class="config-widget-quantity-display">${group.count}</span>
+                                    <button class="config-widget-quantity-btn" onclick="increaseComponentQuantity('memory', '${group.component.id}')" title="Увеличить">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            // ADD OTHER COMPONENTS (SSD, NVMe, HDD, etc.)
+            const otherCategories = [
+                { key: 'ssd', name: 'SSD диски' },
+                { key: 'nvme', name: 'NVMe диски' },
+                { key: 'hdd', name: 'HDD диски' },
+                { key: 'u320', name: 'U320 диски' },
+                { key: 'powerSupply', name: 'Блоки питания' },
+                { key: 'controllers', name: 'Контроллеры' },
+                { key: 'network', name: 'Сетевые карты' }
+            ];
+            
+            otherCategories.forEach(category => {
+                if (currentConfiguration[category.key].length > 0) {
+                    const groups = {};
+                    currentConfiguration[category.key].forEach(comp => {
+                        const key = comp.id;
+                        if (!groups[key]) {
+                            groups[key] = { component: comp, count: 0 };
+                        }
+                        groups[key].count++;
+                    });
+                    
+                    Object.values(groups).forEach(group => {
+                        itemsHtml += `
+                            <div class="config-widget-item">
+                                <div class="config-widget-item-info">
+                                    <div class="config-widget-item-name">${group.component.name}</div>
+                                    <div class="config-widget-item-category">${category.name}</div>
+                                </div>
+                                <div class="config-widget-item-actions">
+                                    <div class="config-widget-quantity-controls">
+                                        <button class="config-widget-quantity-btn" onclick="decreaseComponentQuantity('${category.key}', '${group.component.id}')" title="Уменьшить">-</button>
+                                        <span class="config-widget-quantity-display">${group.count}</span>
+                                        <button class="config-widget-quantity-btn" onclick="increaseComponentQuantity('${category.key}', '${group.component.id}')" title="Увеличить">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            });
+            
+            configWidgetItems.innerHTML = itemsHtml;
+            console.log('Config widget updated with', totalComponents, 'components');
         }
         
         // INITIALIZE PAGE ON LOAD
@@ -5147,8 +5612,8 @@
                 <strong>БИК MTBKBY22</strong></p>
                 
                 <h3>Стол заказов</h3>
-                <p><strong>Телефон:</strong> +375(29)3919044</p>
-                <p><strong>Email:</strong> sales@beltrader.by</p>
+                <p><strong>Телефон:</strong> +375 (29) 391-90-44</p>
+                <p><strong>Email:</strong> info@beltrader.by, sales@beltrader.by</p>
             </div>
         </div>
     </div>
@@ -5170,8 +5635,8 @@
             </div>
             <div class="footer-right">
                 <div class="footer-text">
-                    +375 (33) 600-67-31<br>
-                    sales@beltrader.by
+                    +375 (29) 391-90-44<br>
+                    info@beltrader.by, sales@beltrader.by
                 </div>
             </div>
         </div>

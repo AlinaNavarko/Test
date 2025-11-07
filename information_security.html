@@ -447,12 +447,40 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             padding: 15px;
+            overflow: hidden;
         }
         
         .vendor-logo {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+        }
+        
+        .kaspersky-logo {
+            max-height: 100px;
+            transform: scale(0.95);
+        }
+        
+        .kaspersky-logo-container {
+            padding: 10px;
+        }
+        
+        .positive-tech-logo {
+            max-height: 100px;
+            transform: scale(1.3);
+        }
+        
+        .positive-tech-logo-container {
+            padding: 10px;
+        }
+        
+        .usergate-logo {
+            max-height: 100px;
+            transform: scale(1.6);
+        }
+        
+        .usergate-logo-container {
+            padding: 10px;
         }
         
         .service-card h3 {
@@ -608,7 +636,7 @@
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
                     </svg>
-                    <span>sales@beltrader.by</span>
+                    <span>info@beltrader.by, sales@beltrader.by</span>
                 </div>
             </div>
         </div>
@@ -640,6 +668,7 @@
                         <a href="software.html" class="dropdown-item">Программное обеспечение</a>
                     </div>
                 </div>
+                <a href="about.html" class="nav-link">О нас</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
                 <button class="consultation-btn" onclick="openConsultationPopup()">Консультация</button>
                 <a href="web_configurator_cart.html" class="cart-icon-link" title="Корзина">
@@ -673,12 +702,12 @@
                         <img src="Files/IB_logoc/1200px-check_point_logo.svg-768x490.png" alt="Check Point" class="vendor-logo">
                     </div>
                     <h3>Check Point</h3>
-                    <p>Продукт Check Point – это сочетание высоких технологий для обеспечения высокого уровня защиты от различных угроз</p>
+                    <p>Мировой лидер в сетевой и облачной безопасности. Решения защищают периметр, трафик и инфраструктуру от современных угроз.</p>
                     <ul class="service-features">
-                        <li>Гибкие решения безопасности</li>
-                        <li>Высокий уровень защиты</li>
-                        <li>Защита от различных угроз</li>
-                        <li>Современные технологии</li>
+                        <li>NGFW / IPS / SandBlast Zero-Day</li>
+                        <li>Контроль приложений и трафика</li>
+                        <li>Защита облачных и гибридных сред</li>
+                        <li>Централизованное управление безопасностью</li>
                     </ul>
                 </div>
 
@@ -687,40 +716,54 @@
                         <img src="Files/IB_logoc/drweb_vxcube_logo-e1655736141934-768x130.png" alt="Dr.Web" class="vendor-logo">
                     </div>
                     <h3>Dr.Web</h3>
-                    <p>Антивирусное программное обеспечение, отлично зарекомендовавшее себя при установке на предприятиях и на сетевых устройствах частных клиентов</p>
+                    <p>Антивирусное решение для защиты рабочих станций, серверов и сетевых устройств.</p>
                     <ul class="service-features">
-                        <li>Разработка</li>
                         <li>Антивирусная защита</li>
                         <li>Корпоративные решения</li>
-                        <li>Защита для предприятий и частных клиентов</li>
+                        <li>Проактивное обнаружение угроз</li>
+                        <li>Защита для бизнеса и частных пользователей</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/kaspersky-logo-square.svg" alt="Kaspersky" class="vendor-logo">
+                    <div class="service-logo kaspersky-logo-container">
+                        <img src="Files/IB_logoc/kaspersky-logo-square.svg" alt="Kaspersky" class="vendor-logo kaspersky-logo">
                     </div>
                     <h3>Kaspersky</h3>
-                    <p>Комплексные решения позволяют обеспечить защиту бизнеса и отдельных узлов системы, минимизировать риски распространения вирусных программ</p>
+                    <p>Комплексные решения для защиты рабочих станций, серверов, виртуальной инфраструктуры и почтовых систем.</p>
                     <ul class="service-features">
+                        <li>Антивирус и EDR</li>
                         <li>Защита корпоративных сетей</li>
-                        <li>Антивирусная защита</li>
+                        <li>Мониторинг и анализ угроз</li>
                         <li>Защита от вредоносного ПО</li>
-                        <li>Мониторинг безопасности</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/logo1-1024x572.png" alt="Positive Technologies" class="vendor-logo">
+                    <div class="service-logo positive-tech-logo-container">
+                        <img src="Files/positive_technologies.png" alt="Positive Technologies" class="vendor-logo positive-tech-logo">
                     </div>
                     <h3>Positive Technologies</h3>
-                    <p>Решения для тестирования на проникновение, аудита безопасности и защиты информационных систем</p>
+                    <p>Решения для тестирования на проникновение, анализа кода, а также платформы SIEM/SOAR для комплексной корпоративной защиты.</p>
                     <ul class="service-features">
-                        <li>Тестирование на проникновение</li>
-                        <li>Аудит безопасности</li>
-                        <li>Защита информационных систем</li>
-                        <li>Облачные решения</li>
+                        <li>Пентест и аудит безопасности</li>
+                        <li>SIEM/SOAR-платформа</li>
+                        <li>Анализ вредоносного ПО</li>
+                        <li>Защита веб-приложений</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-logo usergate-logo-container">
+                        <img src="Files/user_gate.svg" alt="UserGate" class="vendor-logo usergate-logo">
+                    </div>
+                    <h3>UserGate</h3>
+                    <p>UTM/NGFW-решения для защиты корпоративных сетей и контроля интернет-доступа.</p>
+                    <ul class="service-features">
+                        <li>Контроль доступа в интернет</li>
+                        <li>Защита корпоративных сетей</li>
+                        <li>Фильтрация трафика</li>
+                        <li>Управление доступом</li>
                     </ul>
                 </div>
 
@@ -728,98 +771,13 @@
                     <div class="service-logo">
                         <img src="Files/IB_logoc/logotip_kompanii_kod_bezopasnosti_.svg-1536x399.png" alt="Код безопасности" class="vendor-logo">
                     </div>
-                    <h3>Код безопасности</h3>
-                    <p>Решения для обеспечения информационной безопасности и защиты корпоративных данных</p>
+                    <h3>Код Безопасности (ViPNet)</h3>
+                    <p>Решения криптографической защиты, сетевого экранирования и защищённого обмена данными.</p>
                     <ul class="service-features">
-                        <li>Информационная безопасность</li>
-                        <li>Защита корпоративных данных</li>
-                        <li>Мониторинг безопасности</li>
-                        <li>Аудит информационной безопасности</li>
-                    </ul>
-                </div>
-
-                <!-- Остальные карточки по алфавиту -->
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/acronis-logo_tcm19-36469-e1654869944831.png" alt="Acronis" class="vendor-logo">
-                    </div>
-                    <h3>Acronis</h3>
-                    <p>Решения для резервного копирования, восстановления данных и обеспечения кибербезопасности</p>
-                    <ul class="service-features">
-                        <li>Резервное копирование</li>
-                        <li>Восстановление данных</li>
-                        <li>Кибербезопасность</li>
-                        <li>Защита от ransomware</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/ctrlhack.png" alt="CtrlHack" class="vendor-logo">
-                    </div>
-                    <h3>CtrlHack</h3>
-                    <p>Решения для тестирования на проникновение и обеспечения кибербезопасности</p>
-                    <ul class="service-features">
-                        <li>Тестирование на проникновение</li>
-                        <li>Кибербезопасность</li>
-                        <li>Аудит безопасности</li>
-                        <li>Пентестинг</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/fortinet-logo.png" alt="Fortinet" class="vendor-logo">
-                    </div>
-                    <h3>Fortinet</h3>
-                    <p>Комплексные решения для обеспечения безопасности корпоративных сетей и защиты от современных киберугроз</p>
-                    <ul class="service-features">
-                        <li>Защита корпоративных сетей</li>
-                        <li>Firewall решения</li>
-                        <li>Защита от киберугроз</li>
-                        <li>Интегрированные решения безопасности</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/fuzzy-logic-labs_web.svg" alt="Fuzzy Logic Labs" class="vendor-logo">
-                    </div>
-                    <h3>Fuzzy Logic Labs</h3>
-                    <p>Решения для обеспечения информационной безопасности и защиты данных</p>
-                    <ul class="service-features">
-                        <li>Информационная безопасность</li>
-                        <li>Защита данных</li>
-                        <li>Облачные решения</li>
-                        <li>Инновационные решения</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/logo-infowatch-e1662551164230-768x467.png" alt="InfoWatch" class="vendor-logo">
-                    </div>
-                    <h3>InfoWatch</h3>
-                    <p>Решения для защиты от утечек информации и обеспечения информационной безопасности</p>
-                    <ul class="service-features">
-                        <li>Защита от утечек информации</li>
-                        <li>DLP решения</li>
-                        <li>Мониторинг информационной безопасности</li>
-                        <li>Облачные решения</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/kiberprotekt.png" alt="КиберПротект" class="vendor-logo">
-                    </div>
-                    <h3>КиберПротект</h3>
-                    <p>Решения для обеспечения кибербезопасности и защиты информационных систем</p>
-                    <ul class="service-features">
-                        <li>Кибербезопасность</li>
-                        <li>Защита информационных систем</li>
-                        <li>Облачные решения</li>
-                        <li>Современная защита</li>
+                        <li>Криптографические VPN по ГОСТ</li>
+                        <li>Межсетевое экранирование</li>
+                        <li>Защита государственных и корпоративных систем</li>
+                        <li>Контроль сетевой инфраструктуры</li>
                     </ul>
                 </div>
 
@@ -828,40 +786,168 @@
                         <img src="Files/IB_logoc/krontech-logo-240x47px-header.png" alt="Krontech" class="vendor-logo">
                     </div>
                     <h3>Krontech</h3>
-                    <p>Решения для обеспечения информационной безопасности и защиты корпоративных данных</p>
+                    <p>PAM-платформа для управления привилегированными доступами и предотвращения инсайдерских угроз.</p>
                     <ul class="service-features">
-                        <li>Информационная безопасность</li>
-                        <li>Защита корпоративных данных</li>
-                        <li>Облачные решения</li>
-                        <li>Корпоративная безопасность</li>
+                        <li>Контроль действий администраторов</li>
+                        <li>Управление привилегированными учётными записями</li>
+                        <li>Запись и анализ сессий</li>
+                        <li>Защита критически важных систем</li>
                     </ul>
                 </div>
 
                 <div class="service-card">
                     <div class="service-logo">
-                        <img src="Files/IB_logoc/ngrsoftlab-logo-2.svg" alt="NGR SoftLab" class="vendor-logo">
+                        <img src="Files/IB_logoc/rusiem.png" alt="Rusiem" class="vendor-logo">
                     </div>
-                    <h3>NGR SoftLab</h3>
-                    <p>Решения для обеспечения информационной безопасности и защиты данных</p>
+                    <h3>Rusiem</h3>
+                    <p>SIEM-платформа для мониторинга событий информационной безопасности и построения SOC.</p>
                     <ul class="service-features">
-                        <li>Информационная безопасность</li>
-                        <li>Защита данных</li>
-                        <li>Облачные решения</li>
-                        <li>Программные решения</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/logo-black-e1657039406812-768x200.jpg" alt="Group IB" class="vendor-logo">
-                    </div>
-                    <h3>Group IB</h3>
-                    <p>Решения для расследования киберпреступлений и защиты от угроз</p>
-                    <ul class="service-features">
-                        <li>Расследование киберпреступлений</li>
-                        <li>Защита от угроз</li>
+                        <li>Сбор и корреляция событий</li>
                         <li>Анализ угроз</li>
-                        <li>Кибербезопасность</li>
+                        <li>Мониторинг безопасности</li>
+                        <li>Инструменты SOC</li>
+                    </ul>
+                </div>
+
+                <!-- Остальные карточки по алфавиту -->
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/IB_logoc/aitibastion.jpg" alt="АЙТИБАСТИОН" class="vendor-logo">
+                    </div>
+                    <h3>АйтиБастион</h3>
+                    <p>Система класса PAM для контроля действий привилегированных пользователей и защиты критически важных ресурсов.</p>
+                    <ul class="service-features">
+                        <li>Управление привилегированным доступом</li>
+                        <li>Контроль и запись сессий</li>
+                        <li>Аудит действий администраторов</li>
+                        <li>Предотвращение инсайдерских рисков</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/IB_logoc/garda.png" alt="ГАРДА ТЕХНОЛОГИИ" class="vendor-logo">
+                    </div>
+                    <h3>Гарда Технологии</h3>
+                    <p>Решения для защиты баз данных, предотвращения утечек и анализа активности пользователей.</p>
+                    <ul class="service-features">
+                        <li>Мониторинг действий в БД</li>
+                        <li>DLP-функциональность</li>
+                        <li>Аналитика поведения пользователей (UBA)</li>
+                        <li>Защита корпоративных данных</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/ideko.png" alt="ideco" class="vendor-logo">
+                    </div>
+                    <h3>Ideco</h3>
+                    <p>UTM-решения для фильтрации трафика и защиты корпоративных сетей.</p>
+                    <ul class="service-features">
+                        <li>Контроль доступа в интернет</li>
+                        <li>Фильтрация контента</li>
+                        <li>Защита сетевого периметра</li>
+                        <li>Управление интернет-трафиком</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/iks.png" alt="Интернет Контроль Сервер" class="vendor-logo">
+                    </div>
+                    <h3>Интернет Контроль Сервер (ИКС)</h3>
+                    <p>Платформа для управления интернет-трафиком, фильтрации контента и защиты корпоративных сетей.</p>
+                    <ul class="service-features">
+                        <li>Контроль интернет-трафика</li>
+                        <li>Фильтрация контента</li>
+                        <li>Защита от сетевых угроз</li>
+                        <li>Управление доступом сотрудников</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/IB_logoc/orion-soft-zvirt-1024x118.png" alt="ORIONsoft zVirt" class="vendor-logo">
+                    </div>
+                    <h3>ORION Soft zVirt</h3>
+                    <p>Платформа виртуализации и управления инфраструктурой для корпоративных и облачных сред.</p>
+                    <ul class="service-features">
+                        <li>Виртуализация серверов</li>
+                        <li>Облачные технологии</li>
+                        <li>Централизованное управление</li>
+                        <li>Импортонезависимая инфраструктура</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/IB_logoc/sangfor.png" alt="Sangfor" class="vendor-logo">
+                    </div>
+                    <h3>Sangfor</h3>
+                    <p>Решения для сетевой безопасности, виртуализации и построения облачных систем.</p>
+                    <ul class="service-features">
+                        <li>Next-Gen Firewall</li>
+                        <li>Виртуализация и HCI</li>
+                        <li>Защита сетевого периметра</li>
+                        <li>Облачные сервисы</li>
+                    </ul>
+                </div>
+
+                <!-- Остальные карточки по алфавиту -->
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/IB_logoc/ctrlhack.png" alt="CtrlHack" class="vendor-logo">
+                    </div>
+                    <h3>CtrlHack</h3>
+                    <p>Платформа для автоматизированного пентеста, моделирования атак и обучения специалистов по кибербезопасности.</p>
+                    <ul class="service-features">
+                        <li>Автоматизированные тесты на проникновение</li>
+                        <li>Анализ уязвимостей</li>
+                        <li>Пентест и аудит</li>
+                        <li>Практические обучающие сценарии</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/IB_logoc/fortinet-logo.png" alt="Fortinet" class="vendor-logo">
+                    </div>
+                    <h3>Fortinet</h3>
+                    <p>Интегрированные решения для защиты корпоративных сетей и предотвращения современных киберугроз.</p>
+                    <ul class="service-features">
+                        <li>NGFW / UTM</li>
+                        <li>Защита от угроз</li>
+                        <li>Безопасный SD-WAN</li>
+                        <li>Платформа FortiOS</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/IB_logoc/logo-infowatch-e1662551164230-768x467.png" alt="InfoWatch" class="vendor-logo">
+                    </div>
+                    <h3>InfoWatch</h3>
+                    <p>DLP-система для предотвращения утечек данных и контроля информационных потоков.</p>
+                    <ul class="service-features">
+                        <li>Защита от утечек</li>
+                        <li>Мониторинг данных</li>
+                        <li>Анализ рисков и инцидентов</li>
+                        <li>Контроль конфиденциальной информации</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-logo">
+                        <img src="Files/IB_logoc/kiberprotekt.png" alt="КиберПротект" class="vendor-logo">
+                    </div>
+                    <h3>КиберПротект</h3>
+                    <p>Комплексные решения для защиты данных, резервного копирования и кибербезопасности ИТ-инфраструктуры.</p>
+                    <ul class="service-features">
+                        <li>Резервное копирование</li>
+                        <li>Антивредоносная защита</li>
+                        <li>Защита корпоративных систем</li>
+                        <li>Облачные сервисы бэкапа</li>
                     </ul>
                 </div>
 
@@ -870,40 +956,12 @@
                         <img src="Files/IB_logoc/r-vision.png" alt="R-Vision" class="vendor-logo">
                     </div>
                     <h3>R-Vision</h3>
-                    <p>Решения для видеонаблюдения и обеспечения физической безопасности</p>
+                    <p>SOAR/IRP/GRC-платформа для автоматизации процессов безопасности и управления инцидентами.</p>
                     <ul class="service-features">
-                        <li>Видеонаблюдение</li>
-                        <li>Физическая безопасность</li>
-                        <li>Облачные решения</li>
-                        <li>Системы безопасности</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/skydns-logo-1-1024x207.png" alt="SkyDNS" class="vendor-logo">
-                    </div>
-                    <h3>SkyDNS</h3>
-                    <p>Решения для фильтрации интернет-трафика и обеспечения веб-безопасности</p>
-                    <ul class="service-features">
-                        <li>Фильтрация интернет-трафика</li>
-                        <li>Веб-безопасность</li>
-                        <li>Облачные решения</li>
-                        <li>Контроль доступа</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/solidwall-1024x253.png" alt="SolidWall" class="vendor-logo">
-                    </div>
-                    <h3>SolidWall</h3>
-                    <p>Решения для защиты корпоративных сетей и обеспечения информационной безопасности</p>
-                    <ul class="service-features">
-                        <li>Защита корпоративных сетей</li>
-                        <li>Информационная безопасность</li>
-                        <li>Облачные решения</li>
-                        <li>Сетевая защита</li>
+                        <li>SOAR-автоматизация</li>
+                        <li>Управление инцидентами</li>
+                        <li>Аналитика и отчётность</li>
+                        <li>Поддержка SOC</li>
                     </ul>
                 </div>
 
@@ -912,42 +970,15 @@
                         <img src="Files/IB_logoc/sv-logo_main_black_rgb-768x196.png" alt="Security Vision" class="vendor-logo">
                     </div>
                     <h3>Security Vision</h3>
-                    <p>Решения для обеспечения информационной безопасности и защиты от киберугроз</p>
+                    <p>Платформа SIEM/SOAR/IRP для централизованного мониторинга, реагирования и управления кибербезопасностью.</p>
                     <ul class="service-features">
-                        <li>Информационная безопасность</li>
-                        <li>Защита от киберугроз</li>
-                        <li>Облачные решения</li>
-                        <li>Современные решения</li>
+                        <li>SIEM-мониторинг</li>
+                        <li>SOAR-оркестрация</li>
+                        <li>Аналитика угроз</li>
+                        <li>Управление безопасностью из единой консоли</li>
                     </ul>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/logo-st.png" alt="SafeTech" class="vendor-logo">
-                    </div>
-                    <h3>SafeTech</h3>
-                    <p>Решения для обеспечения информационной безопасности и защиты данных</p>
-                    <ul class="service-features">
-                        <li>Информационная безопасность</li>
-                        <li>Защита данных</li>
-                        <li>Облачные решения</li>
-                        <li>Корпоративная безопасность</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-logo">
-                        <img src="Files/IB_logoc/1200px-trend-micro-logo.svg-768x264.png" alt="Trend Micro" class="vendor-logo">
-                    </div>
-                    <h3>Trend Micro</h3>
-                    <p>Решения для защиты от вредоносного ПО, обеспечения безопасности облачных сред и защиты корпоративных данных</p>
-                    <ul class="service-features">
-                        <li>Защита от вредоносного ПО</li>
-                        <li>Безопасность облачных сред</li>
-                        <li>Защита корпоративных данных</li>
-                        <li>Анализ угроз</li>
-                    </ul>
-                </div>
 
             </div>
         </div>
@@ -970,8 +1001,8 @@
             </div>
             <div class="footer-right">
                 <div class="footer-text">
-                    +375 (33) 600-67-31<br>
-                    sales@beltrader.by
+                    +375 (29) 391-90-44<br>
+                    info@beltrader.by, sales@beltrader.by
                 </div>
             </div>
         </div>
