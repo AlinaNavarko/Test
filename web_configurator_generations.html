@@ -24,6 +24,9 @@
             border-bottom: 1px solid #e0e0e0;
             padding: 8px 0;
             font-size: 0.9em;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
         }
         
         .top-header-container {
@@ -60,7 +63,7 @@
             color: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
-            top: 0;
+            top: 44px;
             z-index: 1000;
         }
         
@@ -136,24 +139,6 @@
             color: #1c2a3c;
         }
         
-        .consultation-btn {
-            background: rgba(61, 243, 187, 0.1);
-            color: white;
-            border: none;
-            height: 36px;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-weight: 500;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .consultation-btn:hover {
-            background: rgba(61, 243, 187, 0.15);
-            color: rgb(61, 243, 187);
-        }
-        
         /* DROPDOWN MENU STYLES */
         .products-link .nav-icon {
             fill: rgb(61, 243, 187);
@@ -224,46 +209,6 @@
         .nav-link.products-link.active {
             color: rgb(61, 243, 187) !important;
             background: transparent !important;
-        }
-        
-        .cart-icon-link {
-            position: relative;
-            font-size: 1.5em;
-            padding: 8px 12px;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-            color: white;
-        }
-        
-        .cart-icon {
-            width: 24px;
-            height: 24px;
-            vertical-align: middle;
-        }
-        
-        .cart-icon-link:hover {
-            transform: scale(1.1);
-        }
-        
-        .cart-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: rgb(61, 243, 187);
-            color: #1c2a3c;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 0.7em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .cart-badge.hidden {
-            display: none;
         }
         
         .container {
@@ -1078,20 +1023,12 @@
                     </a>
                     <div class="dropdown-content">
                         <a href="web_configurator.html" class="dropdown-item">Конфигуратор серверов и систем хранения</a>
-                        <a href="web_catalog.html" class="dropdown-item">Каталог оборудования</a>
                         <a href="information_security.html" class="dropdown-item">Информационная безопасность</a>
                         <a href="software.html" class="dropdown-item">Программное обеспечение</a>
                     </div>
                 </div>
                 <a href="about.html" class="nav-link">О нас</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
-                <button class="consultation-btn" onclick="openConsultationPopup()">Консультация</button>
-                <a href="web_configurator_cart.html" class="cart-icon-link" id="cartIconLink" title="Корзина">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 18C5.9 18 5.01 18.9 5.01 20S5.9 22 7 22 8.99 21.1 8.99 20 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5H5.21L4.27 3H1V2ZM17 18C15.9 18 15.01 18.9 15.01 20S15.9 22 17 22 18.99 21.1 18.99 20 18.1 18 17 18Z" fill="currentColor"/>
-                    </svg>
-                    <span class="cart-badge" id="cartBadge">0</span>
-                </a>
             </nav>
         </div>
     </header>
@@ -1367,9 +1304,6 @@
             
             updatePageHeaders(categoryType);
             renderBrands(categoryType);
-            
-            // Обновить счетчик корзины
-            updateCartBadge();
         }
         
         // Обновить заголовки страницы
@@ -1388,14 +1322,14 @@
             }
             
             const brands = [
-                { id: 'hpe', name: 'HPE', logo: 'Files/New folder/partners_1_hpe.svg' },
-                { id: 'dell', name: 'Dell', logo: 'Files/New folder/partners_2_dell.svg' },
-                { id: 'lenovo', name: 'Lenovo', logo: 'Files/New folder/partners_3_lenovo.svg' },
-                { id: 'ibm', name: 'IBM', logo: 'Files/New folder/partners_4_ibm.svg' },
-                { id: 'xfusion', name: 'xFusion', logo: 'Files/New folder/partners_5_xfusion.svg' },
-                { id: 'h3c', name: 'H3C', logo: 'Files/New folder/partners_6_h3c.svg' },
-                { id: 'supermicro', name: 'Supermicro', logo: 'Files/New folder/partners_7_supermicro.svg' },
-                { id: 'inspur', name: 'Inspur', logo: 'Files/New folder/partners_8_inspur.svg' },
+                { id: 'hpe', name: 'HPE', logo: 'Files/configurator_brands/partners_1_hpe.svg' },
+                { id: 'dell', name: 'Dell', logo: 'Files/configurator_brands/partners_2_dell.svg' },
+                { id: 'ibm', name: 'IBM', logo: 'Files/configurator_brands/partners_4_ibm.svg' },
+                { id: 'h3c', name: 'H3C', logo: 'Files/configurator_brands/partners_6_h3c.svg' },
+                { id: 'lenovo', name: 'Lenovo', logo: 'Files/configurator_brands/partners_3_lenovo.svg' },
+                { id: 'xfusion', name: 'xFusion', logo: 'Files/configurator_brands/partners_5_xfusion.svg' },
+                { id: 'supermicro', name: 'Supermicro', logo: 'Files/configurator_brands/partners_7_supermicro.svg' },
+                { id: 'fujitsu', name: 'Fujitsu', logo: 'Files/configurator_brands/partners_3_fui.svg' },
                 { id: 'none', name: 'Не выбрано', logo: null }
             ];
             
@@ -1709,43 +1643,8 @@
             window.location.href = 'web_configurator.html';
         }
         
-        // Обновить счетчик корзины
-        function updateCartBadge() {
-            const badge = document.getElementById('cartBadge');
-            let totalItems = 0;
-            
-            // Подсчитать сервер
-            const selectedServer = localStorage.getItem('selectedServer');
-            if (selectedServer) {
-                totalItems += 1;
-            }
-            
-            // Подсчитать компоненты
-            const currentConfiguration = JSON.parse(localStorage.getItem('currentConfiguration') || '{}');
-            if (currentConfiguration && typeof currentConfiguration === 'object') {
-                const categories = ['processors', 'memory', 'ssd', 'nvme', 'hdd', 'u320', 'powerSupply', 'controllers', 'network'];
-                categories.forEach(cat => {
-                    if (currentConfiguration[cat] && Array.isArray(currentConfiguration[cat])) {
-                        totalItems += currentConfiguration[cat].length;
-                    }
-                });
-            }
-            
-            if (totalItems > 0) {
-                badge.textContent = totalItems;
-                badge.classList.remove('hidden');
-            } else {
-                badge.textContent = '0';
-                badge.classList.add('hidden');
-            }
-        }
-        
         // Запуск
         init();
-        updateCartBadge();
-        
-        // Обновлять счетчик при изменении localStorage
-        window.addEventListener('storage', updateCartBadge);
     </script>
     
     <!-- CONTACTS MODAL -->

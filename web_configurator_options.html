@@ -24,6 +24,9 @@
             border-bottom: 1px solid #e0e0e0;
             padding: 8px 0;
             font-size: 0.9em;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
         }
         
         .top-header-container {
@@ -60,7 +63,7 @@
             color: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
-            top: 0;
+            top: 44px;
             z-index: 1000;
         }
         
@@ -204,65 +207,6 @@
         .dropdown-item:hover {
             background: rgba(61, 243, 187, 0.1);
             color: #1c2a3c;
-        }
-        
-        .consultation-btn {
-            background: rgba(61, 243, 187, 0.1);
-            color: white;
-            border: none;
-            height: 36px;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-weight: 500;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .consultation-btn:hover {
-            background: rgba(61, 243, 187, 0.15);
-            color: rgb(61, 243, 187);
-        }
-        
-        .cart-icon-link {
-            position: relative;
-            font-size: 1.5em;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .cart-icon {
-            width: 24px;
-            height: 24px;
-            vertical-align: middle;
-        }
-        
-        .cart-icon-link:hover {
-            background: rgba(61, 243, 187, 0.1);
-            color: rgb(61, 243, 187);
-        }
-        
-        .cart-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: rgb(61, 243, 187);
-            color: #1c2a3c;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7em;
-            font-weight: bold;
-        }
-        
-        .cart-badge.hidden {
-            display: none;
         }
         
         /* HERO SECTION */
@@ -482,6 +426,61 @@
             margin-bottom: 12px;
             padding-bottom: 8px;
             border-bottom: 2px solid rgb(61, 243, 187);
+        }
+        
+        /* SELECT DROPDOWN STYLES */
+        .form-select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.95em;
+            color: #333;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .form-select:hover {
+            border-color: rgb(61, 243, 187);
+            background: rgba(61, 243, 187, 0.05);
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: rgb(61, 243, 187);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(61, 243, 187, 0.1);
+        }
+        
+        .form-select option {
+            padding: 10px;
+        }
+        
+        /* NUMBER INPUT STYLES */
+        .form-number {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.95em;
+            color: #333;
+            background: #f8f9fa;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .form-number:hover {
+            border-color: rgb(61, 243, 187);
+            background: rgba(61, 243, 187, 0.05);
+        }
+        
+        .form-number:focus {
+            outline: none;
+            border-color: rgb(61, 243, 187);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(61, 243, 187, 0.1);
         }
         
         /* ACTION BUTTONS */
@@ -817,6 +816,11 @@
             padding-left: 10px;
         }
         
+        .summary-item.not-selected {
+            color: #999;
+            font-style: italic;
+        }
+        
         .summary-item::before {
             content: '•';
             color: rgb(61, 243, 187);
@@ -980,20 +984,12 @@
                     </a>
                     <div class="dropdown-content">
                         <a href="web_configurator.html" class="dropdown-item">Конфигуратор серверов и систем хранения</a>
-                        <a href="web_catalog.html" class="dropdown-item">Каталог оборудования</a>
                         <a href="information_security.html" class="dropdown-item">Информационная безопасность</a>
                         <a href="software.html" class="dropdown-item">Программное обеспечение</a>
                     </div>
                 </div>
                 <a href="about.html" class="nav-link">О нас</a>
                 <a href="contacts.html" class="nav-link">Контакты</a>
-                <button class="consultation-btn" onclick="openConsultationPopup()">Консультация</button>
-                <a href="web_configurator_cart.html" class="cart-icon-link" title="Корзина">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 18C5.9 18 5.01 18.9 5.01 20S5.9 22 7 22 8.99 21.1 8.99 20 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5H5.21L4.27 3H1V2ZM17 18C15.9 18 15.01 18.9 15.01 20S15.9 22 17 22 18.99 21.1 18.99 20 18.1 18 17 18Z" fill="currentColor"/>
-                    </svg>
-                    <span class="cart-badge hidden" id="cartBadge">0</span>
-                </a>
             </nav>
         </div>
     </header>
@@ -1031,338 +1027,600 @@
     <div class="main-content-wrapper">
         <!-- OPTIONS CONTAINER -->
         <div class="options-container">
-        <!-- MAIN CHARACTERISTICS SECTION -->
+        <!-- SECTION 1: BASIC INFORMATION -->
         <div class="option-section">
-            <h2 class="option-section-title">Основные характеристики</h2>
+            <h2 class="option-section-title">1. Основная информация</h2>
+            
+            <!-- Server Count -->
+            <div class="option-group">
+                <h2 class="option-group-title">Количество серверов</h2>
+                <select name="serverCount" id="serverCount" class="form-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value=">5">&gt;5</option>
+                </select>
+            </div>
             
             <!-- Form Factor -->
             <div class="option-group">
-                <h2 class="option-group-title">Вид сервера (форм-фактор)</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="radio" name="formFactor" id="tower" value="tower" class="option-checkbox" onchange="handleFormFactorChange('tower')">
-                    <label for="tower" class="option-label">Tower (Башенный)</label>
+                <h2 class="option-group-title">Форм-фактор</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="formFactor" id="tower" value="tower" class="option-checkbox" onchange="handleFormFactorChange('tower')">
+                        <label for="tower" class="option-label">Tower (Башенный)</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="formFactor" id="rack" value="rack" class="option-checkbox" onchange="handleFormFactorChange('rack')">
+                        <label for="rack" class="option-label">Rack (Стоечный)</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="formFactor" id="blade" value="blade" class="option-checkbox" onchange="handleFormFactorChange('blade')">
+                        <label for="blade" class="option-label">Blade Шасси</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="formFactor" id="edge" value="edge" class="option-checkbox" onchange="handleFormFactorChange('edge')">
+                        <label for="edge" class="option-label">Edge</label>
+                    </div>
                 </div>
-                <div class="option-item">
-                    <input type="radio" name="formFactor" id="rack" value="rack" class="option-checkbox" onchange="handleFormFactorChange('rack')">
-                    <label for="rack" class="option-label">Rack (Стоечный)</label>
+                
+                <!-- Sub-options for Tower -->
+                <div id="towerSubOptions" class="sub-options">
+                    <h3 style="font-size: 1em; margin-bottom: 10px; color: #1c2a3c;">Выберите размер:</h3>
+                    <div class="sub-options-grid">
+                        <div class="option-item">
+                            <input type="radio" name="towerSize" id="tower1u" value="tower1u" class="option-checkbox">
+                            <label for="tower1u" class="option-label">1U</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="towerSize" id="tower2u" value="tower2u" class="option-checkbox">
+                            <label for="tower2u" class="option-label">2U</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="towerSize" id="tower4u" value="tower4u" class="option-checkbox">
+                            <label for="tower4u" class="option-label">4U</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sub-options for Rack -->
+                <div id="rackSubOptions" class="sub-options">
+                    <h3 style="font-size: 1em; margin-bottom: 10px; color: #1c2a3c;">Выберите размер стойки:</h3>
+                    <div class="sub-options-grid">
+                        <div class="option-item">
+                            <input type="radio" name="rackSize" id="rack1u" value="rack1u" class="option-checkbox">
+                            <label for="rack1u" class="option-label">1U</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="rackSize" id="rack2u" value="rack2u" class="option-checkbox">
+                            <label for="rack2u" class="option-label">2U</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="rackSize" id="rack4u" value="rack4u" class="option-checkbox">
+                            <label for="rack4u" class="option-label">4U</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Sub-options for Tower -->
-            <div id="towerSubOptions" class="sub-options">
-                <h3 style="font-size: 1em; margin-bottom: 10px; color: #1c2a3c;">Выберите размер:</h3>
-                <div class="sub-options-grid">
-                    <div class="option-item">
-                        <input type="radio" name="towerSize" id="tower1u" value="tower1u" class="option-checkbox">
-                        <label for="tower1u" class="option-label">1U</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" name="towerSize" id="tower2u" value="tower2u" class="option-checkbox">
-                        <label for="tower2u" class="option-label">2U</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" name="towerSize" id="tower4u" value="tower4u" class="option-checkbox">
-                        <label for="tower4u" class="option-label">4U</label>
-                    </div>
-                </div>
+            <!-- Disk Platform -->
+            <div class="option-group">
+                <h2 class="option-group-title">Платформа для дисков</h2>
+                <select name="diskPlatform" id="diskPlatform" class="form-select">
+                    <option value="">Выберите</option>
+                    <option value="4*3.5">4*3.5"</option>
+                    <option value="8*3.5">8*3.5"</option>
+                    <option value="10*3.5">10*3.5"</option>
+                    <option value="12*3.5">12*3.5"</option>
+                    <option value=">12*3.5">&gt;12*3.5"</option>
+                    <option value="8*2.5">8*2.5"</option>
+                    <option value="10*2.5">10*2.5"</option>
+                    <option value="16*2.5">16*2.5"</option>
+                    <option value="24*2.5">24*2.5"</option>
+                    <option value=">24*2.5">&gt;24*2.5"</option>
+                </select>
             </div>
             
-            <!-- Sub-options for Rack -->
-            <div id="rackSubOptions" class="sub-options">
-                <h3 style="font-size: 1em; margin-bottom: 10px; color: #1c2a3c;">Выберите размер стойки:</h3>
-                <div class="sub-options-grid">
+            <!-- Server Purpose -->
+            <div class="option-group">
+                <h2 class="option-group-title">Назначение сервера</h2>
+                <div class="options-grid">
                     <div class="option-item">
-                        <input type="radio" name="rackSize" id="rack1u" value="rack1u" class="option-checkbox">
-                        <label for="rack1u" class="option-label">1U</label>
+                        <input type="checkbox" name="serverPurpose" id="fileServer" value="file_server" class="option-checkbox">
+                        <label for="fileServer" class="option-label">Файловый сервер</label>
                     </div>
                     <div class="option-item">
-                        <input type="radio" name="rackSize" id="rack2u" value="rack2u" class="option-checkbox">
-                        <label for="rack2u" class="option-label">2U</label>
+                        <input type="checkbox" name="serverPurpose" id="computeServer" value="compute_server" class="option-checkbox">
+                        <label for="computeServer" class="option-label">Вычислительный сервер</label>
                     </div>
                     <div class="option-item">
-                        <input type="radio" name="rackSize" id="rack4u" value="rack4u" class="option-checkbox">
-                        <label for="rack4u" class="option-label">4U</label>
+                        <input type="checkbox" name="serverPurpose" id="dbServer" value="db_server" class="option-checkbox">
+                        <label for="dbServer" class="option-label">Сервер баз данных</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="serverPurpose" id="webServer" value="web_server" class="option-checkbox">
+                        <label for="webServer" class="option-label">Веб-сервер</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="serverPurpose" id="virtualization" value="virtualization" class="option-checkbox">
+                        <label for="virtualization" class="option-label">Виртуализация</label>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Server Purpose -->
-        <div class="option-group">
-            <h2 class="option-group-title">Назначение сервера</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="checkbox" name="serverPurpose" id="fileServer" value="file_server" class="option-checkbox">
-                    <label for="fileServer" class="option-label">Файловый сервер / Хранилище данных</label>
-                </div>
-                <div class="option-item">
-                    <input type="checkbox" name="serverPurpose" id="computeServer" value="compute_server" class="option-checkbox">
-                    <label for="computeServer" class="option-label">Вычислительный сервер</label>
-                </div>
-                <div class="option-item">
-                    <input type="checkbox" name="serverPurpose" id="dbServer" value="db_server" class="option-checkbox">
-                    <label for="dbServer" class="option-label">Сервер баз данных</label>
-                </div>
-                <div class="option-item">
-                    <input type="checkbox" name="serverPurpose" id="webServer" value="web_server" class="option-checkbox">
-                    <label for="webServer" class="option-label">Веб-сервер</label>
-                </div>
-                <div class="option-item">
-                    <input type="checkbox" name="serverPurpose" id="virtualization" value="virtualization" class="option-checkbox">
-                    <label for="virtualization" class="option-label">Виртуализация</label>
-                </div>
-            </div>
-        </div>
-        </div>
-        
-        <!-- CPU SECTION -->
+        <!-- SECTION 2: CPU -->
         <div class="option-section">
-            <h2 class="option-section-title">Процессор (CPU)</h2>
+            <h2 class="option-section-title">2. Процессор (CPU)</h2>
             
             <!-- CPU Count -->
             <div class="option-group">
-                <h2 class="option-group-title">Количество процессоров</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="radio" name="cpuCount" id="cpu1" value="1" class="option-checkbox">
-                    <label for="cpu1" class="option-label">1 процессор</label>
+                <h2 class="option-group-title">Кол-во CPU</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="cpuCount" id="cpu1" value="1" class="option-checkbox">
+                        <label for="cpu1" class="option-label">1</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="cpuCount" id="cpu2" value="2" class="option-checkbox">
+                        <label for="cpu2" class="option-label">2</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="cpuCount" id="cpu4" value="4" class="option-checkbox">
+                        <label for="cpu4" class="option-label">4</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="cpuCount" id="cpu8" value="8" class="option-checkbox">
+                        <label for="cpu8" class="option-label">8</label>
+                    </div>
                 </div>
-                <div class="option-item">
-                    <input type="radio" name="cpuCount" id="cpu2" value="2" class="option-checkbox">
-                    <label for="cpu2" class="option-label">2 процессора</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="cpuCount" id="cpu4" value="4" class="option-checkbox">
-                    <label for="cpu4" class="option-label">4 процессора</label>
+            </div>
+            
+            <!-- CPU Manufacturer -->
+            <div class="option-group">
+                <h2 class="option-group-title">Производитель CPU</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="cpuManufacturer" id="intelCpu" value="intel" class="option-checkbox">
+                        <label for="intelCpu" class="option-label">Intel CPU</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="cpuManufacturer" id="amdCpu" value="amd" class="option-checkbox">
+                        <label for="amdCpu" class="option-label">AMD CPU</label>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- CPU Type -->
-        <div class="option-group">
-            <h2 class="option-group-title">Тип процессора</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="radio" name="cpuType" id="intelXeon" value="intel_xeon" class="option-checkbox">
-                    <label for="intelXeon" class="option-label">Intel Xeon</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="cpuType" id="amdEpyc" value="amd_epyc" class="option-checkbox">
-                    <label for="amdEpyc" class="option-label">AMD EPYC</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="cpuType" id="amdOpteron" value="amd_opteron" class="option-checkbox">
-                    <label for="amdOpteron" class="option-label">AMD Opteron</label>
-                </div>
-            </div>
-        </div>
-        </div>
-        
-        <!-- MEMORY SECTION -->
+        <!-- SECTION 3: MEMORY -->
         <div class="option-section">
-            <h2 class="option-section-title">Память (RAM)</h2>
+            <h2 class="option-section-title">3. Память (RAM)</h2>
             
             <!-- RAM Amount -->
             <div class="option-group">
-                <h2 class="option-group-title">Объем памяти</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="radio" name="ramAmount" id="ram32" value="up_to_32" class="option-checkbox">
-                    <label for="ram32" class="option-label">До 32 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="ramAmount" id="ram32_64" value="32_64" class="option-checkbox">
-                    <label for="ram32_64" class="option-label">32–64 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="ramAmount" id="ram64_128" value="64_128" class="option-checkbox">
-                    <label for="ram64_128" class="option-label">64–128 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="ramAmount" id="ram128_256" value="128_256" class="option-checkbox">
-                    <label for="ram128_256" class="option-label">128–256 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="ramAmount" id="ram256_512" value="256_512" class="option-checkbox">
-                    <label for="ram256_512" class="option-label">256–512 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="ramAmount" id="ram512plus" value="512_plus" class="option-checkbox">
-                    <label for="ram512plus" class="option-label">Более 512 ГБ</label>
-                </div>
+                <h2 class="option-group-title">Объем ОЗУ</h2>
+                <select name="ramAmount" id="ramAmount" class="form-select">
+                    <option value="">Выберите</option>
+                    <option value="16gb">16GB</option>
+                    <option value="32gb">32GB</option>
+                    <option value="64gb">64GB</option>
+                    <option value="128gb">128GB</option>
+                    <option value="256gb">256GB</option>
+                    <option value="512gb">512GB</option>
+                    <option value="1tb">1TB</option>
+                    <option value="2tb">2TB и более</option>
+                </select>
             </div>
-        </div>
-        
-        <!-- RAM Type -->
-        <div class="option-group">
-            <h2 class="option-group-title">Тип памяти</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="radio" name="ramType" id="ddr3" value="ddr3" class="option-checkbox">
-                    <label for="ddr3" class="option-label">DDR3</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="ramType" id="ddr4" value="ddr4" class="option-checkbox">
-                    <label for="ddr4" class="option-label">DDR4</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="ramType" id="ddr5" value="ddr5" class="option-checkbox">
-                    <label for="ddr5" class="option-label">DDR5</label>
-                </div>
-            </div>
-        </div>
-        </div>
-        
-        <!-- STORAGE SECTION -->
-        <div class="option-section">
-            <h2 class="option-section-title">Хранилище</h2>
             
-            <!-- Drive Bays -->
+            <!-- RAM Type -->
             <div class="option-group">
-                <h2 class="option-group-title">Количество отсеков для дисков</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="radio" name="driveBays" id="bays4" value="up_to_4" class="option-checkbox">
-                    <label for="bays4" class="option-label">До 4 отсеков</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="driveBays" id="bays4_8" value="4_8" class="option-checkbox">
-                    <label for="bays4_8" class="option-label">4–8 отсеков</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="driveBays" id="bays8_12" value="8_12" class="option-checkbox">
-                    <label for="bays8_12" class="option-label">8–12 отсеков</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="driveBays" id="bays12plus" value="12_plus" class="option-checkbox">
-                    <label for="bays12plus" class="option-label">Более 12 отсеков</label>
+                <h2 class="option-group-title">Тип памяти</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="ramType" id="ddr3" value="ddr3" class="option-checkbox">
+                        <label for="ddr3" class="option-label">DDR3</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="ramType" id="ddr4" value="ddr4" class="option-checkbox">
+                        <label for="ddr4" class="option-label">DDR4</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="ramType" id="ddr5" value="ddr5" class="option-checkbox">
+                        <label for="ddr5" class="option-label">DDR5</label>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Storage Type -->
-        <div class="option-group">
-            <h2 class="option-group-title">Тип накопителей</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="radio" name="storageType" id="sataHdd" value="sata_hdd" class="option-checkbox">
-                    <label for="sataHdd" class="option-label">SATA HDD</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="storageType" id="sasHdd" value="sas_hdd" class="option-checkbox">
-                    <label for="sasHdd" class="option-label">SAS HDD</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="storageType" id="sataSsd" value="sata_ssd" class="option-checkbox">
-                    <label for="sataSsd" class="option-label">SATA SSD</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="storageType" id="nvmeSsd" value="nvme_ssd" class="option-checkbox">
-                    <label for="nvmeSsd" class="option-label">NVMe SSD</label>
-                </div>
-            </div>
-        </div>
-        </div>
-        
-        <!-- GPU SECTION -->
+        <!-- SECTION 4: RAID CONTROLLER -->
         <div class="option-section">
-            <h2 class="option-section-title">Графический процессор (GPU)</h2>
+            <h2 class="option-section-title">4. Raid контроллер</h2>
             
-            <!-- GPU Count -->
             <div class="option-group">
-                <h2 class="option-group-title">Количество процессоров</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="radio" name="gpuCount" id="gpu0" value="0" class="option-checkbox">
-                    <label for="gpu0" class="option-label">Нет GPU</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuCount" id="gpu1" value="1" class="option-checkbox">
-                    <label for="gpu1" class="option-label">1 GPU</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuCount" id="gpu2" value="2" class="option-checkbox">
-                    <label for="gpu2" class="option-label">2 GPU</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuCount" id="gpu4" value="4" class="option-checkbox">
-                    <label for="gpu4" class="option-label">4 GPU</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuCount" id="gpu8" value="8" class="option-checkbox">
-                    <label for="gpu8" class="option-label">8 GPU</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuCount" id="gpu8plus" value="8_plus" class="option-checkbox">
-                    <label for="gpu8plus" class="option-label">Более 8 GPU</label>
+                <h2 class="option-group-title">Raid контроллер</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="raidController" id="raidNone" value="нет" class="option-checkbox">
+                        <label for="raidNone" class="option-label">нет</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="raidController" id="raid1gb" value="1GB cache" class="option-checkbox">
+                        <label for="raid1gb" class="option-label">1GB cache</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="raidController" id="raid2gb" value="2GB cache" class="option-checkbox">
+                        <label for="raid2gb" class="option-label">2GB cache</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="raidController" id="raid3gb" value="3GB cache" class="option-checkbox">
+                        <label for="raid3gb" class="option-label">3GB cache</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="raidController" id="raid4gb" value="4GB cache" class="option-checkbox">
+                        <label for="raid4gb" class="option-label">4GB cache</label>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- GPU Memory -->
-        <div class="option-group" id="gpuMemoryGroup" style="display: none;">
-            <h2 class="option-group-title">Объем памяти</h2>
-            <div class="options-grid">
-                <div class="option-item">
-                    <input type="radio" name="gpuMemory" id="gpuMem8" value="8" class="option-checkbox">
-                    <label for="gpuMem8" class="option-label">8 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuMemory" id="gpuMem12" value="12" class="option-checkbox">
-                    <label for="gpuMem12" class="option-label">12 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuMemory" id="gpuMem16" value="16" class="option-checkbox">
-                    <label for="gpuMem16" class="option-label">16 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuMemory" id="gpuMem24" value="24" class="option-checkbox">
-                    <label for="gpuMem24" class="option-label">24 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuMemory" id="gpuMem32" value="32" class="option-checkbox">
-                    <label for="gpuMem32" class="option-label">32 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuMemory" id="gpuMem48" value="48" class="option-checkbox">
-                    <label for="gpuMem48" class="option-label">48 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuMemory" id="gpuMem64" value="64" class="option-checkbox">
-                    <label for="gpuMem64" class="option-label">64 ГБ</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="gpuMemory" id="gpuMem80" value="80" class="option-checkbox">
-                    <label for="gpuMem80" class="option-label">80 ГБ</label>
-                </div>
-            </div>
-        </div>
-        </div>
-        
-        <!-- POWER SUPPLY SECTION -->
+        <!-- SECTION 5: HDD STORAGE -->
         <div class="option-section">
-            <h2 class="option-section-title">Питание</h2>
+            <h2 class="option-section-title">5. Хранилище HDD</h2>
             
-            <!-- Power Supply -->
+            <!-- HDD Form Factor -->
+            <div class="option-group">
+                <h2 class="option-group-title">Форм-фактор HDD</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="hddFormFactor" id="hdd25" value="2.5" class="option-checkbox">
+                        <label for="hdd25" class="option-label">2.5"</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="hddFormFactor" id="hdd35" value="3.5" class="option-checkbox">
+                        <label for="hdd35" class="option-label">3.5"</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- HDD Count -->
+            <div class="option-group">
+                <h2 class="option-group-title">Кол-во HDD</h2>
+                <select name="hddCount" id="hddCount" class="form-select">
+                    <option value="">Выберите</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value=">24">&gt;24</option>
+                </select>
+            </div>
+            
+            <!-- HDD Capacity -->
+            <div class="option-group">
+                <h2 class="option-group-title">Объем одного HDD</h2>
+                <select name="hddCapacity" id="hddCapacity" class="form-select">
+                    <option value="">Выберите</option>
+                    <option value="300GB SAS 2.5">300GB SAS 2.5"</option>
+                    <option value="600GB SAS 2.5">600GB SAS 2.5"</option>
+                    <option value="900GB SAS 2.5">900GB SAS 2.5"</option>
+                    <option value="1TB SATA3 3.5">1TB SATA3 3.5"</option>
+                    <option value="1TB SAS 3.5">1TB SAS 3.5"</option>
+                    <option value="1TB SAS 2.5">1TB SAS 2.5"</option>
+                    <option value="1.2TB SAS 2.5">1.2TB SAS 2.5"</option>
+                    <option value="1.8TB SAS 2.5">1.8TB SAS 2.5"</option>
+                    <option value="2TB SATA3 3.5">2TB SATA3 3.5"</option>
+                    <option value="2TB SAS 3.5">2TB SAS 3.5"</option>
+                    <option value="2TB SAS 2.5">2TB SAS 2.5"</option>
+                    <option value="2.4TB SAS 2.5">2.4TB SAS 2.5"</option>
+                    <option value="4TB SATA3 3.5">4TB SATA3 3.5"</option>
+                    <option value="4TB SAS 3.5">4TB SAS 3.5"</option>
+                    <option value="6TB SATA3 3.5">6TB SATA3 3.5"</option>
+                    <option value="6TB SAS 3.5">6TB SAS 3.5"</option>
+                    <option value="8TB SATA3 3.5">8TB SATA3 3.5"</option>
+                    <option value="8TB SAS 3.5">8TB SAS 3.5"</option>
+                    <option value="10TB SATA3 3.5">10TB SATA3 3.5"</option>
+                    <option value="10TB SAS 3.5">10TB SAS 3.5"</option>
+                    <option value=">10TB SATA3 3.5">&gt;10TB SATA3 3.5"</option>
+                    <option value=">10TB SAS 3.5">&gt;10TB SAS 3.5"</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- SECTION 6: SSD STORAGE -->
+        <div class="option-section">
+            <h2 class="option-section-title">6. Хранилище SSD</h2>
+            
+            <!-- SSD Form Factor -->
+            <div class="option-group">
+                <h2 class="option-group-title">Форм-фактор SSD</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="ssdFormFactor" id="ssd25" value="2.5" class="option-checkbox">
+                        <label for="ssd25" class="option-label">2.5"</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="ssdFormFactor" id="ssd35" value="3.5" class="option-checkbox">
+                        <label for="ssd35" class="option-label">3.5"</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="ssdFormFactor" id="ssdM2" value="M.2" class="option-checkbox">
+                        <label for="ssdM2" class="option-label">M.2</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SSD Count -->
+            <div class="option-group">
+                <h2 class="option-group-title">Кол-во SSD</h2>
+                <select name="ssdCount" id="ssdCount" class="form-select">
+                    <option value="">Выберите</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value=">24">&gt;24</option>
+                </select>
+            </div>
+            
+            <!-- SSD Capacity -->
+            <div class="option-group">
+                <h2 class="option-group-title">Объем одного SSD</h2>
+                <select name="ssdCapacity" id="ssdCapacity" class="form-select">
+                    <option value="">Выберите</option>
+                    <option value="240GB SATA 2.5"">240GB SATA 2.5"</option>
+                    <option value="375GB NVMe 2.5"">375GB NVMe 2.5"</option>
+                    <option value="400GB SAS 2.5"">400GB SAS 2.5"</option>
+                    <option value="480GB SATA 2.5"">480GB SATA 2.5"</option>
+                    <option value="750GB NVMe 2.5"">750GB NVMe 2.5"</option>
+                    <option value="800GB SAS 2.5"">800GB SAS 2.5"</option>
+                    <option value="960GB SATA 2.5"">960GB SATA 2.5"</option>
+                    <option value="960GB SAS 2.5"">960GB SAS 2.5"</option>
+                    <option value="1TB NVMe 2.5"">1TB NVMe 2.5"</option>
+                    <option value="1.6TB SAS 2.5"">1.6TB SAS 2.5"</option>
+                    <option value="1.6TB NVMe 2.5"">1.6TB NVMe 2.5"</option>
+                    <option value="1.92TB SATA 2.5"">1.92TB SATA 2.5"</option>
+                    <option value="1.92TB SAS 2.5"">1.92TB SAS 2.5"</option>
+                    <option value="3.2TB SAS 2.5"">3.2TB SAS 2.5"</option>
+                    <option value="3.2TB NVMe 2.5"">3.2TB NVMe 2.5"</option>
+                    <option value="3.84TB SATA 2.5"">3.84TB SATA 2.5"</option>
+                    <option value="3.84TB SAS 2.5"">3.84TB SAS 2.5"</option>
+                    <option value="6.4TB NVMe 2.5"">6.4TB NVMe 2.5"</option>
+                    <option value="7.68TB SATA 2.5"">7.68TB SATA 2.5"</option>
+                    <option value="7.68TB SAS 2.5"">7.68TB SAS 2.5"</option>
+                    <option value="15.36TB SAS 2.5"">15.36TB SAS 2.5"</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- SECTION 7: NETWORK -->
+        <div class="option-section">
+            <h2 class="option-section-title">7. Сеть и расширения</h2>
+            
+            <!-- Ethernet -->
+            <div class="option-group">
+                <h2 class="option-group-title">Ethernet</h2>
+                <select name="ethernet" id="ethernet" class="form-select">
+                    <option value="">Выберите</option>
+                    <option value="2x1ge">2*1GE RJ45</option>
+                    <option value="4x1ge">4*1GE RJ45</option>
+                    <option value="2x10ge">2*10GE SFP+</option>
+                    <option value="4x10ge">4*10GE SFP+</option>
+                    <option value="2x25ge">2*25GE SFP28</option>
+                    <option value="2x40ge">2*40GE QSFP+</option>
+                    <option value="2x100ge">2*100GE QSFP28</option>
+                </select>
+            </div>
+            
+            <!-- PCIe Adapters -->
+            <div class="option-group">
+                <h2 class="option-group-title">Другие PCIe adapters</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="pcieAdapters" id="pcieYes" value="yes" class="option-checkbox">
+                        <label for="pcieYes" class="option-label">Да</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="pcieAdapters" id="pcieNo" value="no" class="option-checkbox">
+                        <label for="pcieNo" class="option-label">Нет</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION 8: POWER -->
+        <div class="option-section">
+            <h2 class="option-section-title">8. Питание (PSU)</h2>
+            
+            <!-- Power Supply Count -->
+            <div class="option-group">
+                <h2 class="option-group-title">Кол-во блоков питания</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="psuCount" id="psu1" value="1" class="option-checkbox">
+                        <label for="psu1" class="option-label">1</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="psuCount" id="psu2" value="2" class="option-checkbox">
+                        <label for="psu2" class="option-label">2</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="psuCount" id="psu4" value="4" class="option-checkbox">
+                        <label for="psu4" class="option-label">4</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Power Supply Wattage -->
             <div class="option-group">
                 <h2 class="option-group-title">Мощность блока питания</h2>
                 <div class="options-grid">
                     <div class="option-item">
-                        <input type="radio" name="powerSupply" id="ps500" value="up_to_500" class="option-checkbox">
+                        <input type="radio" name="psuWattage" id="ps500" value="up_to_500" class="option-checkbox">
                         <label for="ps500" class="option-label">До 500 Вт</label>
                     </div>
                     <div class="option-item">
-                        <input type="radio" name="powerSupply" id="ps500_750" value="500_750" class="option-checkbox">
+                        <input type="radio" name="psuWattage" id="ps500_750" value="500_750" class="option-checkbox">
                         <label for="ps500_750" class="option-label">500–750 Вт</label>
                     </div>
                     <div class="option-item">
-                        <input type="radio" name="powerSupply" id="ps750_1000" value="750_1000" class="option-checkbox">
+                        <input type="radio" name="psuWattage" id="ps750_1000" value="750_1000" class="option-checkbox">
                         <label for="ps750_1000" class="option-label">750–1000 Вт</label>
                     </div>
                     <div class="option-item">
-                        <input type="radio" name="powerSupply" id="ps1000plus" value="1000_plus" class="option-checkbox">
+                        <input type="radio" name="psuWattage" id="ps1000plus" value="1000_plus" class="option-checkbox">
                         <label for="ps1000plus" class="option-label">Более 1000 Вт</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION 9: GPU (Optional) -->
+        <div class="option-section">
+            <h2 class="option-section-title">9. Графический процессор (GPU) - опционально</h2>
+            
+            <!-- GPU Count -->
+            <div class="option-group">
+                <h2 class="option-group-title">Количество GPU</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="gpuCount" id="gpu0" value="0" class="option-checkbox">
+                        <label for="gpu0" class="option-label">Нет GPU</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuCount" id="gpu1" value="1" class="option-checkbox">
+                        <label for="gpu1" class="option-label">1 GPU</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuCount" id="gpu2" value="2" class="option-checkbox">
+                        <label for="gpu2" class="option-label">2 GPU</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuCount" id="gpu4" value="4" class="option-checkbox">
+                        <label for="gpu4" class="option-label">4 GPU</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuCount" id="gpu8" value="8" class="option-checkbox">
+                        <label for="gpu8" class="option-label">8 GPU</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuCount" id="gpu8plus" value="8_plus" class="option-checkbox">
+                        <label for="gpu8plus" class="option-label">Более 8 GPU</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GPU Memory -->
+            <div class="option-group" id="gpuMemoryGroup" style="display: none;">
+                <h2 class="option-group-title">Объем памяти GPU</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="radio" name="gpuMemory" id="gpuMem8" value="8" class="option-checkbox">
+                        <label for="gpuMem8" class="option-label">8 ГБ</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuMemory" id="gpuMem12" value="12" class="option-checkbox">
+                        <label for="gpuMem12" class="option-label">12 ГБ</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuMemory" id="gpuMem16" value="16" class="option-checkbox">
+                        <label for="gpuMem16" class="option-label">16 ГБ</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuMemory" id="gpuMem24" value="24" class="option-checkbox">
+                        <label for="gpuMem24" class="option-label">24 ГБ</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuMemory" id="gpuMem32" value="32" class="option-checkbox">
+                        <label for="gpuMem32" class="option-label">32 ГБ</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuMemory" id="gpuMem48" value="48" class="option-checkbox">
+                        <label for="gpuMem48" class="option-label">48 ГБ</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuMemory" id="gpuMem64" value="64" class="option-checkbox">
+                        <label for="gpuMem64" class="option-label">64 ГБ</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="gpuMemory" id="gpuMem80" value="80" class="option-checkbox">
+                        <label for="gpuMem80" class="option-label">80 ГБ</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION 10: SERVICES -->
+        <div class="option-section">
+            <h2 class="option-section-title">10. Работы / Услуги</h2>
+            
+            <div class="option-group">
+                <h2 class="option-group-title">Дополнительные услуги</h2>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="checkbox" name="services" id="serviceInstall" value="installation" class="option-checkbox">
+                        <label for="serviceInstall" class="option-label">Установка и настройка</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="services" id="serviceRack" value="rack_mount" class="option-checkbox">
+                        <label for="serviceRack" class="option-label">Монтаж в стойку</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="services" id="serviceConfig" value="configuration" class="option-checkbox">
+                        <label for="serviceConfig" class="option-label">Конфигурация RAID</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="services" id="serviceOS" value="os_install" class="option-checkbox">
+                        <label for="serviceOS" class="option-label">Установка ОС</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="services" id="serviceSupport" value="support" class="option-checkbox">
+                        <label for="serviceSupport" class="option-label">Техническая поддержка</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="services" id="serviceWarranty" value="warranty" class="option-checkbox">
+                        <label for="serviceWarranty" class="option-label">Расширенная гарантия</label>
                     </div>
                 </div>
             </div>
@@ -1427,6 +1685,12 @@
                                 Email <span class="required">*</span>
                             </label>
                             <input type="email" class="form-input" name="email" required>
+                            <div style="margin-top: 8px;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.9em;">
+                                    <input type="checkbox" name="sendCopy" id="sendCopy" style="cursor: pointer;">
+                                    <span>Отправить мне копию</span>
+                                </label>
+                            </div>
                         </div>
                         
                         <div class="form-group">
@@ -1442,6 +1706,13 @@
                             Комментарий
                         </label>
                         <textarea class="form-input form-textarea" name="comment" placeholder="Дополнительная информация"></textarea>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 0.95em;">
+                            <input type="checkbox" name="dataConsent" id="dataConsent" required style="margin-top: 3px; cursor: pointer;">
+                            <span>Согласие на обработку персональных данных <span class="required">*</span></span>
+                        </label>
                     </div>
                 </form>
             </div>
@@ -1518,41 +1789,6 @@
             alert('Функция консультации будет доступна в ближайшее время. Свяжитесь с нами по телефону +375 (29) 391-90-44');
         }
         
-        // Update cart badge
-        function updateCartBadge() {
-            const badge = document.getElementById('cartBadge');
-            if (!badge) return;
-            
-            let totalItems = 0;
-            
-            const selectedServer = localStorage.getItem('selectedServer');
-            if (selectedServer && selectedServer !== 'null' && selectedServer !== '{}') {
-                totalItems++;
-            }
-            
-            const currentConfiguration = localStorage.getItem('currentConfiguration');
-            if (currentConfiguration && currentConfiguration !== '{}' && currentConfiguration !== 'null') {
-                try {
-                    const config = JSON.parse(currentConfiguration);
-                    Object.values(config).forEach(category => {
-                        if (Array.isArray(category)) {
-                            totalItems += category.length;
-                        }
-                    });
-                } catch (e) {
-                    console.log('Error parsing currentConfiguration:', e);
-                }
-            }
-            
-            badge.textContent = totalItems;
-            
-            if (totalItems === 0) {
-                badge.classList.add('hidden');
-            } else {
-                badge.classList.remove('hidden');
-            }
-        }
-        
         // Get category and brand info
         function getCategoryAndBrand() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -1615,24 +1851,6 @@
                 }
             }
         }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCartBadge();
-            initRadioDeselect();
-            initGpuMemoryToggle();
-            updateCategoryAndBrandInfo();
-            updateSidebar();
-            
-            // Listen for all option changes
-            document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
-                input.addEventListener('change', updateSidebar);
-            });
-            
-            // Also listen for sub-options (towerSize, rackSize)
-            document.querySelectorAll('input[name="towerSize"], input[name="rackSize"]').forEach(input => {
-                input.addEventListener('change', updateSidebar);
-            });
-        });
         
         // Initialize GPU memory group toggle
         function initGpuMemoryToggle() {
@@ -1727,8 +1945,12 @@
             const rackSizeInputs = document.querySelectorAll('input[name="rackSize"]');
             
             // Hide all sub-options first
-            towerSubOptions.classList.remove('active');
-            rackSubOptions.classList.remove('active');
+            if (towerSubOptions) {
+                towerSubOptions.classList.remove('active');
+            }
+            if (rackSubOptions) {
+                rackSubOptions.classList.remove('active');
+            }
             
             // Clear all size selections
             towerSizeInputs.forEach(input => {
@@ -1739,9 +1961,9 @@
             });
             
             // Show appropriate sub-options
-            if (value === 'tower') {
+            if (value === 'tower' && towerSubOptions) {
                 towerSubOptions.classList.add('active');
-            } else if (value === 'rack') {
+            } else if (value === 'rack' && rackSubOptions) {
                 rackSubOptions.classList.add('active');
             }
             
@@ -1770,17 +1992,47 @@
             }
             
             return {
+                // BASIC INFORMATION
+                serverCount: document.getElementById('serverCount')?.value || null,
                 formFactor: finalFormFactor,
-                cpuCount: document.querySelector('input[name="cpuCount"]:checked')?.value || null,
-                cpuType: document.querySelector('input[name="cpuType"]:checked')?.value || null,
-                ramAmount: document.querySelector('input[name="ramAmount"]:checked')?.value || null,
-                ramType: document.querySelector('input[name="ramType"]:checked')?.value || null,
-                driveBays: document.querySelector('input[name="driveBays"]:checked')?.value || null,
-                storageType: document.querySelector('input[name="storageType"]:checked')?.value || null,
-                powerSupply: document.querySelector('input[name="powerSupply"]:checked')?.value || null,
+                diskPlatform: document.getElementById('diskPlatform')?.value || null,
                 serverPurpose: Array.from(document.querySelectorAll('input[name="serverPurpose"]:checked')).map(cb => cb.value),
+                
+                // CPU
+                cpuCount: document.querySelector('input[name="cpuCount"]:checked')?.value || null,
+                cpuManufacturer: document.querySelector('input[name="cpuManufacturer"]:checked')?.value || null,
+                
+                // RAM
+                ramAmount: document.getElementById('ramAmount')?.value || null,
+                ramType: document.querySelector('input[name="ramType"]:checked')?.value || null,
+                
+                // RAID
+                raidController: document.querySelector('input[name="raidController"]:checked')?.value || null,
+                
+                // HDD STORAGE
+                hddFormFactor: document.querySelector('input[name="hddFormFactor"]:checked')?.value || null,
+                hddCount: document.getElementById('hddCount')?.value || null,
+                hddCapacity: document.getElementById('hddCapacity')?.value || null,
+                
+                // SSD STORAGE
+                ssdFormFactor: document.querySelector('input[name="ssdFormFactor"]:checked')?.value || null,
+                ssdCount: document.getElementById('ssdCount')?.value || null,
+                ssdCapacity: document.getElementById('ssdCapacity')?.value || null,
+                
+                // NETWORK
+                ethernet: document.getElementById('ethernet')?.value || null,
+                pcieAdapters: document.querySelector('input[name="pcieAdapters"]:checked')?.value || null,
+                
+                // POWER
+                psuCount: document.querySelector('input[name="psuCount"]:checked')?.value || null,
+                psuWattage: document.querySelector('input[name="psuWattage"]:checked')?.value || null,
+                
+                // GPU
                 gpuCount: document.querySelector('input[name="gpuCount"]:checked')?.value || null,
-                gpuMemory: document.querySelector('input[name="gpuMemory"]:checked')?.value || null
+                gpuMemory: document.querySelector('input[name="gpuMemory"]:checked')?.value || null,
+                
+                // SERVICES
+                services: Array.from(document.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value)
             };
         }
         
@@ -1825,15 +2077,20 @@
             const info = getCategoryAndBrand();
             const options = getSelectedOptions();
             
-            // Get display text for options
-            const getOptionText = (inputName) => {
-                const input = document.querySelector(`input[name="${inputName}"]:checked`);
+            // Helper functions
+            const getSelectText = (selectId) => {
+                const select = document.getElementById(selectId);
+                return select && select.value ? select.options[select.selectedIndex].text : null;
+            };
+            
+            const getRadioText = (name) => {
+                const input = document.querySelector(`input[name="${name}"]:checked`);
                 return input ? input.nextElementSibling.textContent : null;
             };
             
             let html = '<div class="summary-title">Выбранная конфигурация</div>';
             
-            // Category and Brand
+            // CATEGORY AND BRAND
             html += '<div class="summary-group">';
             html += '<div class="summary-group-title">Основная информация</div>';
             if (info.categoryName) {
@@ -1844,101 +2101,194 @@
             }
             html += '</div>';
             
+            // BASIC INFORMATION
+            html += '<div class="summary-group">';
+            html += '<div class="summary-group-title">1. Основная информация</div>';
+            
+            if (options.serverCount) {
+                html += `<div class="summary-item">Кол-во серверов: ${getSelectText('serverCount')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Кол-во серверов: Не выбрано</div>';
+            }
+            
             // Form Factor
-            const formFactorText = getOptionText('formFactor');
-            let formFactorDisplay = formFactorText;
-            if (formFactorText === 'Tower (Башенный)') {
-                const towerSize = getOptionText('towerSize');
-                if (towerSize) {
-                    formFactorDisplay = `Tower ${towerSize}`;
+            if (options.formFactor) {
+                let ffText = getRadioText('formFactor');
+                if (options.formFactor.includes('tower')) {
+                    ffText += ' ' + options.formFactor.replace('tower', '').toUpperCase();
+                } else if (options.formFactor.includes('rack')) {
+                    ffText += ' ' + options.formFactor.replace('rack', '').toUpperCase();
                 }
-            } else if (formFactorText === 'Rack (Стоечный)') {
-                const rackSize = getOptionText('rackSize');
-                if (rackSize) {
-                    formFactorDisplay = `Rack ${rackSize}`;
-                }
+                html += `<div class="summary-item">Форм-фактор: ${ffText}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Форм-фактор: Не выбрано</div>';
+            }
+            
+            if (options.diskPlatform) {
+                html += `<div class="summary-item">Платформа дисков: ${getSelectText('diskPlatform')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Платформа дисков: Не выбрано</div>';
             }
             
             // Server Purpose
-            const serverPurposeTexts = Array.from(document.querySelectorAll('input[name="serverPurpose"]:checked')).map(cb => {
-                return cb.nextElementSibling.textContent;
-            });
-            
-            html += '<div class="summary-group">';
-            html += '<div class="summary-group-title">Основные характеристики</div>';
-            if (formFactorDisplay) {
-                html += `<div class="summary-item">Форм-фактор: ${formFactorDisplay}</div>`;
-            }
-            if (serverPurposeTexts.length > 0) {
-                serverPurposeTexts.forEach(text => {
-                    html += `<div class="summary-item">Назначение: ${text}</div>`;
+            if (options.serverPurpose.length > 0) {
+                const labels = {
+                    'file_server': 'Файловый сервер',
+                    'compute_server': 'Вычислительный',
+                    'db_server': 'Сервер БД',
+                    'web_server': 'Веб-сервер',
+                    'virtualization': 'Виртуализация'
+                };
+                options.serverPurpose.forEach(p => {
+                    html += `<div class="summary-item">Назначение: ${labels[p] || p}</div>`;
                 });
+            } else {
+                html += '<div class="summary-item not-selected">Назначение: Не выбрано</div>';
             }
             html += '</div>';
             
             // CPU
-            const cpuCountText = getOptionText('cpuCount');
-            const cpuTypeText = getOptionText('cpuType');
-            
             html += '<div class="summary-group">';
-            html += '<div class="summary-group-title">Процессор (CPU)</div>';
-            if (cpuCountText) {
-                html += `<div class="summary-item">Количество: ${cpuCountText}</div>`;
+            html += '<div class="summary-group-title">2. Процессор (CPU)</div>';
+            if (options.cpuCount) {
+                html += `<div class="summary-item">Кол-во: ${getRadioText('cpuCount')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Кол-во: Не выбрано</div>';
             }
-            if (cpuTypeText) {
-                html += `<div class="summary-item">Тип: ${cpuTypeText}</div>`;
+            if (options.cpuManufacturer) {
+                html += `<div class="summary-item">Производитель: ${getRadioText('cpuManufacturer')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Производитель: Не выбрано</div>';
             }
             html += '</div>';
             
-            // Memory
-            const ramAmountText = getOptionText('ramAmount');
-            const ramTypeText = getOptionText('ramType');
-            
+            // MEMORY
             html += '<div class="summary-group">';
-            html += '<div class="summary-group-title">Память (RAM)</div>';
-            if (ramAmountText) {
-                html += `<div class="summary-item">Объем: ${ramAmountText}</div>`;
+            html += '<div class="summary-group-title">3. Память (RAM)</div>';
+            if (options.ramAmount) {
+                html += `<div class="summary-item">Объем: ${getRadioText('ramAmount')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Объем: Не выбрано</div>';
             }
-            if (ramTypeText) {
-                html += `<div class="summary-item">Тип: ${ramTypeText}</div>`;
+            if (options.ramType) {
+                html += `<div class="summary-item">Тип: ${getRadioText('ramType')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Тип: Не выбрано</div>';
             }
             html += '</div>';
             
-            // Storage
-            const driveBaysText = getOptionText('driveBays');
-            const storageTypeText = getOptionText('storageType');
-            
+            // RAID CONTROLLER
             html += '<div class="summary-group">';
-            html += '<div class="summary-group-title">Хранилище</div>';
-            if (driveBaysText) {
-                html += `<div class="summary-item">Отсеки для дисков: ${driveBaysText}</div>`;
+            html += '<div class="summary-group-title">4. Raid контроллер</div>';
+            if (options.raidController) {
+                html += `<div class="summary-item">${getRadioText('raidController')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Не выбрано</div>';
             }
-            if (storageTypeText) {
-                html += `<div class="summary-item">Тип накопителей: ${storageTypeText}</div>`;
+            html += '</div>';
+            
+            // HDD STORAGE
+            html += '<div class="summary-group">';
+            html += '<div class="summary-group-title">5. Хранилище HDD</div>';
+            if (options.hddFormFactor) {
+                html += `<div class="summary-item">Форм-фактор: ${getRadioText('hddFormFactor')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Форм-фактор: Не выбрано</div>';
+            }
+            if (options.hddCount) {
+                html += `<div class="summary-item">Кол-во: ${getSelectText('hddCount')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Кол-во: Не выбрано</div>';
+            }
+            if (options.hddCapacity) {
+                html += `<div class="summary-item">Объем: ${getSelectText('hddCapacity')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Объем: Не выбрано</div>';
+            }
+            html += '</div>';
+            
+            // SSD STORAGE
+            html += '<div class="summary-group">';
+            html += '<div class="summary-group-title">6. Хранилище SSD</div>';
+            if (options.ssdFormFactor) {
+                html += `<div class="summary-item">Форм-фактор: ${getRadioText('ssdFormFactor')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Форм-фактор: Не выбрано</div>';
+            }
+            if (options.ssdCount) {
+                html += `<div class="summary-item">Кол-во: ${getSelectText('ssdCount')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Кол-во: Не выбрано</div>';
+            }
+            if (options.ssdCapacity) {
+                html += `<div class="summary-item">Объем: ${getSelectText('ssdCapacity')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Объем: Не выбрано</div>';
+            }
+            html += '</div>';
+            
+            // NETWORK
+            html += '<div class="summary-group">';
+            html += '<div class="summary-group-title">7. Сеть и расширения</div>';
+            if (options.ethernet) {
+                html += `<div class="summary-item">Ethernet: ${getSelectText('ethernet')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Ethernet: Не выбрано</div>';
+            }
+            if (options.pcieAdapters) {
+                html += `<div class="summary-item">PCIe адаптеры: ${getRadioText('pcieAdapters')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">PCIe адаптеры: Не выбрано</div>';
+            }
+            html += '</div>';
+            
+            // POWER
+            html += '<div class="summary-group">';
+            html += '<div class="summary-group-title">8. Питание (PSU)</div>';
+            if (options.psuCount) {
+                html += `<div class="summary-item">Кол-во БП: ${getRadioText('psuCount')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Кол-во БП: Не выбрано</div>';
+            }
+            if (options.psuWattage) {
+                html += `<div class="summary-item">Мощность: ${getRadioText('psuWattage')}</div>`;
+            } else {
+                html += '<div class="summary-item not-selected">Мощность: Не выбрано</div>';
             }
             html += '</div>';
             
             // GPU
-            const gpuCountText = getOptionText('gpuCount');
-            const gpuMemoryText = getOptionText('gpuMemory');
-            
-            if (gpuCountText && gpuCountText !== 'Нет GPU') {
-                html += '<div class="summary-group">';
-                html += '<div class="summary-group-title">Графический процессор (GPU)</div>';
-                html += `<div class="summary-item">Количество: ${gpuCountText}</div>`;
-                if (gpuMemoryText) {
-                    html += `<div class="summary-item">Объем памяти: ${gpuMemoryText}</div>`;
-                }
-                html += '</div>';
-            }
-            
-            // Power Supply
-            const powerSupplyText = getOptionText('powerSupply');
-            
             html += '<div class="summary-group">';
-            html += '<div class="summary-group-title">Блок питания</div>';
-            if (powerSupplyText) {
-                html += `<div class="summary-item">Мощность: ${powerSupplyText}</div>`;
+            html += '<div class="summary-group-title">9. Графический процессор (GPU)</div>';
+            if (options.gpuCount && options.gpuCount !== '0') {
+                html += `<div class="summary-item">Кол-во: ${getRadioText('gpuCount')}</div>`;
+                if (options.gpuMemory) {
+                    html += `<div class="summary-item">Память: ${getRadioText('gpuMemory')}</div>`;
+                } else {
+                    html += '<div class="summary-item not-selected">Память: Не выбрано</div>';
+                }
+            } else {
+                html += '<div class="summary-item not-selected">Не выбрано</div>';
+            }
+            html += '</div>';
+            
+            // SERVICES
+            html += '<div class="summary-group">';
+            html += '<div class="summary-group-title">10. Работы / Услуги</div>';
+            if (options.services.length > 0) {
+                const labels = {
+                    'installation': 'Установка и настройка',
+                    'rack_mount': 'Монтаж в стойку',
+                    'configuration': 'Конфигурация RAID',
+                    'os_install': 'Установка ОС',
+                    'warranty': 'Расширенная гарантия',
+                    'support': 'Техподдержка'
+                };
+                options.services.forEach(s => {
+                    html += `<div class="summary-item">${labels[s] || s}</div>`;
+                });
+            } else {
+                html += '<div class="summary-item not-selected">Не выбрано</div>';
             }
             html += '</div>';
             
@@ -1963,7 +2313,9 @@
                 organization: formData.get('organization'),
                 email: formData.get('email'),
                 phone: formData.get('phone'),
-                comment: formData.get('comment')
+                comment: formData.get('comment'),
+                sendCopy: formData.get('sendCopy') === 'on',
+                dataConsent: formData.get('dataConsent') === 'on'
             };
             
             // Get selected options
@@ -2030,120 +2382,170 @@
             const sidebarContent = document.getElementById('sidebarContent');
             if (!sidebarContent) return;
             
-            // Get all selected options
-            const formFactor = document.querySelector('input[name="formFactor"]:checked');
-            let formFactorText = null;
-            if (formFactor) {
-                if (formFactor.value === 'tower') {
-                    const towerSize = document.querySelector('input[name="towerSize"]:checked');
-                    if (towerSize) {
-                        formFactorText = 'Tower ' + towerSize.value.replace('tower', '').toUpperCase();
-                    } else {
-                        formFactorText = 'Tower (Башенный)';
-                    }
-                } else if (formFactor.value === 'rack') {
-                    const rackSize = document.querySelector('input[name="rackSize"]:checked');
-                    if (rackSize) {
-                        formFactorText = 'Rack ' + rackSize.value.replace('rack', '').toUpperCase();
-                    } else {
-                        formFactorText = 'Rack (Стоечный)';
-                    }
-                }
-            }
-            
-            const serverPurpose = Array.from(document.querySelectorAll('input[name="serverPurpose"]:checked'));
-            const serverPurposeTexts = serverPurpose.map(cb => {
-                const labels = {
-                    'file_server': 'Файловый сервер / Хранилище данных',
-                    'compute_server': 'Вычислительный сервер',
-                    'db_server': 'Сервер баз данных',
-                    'web_server': 'Веб-сервер',
-                    'virtualization': 'Виртуализация'
-                };
-                return labels[cb.value] || cb.value;
-            });
-            
-            const cpuCount = document.querySelector('input[name="cpuCount"]:checked');
-            const cpuCountText = cpuCount ? cpuCount.nextElementSibling.textContent : null;
-            
-            const cpuType = document.querySelector('input[name="cpuType"]:checked');
-            const cpuTypeText = cpuType ? cpuType.nextElementSibling.textContent : null;
-            
-            const ramAmount = document.querySelector('input[name="ramAmount"]:checked');
-            const ramAmountText = ramAmount ? ramAmount.nextElementSibling.textContent : null;
-            
-            const ramType = document.querySelector('input[name="ramType"]:checked');
-            const ramTypeText = ramType ? ramType.nextElementSibling.textContent : null;
-            
-            const driveBays = document.querySelector('input[name="driveBays"]:checked');
-            const driveBaysText = driveBays ? driveBays.nextElementSibling.textContent : null;
-            
-            const storageType = document.querySelector('input[name="storageType"]:checked');
-            const storageTypeText = storageType ? storageType.nextElementSibling.textContent : null;
-            
-            const gpuCount = document.querySelector('input[name="gpuCount"]:checked');
-            const gpuCountText = gpuCount ? gpuCount.nextElementSibling.textContent : null;
-            
-            const gpuMemory = document.querySelector('input[name="gpuMemory"]:checked');
-            const gpuMemoryText = gpuMemory ? gpuMemory.nextElementSibling.textContent + ' GPU' : null;
-            
-            const powerSupply = document.querySelector('input[name="powerSupply"]:checked');
-            const powerSupplyText = powerSupply ? powerSupply.nextElementSibling.textContent : null;
-            
-            // Build HTML
+            const options = getSelectedOptions();
             let html = '';
             
-            // Основные характеристики
-            html += '<div class="selected-option-group">';
-            html += '<div class="selected-option-group-title">Основные характеристики</div>';
-            html += formFactorText ? `<div class="selected-option-item">${formFactorText}</div>` : '<div class="selected-option-item empty">Не выбрано</div>';
-            if (serverPurposeTexts.length > 0) {
-                serverPurposeTexts.forEach(text => {
-                    html += `<div class="selected-option-item">${text}</div>`;
-                });
-            } else {
-                html += '<div class="selected-option-item empty">Не выбрано</div>';
-            }
-            html += '</div>';
+            // Helper function to get display text
+            const getSelectText = (selectId) => {
+                const select = document.getElementById(selectId);
+                return select && select.value ? select.options[select.selectedIndex].text : null;
+            };
             
-            // Процессор
-            html += '<div class="selected-option-group">';
-            html += '<div class="selected-option-group-title">Процессор (CPU)</div>';
-            html += cpuCountText ? `<div class="selected-option-item">${cpuCountText}</div>` : '<div class="selected-option-item empty">Не выбрано</div>';
-            html += cpuTypeText ? `<div class="selected-option-item">${cpuTypeText}</div>` : '<div class="selected-option-item empty">Не выбрано</div>';
-            html += '</div>';
+            const getRadioText = (name) => {
+                const input = document.querySelector(`input[name="${name}"]:checked`);
+                return input ? input.nextElementSibling.textContent : null;
+            };
             
-            // Память
-            html += '<div class="selected-option-group">';
-            html += '<div class="selected-option-group-title">Память (RAM)</div>';
-            html += ramAmountText ? `<div class="selected-option-item">${ramAmountText}</div>` : '<div class="selected-option-item empty">Не выбрано</div>';
-            html += ramTypeText ? `<div class="selected-option-item">${ramTypeText}</div>` : '<div class="selected-option-item empty">Не выбрано</div>';
-            html += '</div>';
-            
-            // Хранилище
-            html += '<div class="selected-option-group">';
-            html += '<div class="selected-option-group-title">Хранилище</div>';
-            html += driveBaysText ? `<div class="selected-option-item">${driveBaysText}</div>` : '<div class="selected-option-item empty">Не выбрано</div>';
-            html += storageTypeText ? `<div class="selected-option-item">${storageTypeText}</div>` : '<div class="selected-option-item empty">Не выбрано</div>';
-            html += '</div>';
-            
-            // GPU
-            if (gpuCountText && gpuCountText !== 'Нет GPU') {
+            // BASIC INFORMATION
+            if (options.serverCount || options.formFactor || options.diskPlatform || options.serverPurpose.length > 0) {
                 html += '<div class="selected-option-group">';
-                html += '<div class="selected-option-group-title">Графический процессор (GPU)</div>';
-                html += `<div class="selected-option-item">${gpuCountText}</div>`;
-                html += gpuMemoryText ? `<div class="selected-option-item">${gpuMemoryText}</div>` : '<div class="selected-option-item empty">Не выбрано</div>';
+                html += '<div class="selected-option-group-title">1. Основная информация</div>';
+                if (options.serverCount) html += `<div class="selected-option-item">Кол-во серверов: ${getSelectText('serverCount')}</div>`;
+                
+                // Form Factor
+                if (options.formFactor) {
+                    let ffText = getRadioText('formFactor');
+                    if (options.formFactor.includes('tower')) {
+                        ffText += ' ' + options.formFactor.replace('tower', '').toUpperCase();
+                    } else if (options.formFactor.includes('rack')) {
+                        ffText += ' ' + options.formFactor.replace('rack', '').toUpperCase();
+                    }
+                    html += `<div class="selected-option-item">Форм-фактор: ${ffText}</div>`;
+                }
+                
+                if (options.diskPlatform) html += `<div class="selected-option-item">Платформа дисков: ${getSelectText('diskPlatform')}</div>`;
+                
+                // Server Purpose
+                if (options.serverPurpose.length > 0) {
+                    const labels = {
+                        'file_server': 'Файловый сервер',
+                        'compute_server': 'Вычислительный',
+                        'db_server': 'Сервер БД',
+                        'web_server': 'Веб-сервер',
+                        'virtualization': 'Виртуализация'
+                    };
+                    options.serverPurpose.forEach(p => {
+                        html += `<div class="selected-option-item">Назначение: ${labels[p] || p}</div>`;
+                    });
+                }
                 html += '</div>';
             }
             
-            // Блок питания
-            html += '<div class="selected-option-group">';
-            html += '<div class="selected-option-group-title">Блок питания</div>';
-            html += powerSupplyText ? `<div class="selected-option-item">${powerSupplyText}</div>` : '<div class="selected-option-item empty">Не выбрано</div>';
-            html += '</div>';
+            // CPU
+            if (options.cpuCount || options.cpuManufacturer) {
+                html += '<div class="selected-option-group">';
+                html += '<div class="selected-option-group-title">2. Процессор</div>';
+                if (options.cpuCount) html += `<div class="selected-option-item">Кол-во: ${getRadioText('cpuCount')}</div>`;
+                if (options.cpuManufacturer) html += `<div class="selected-option-item">Производитель: ${getRadioText('cpuManufacturer')}</div>`;
+                html += '</div>';
+            }
+            
+            // MEMORY
+            if (options.ramAmount || options.ramType) {
+                html += '<div class="selected-option-group">';
+                html += '<div class="selected-option-group-title">3. Память</div>';
+                if (options.ramAmount) html += `<div class="selected-option-item">Объем: ${getSelectText('ramAmount')}</div>`;
+                if (options.ramType) html += `<div class="selected-option-item">Тип: ${getRadioText('ramType')}</div>`;
+                html += '</div>';
+            }
+            
+            // RAID
+            if (options.raidController) {
+                html += '<div class="selected-option-group">';
+                html += '<div class="selected-option-group-title">4. Raid</div>';
+                html += `<div class="selected-option-item">${getRadioText('raidController')}</div>`;
+                html += '</div>';
+            }
+            
+            // HDD STORAGE
+            if (options.hddFormFactor || options.hddCount || options.hddCapacity) {
+                html += '<div class="selected-option-group">';
+                html += '<div class="selected-option-group-title">5. HDD</div>';
+                if (options.hddFormFactor) html += `<div class="selected-option-item">Форм-фактор: ${getRadioText('hddFormFactor')}</div>`;
+                if (options.hddCount) html += `<div class="selected-option-item">Кол-во: ${getSelectText('hddCount')}</div>`;
+                if (options.hddCapacity) html += `<div class="selected-option-item">Объем: ${getSelectText('hddCapacity')}</div>`;
+                html += '</div>';
+            }
+            
+            // SSD STORAGE
+            if (options.ssdFormFactor || options.ssdCount || options.ssdCapacity) {
+                html += '<div class="selected-option-group">';
+                html += '<div class="selected-option-group-title">6. SSD</div>';
+                if (options.ssdFormFactor) html += `<div class="selected-option-item">Форм-фактор: ${getRadioText('ssdFormFactor')}</div>`;
+                if (options.ssdCount) html += `<div class="selected-option-item">Кол-во: ${getSelectText('ssdCount')}</div>`;
+                if (options.ssdCapacity) html += `<div class="selected-option-item">Объем: ${getSelectText('ssdCapacity')}</div>`;
+                html += '</div>';
+            }
+            
+            // NETWORK
+            if (options.ethernet || options.pcieAdapters) {
+                html += '<div class="selected-option-group">';
+                html += '<div class="selected-option-group-title">7. Сеть</div>';
+                if (options.ethernet) html += `<div class="selected-option-item">Ethernet: ${getSelectText('ethernet')}</div>`;
+                if (options.pcieAdapters) html += `<div class="selected-option-item">PCIe: ${getRadioText('pcieAdapters')}</div>`;
+                html += '</div>';
+            }
+            
+            // POWER
+            if (options.psuCount || options.psuWattage) {
+                html += '<div class="selected-option-group">';
+                html += '<div class="selected-option-group-title">8. Питание (PSU)</div>';
+                if (options.psuCount) html += `<div class="selected-option-item">Кол-во БП: ${getRadioText('psuCount')}</div>`;
+                if (options.psuWattage) html += `<div class="selected-option-item">Мощность: ${getRadioText('psuWattage')}</div>`;
+                html += '</div>';
+            }
+            
+            // GPU
+            if (options.gpuCount && options.gpuCount !== '0') {
+                html += '<div class="selected-option-group">';
+                html += '<div class="selected-option-group-title">9. GPU</div>';
+                html += `<div class="selected-option-item">Кол-во: ${getRadioText('gpuCount')}</div>`;
+                if (options.gpuMemory) html += `<div class="selected-option-item">Память: ${getRadioText('gpuMemory')}</div>`;
+                html += '</div>';
+            }
+            
+            // SERVICES
+            if (options.services.length > 0) {
+                html += '<div class="selected-option-group">';
+                html += '<div class="selected-option-group-title">10. Услуги</div>';
+                const labels = {
+                    'installation': 'Установка и настройка',
+                    'rack_mount': 'Монтаж в стойку',
+                    'configuration': 'Конфигурация RAID',
+                    'os_install': 'Установка ОС',
+                    'warranty': 'Расширенная гарантия',
+                    'support': 'Техподдержка'
+                };
+                options.services.forEach(s => {
+                    html += `<div class="selected-option-item">${labels[s] || s}</div>`;
+                });
+                html += '</div>';
+            }
+            
+            if (html === '') {
+                html = '<div class="selected-option-item empty">Выберите опции</div>';
+            }
             
             sidebarContent.innerHTML = html;
         }
+        
+        // Add event listeners for all form elements
+        document.addEventListener('DOMContentLoaded', function() {
+            initRadioDeselect();
+            initGpuMemoryToggle();
+            updateCategoryAndBrandInfo();
+            updateSidebar();
+            
+            // Listen for all radio and checkbox changes
+            document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+                input.addEventListener('change', updateSidebar);
+            });
+            
+            // Listen for all select changes
+            document.querySelectorAll('select.form-select').forEach(select => {
+                select.addEventListener('change', updateSidebar);
+            });
+        });
     </script>
 </body>
 </html>
