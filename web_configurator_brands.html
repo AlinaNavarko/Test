@@ -23,10 +23,11 @@
             background: white;
             border-bottom: 1px solid #e0e0e0;
             padding: 8px 0;
-            font-size: 0.9em;
+            font-size: 0.85em;
             position: sticky;
             top: 0;
             z-index: 1001;
+            margin: 0;
         }
         
         .top-header-container {
@@ -48,13 +49,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #1c2a3c;
+            color: #888;
         }
         
         .contact-icon {
             width: 16px;
             height: 16px;
-            fill: #1c2a3c;
+            fill: #888;
         }
         
         /* MAIN HEADER */
@@ -63,8 +64,9 @@
             color: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
-            top: 44px;
+            top: 33px;
             z-index: 1000;
+            margin: 0;
         }
         
         .header-container {
@@ -211,104 +213,119 @@
             background: transparent !important;
         }
         
-        .container {
-            max-width: 1400px;
-            width: 1400px;
-            margin: 20px auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-        
         /* BREADCRUMB */
         .breadcrumb {
-            padding: 30px 30px;
-            background: white;
-            border-bottom: 2px solid rgb(61, 243, 187);
-            color: #666;
-            max-width: 1340px;
-            width: 1340px;
-            margin: 40px auto 0 auto;
-            display: flex;
-            justify-content: center;
+            display: inline-flex;
+            gap: 24px;
+            padding: 8px 24px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
             align-items: center;
-            gap: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            animation: fadeInDown 0.6s ease-out;
         }
         
-        .breadcrumb span {
-            margin: 0 5px;
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .breadcrumb .active {
-            color: #1c2a3c;
-            font-weight: 600;
+        .breadcrumb > span {
+            margin: 0;
+            color: rgba(0, 0, 0, 0.3);
+            font-size: 14px;
         }
         
         .breadcrumb-step {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            transition: all 0.25s ease;
+        }
+        
+        .breadcrumb-step span,
+        .breadcrumb-step a {
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+        
+        /* Текущий шаг */
+        .breadcrumb-step.active span,
+        .breadcrumb .active span {
+            color: #0a1823;
+            font-weight: 700;
+        }
+        
+        /* Пройденный шаг */
+        .breadcrumb-step.completed span,
+        .breadcrumb .completed span,
+        .breadcrumb .completed a {
+            color: rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .breadcrumb .completed a:hover {
+            color: #1FE2B2;
+            text-decoration: underline;
+        }
+        
+        /* Следующий шаг */
+        .breadcrumb-step:not(.active):not(.completed) {
+            pointer-events: none;
+        }
+        
+        .breadcrumb-step:not(.active):not(.completed) span {
+            color: rgba(0, 0, 0, 0.4);
         }
         
         .breadcrumb-number {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: rgb(61, 243, 187);
-            color: #1c2a3c;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            font-size: 0.9em;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.25s ease;
         }
         
+        /* Текущий шаг - прозрачный с зелёным контуром */
+        .breadcrumb-step.active .breadcrumb-number,
         .breadcrumb .active .breadcrumb-number {
-            background: rgb(61, 243, 187);
-            color: #1c2a3c;
+            border: 2px solid #1fe2b2;
+            color: #1fe2b2;
+            background: transparent;
+            box-shadow: 0 0 8px rgba(31, 226, 178, 0.2);
         }
         
+        /* Пройденный шаг - зелёный круг с белой цифрой */
+        .breadcrumb-step.completed .breadcrumb-number,
         .breadcrumb .completed .breadcrumb-number {
-            background: #6c757d;
-            color: white;
+            background: #1fe2b2;
+            color: #fff;
+            border: none;
         }
         
-        .breadcrumb .completed a {
-            color: #6c757d;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .breadcrumb .completed a:hover {
-            color: #495057;
-            text-decoration: underline;
-        }
-        
-        .breadcrumb .completed span {
-            color: #6c757d;
-        }
-        
-        .breadcrumb-step:not(.active):not(.completed) {
-            opacity: 0.6;
-        }
-        
+        /* Следующий шаг - серый контур */
         .breadcrumb-step:not(.active):not(.completed) .breadcrumb-number {
-            background: #e9ecef;
-            color: #6c757d;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            color: rgba(0, 0, 0, 0.4);
+            background: transparent;
         }
         
         /* HERO SECTION */
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Files/bg_cofig.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: radial-gradient(ellipse at center, #2a3f5f 0%, #1c2a3c 70%, #0C1E2B 100%);
             color: white;
-            padding: 140px 30px;
+            padding: 80px 30px 60px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -317,23 +334,42 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            padding: 0 20px;
         }
         
+        .eyebrow {
+            display: inline-block;
+            font-size: 14px;
+            letter-spacing: .4px;
+            text-transform: uppercase;
+            color: #1FE2B2;
+            background: none;
+            border: none;
+            margin-bottom: 20px;
+        }
+        
+        .hero-section h1,
         .hero-title {
-            font-size: 3.2em;
+            font-size: 48px;
             font-weight: 700;
-            margin: 0 0 20px 0;
+            margin: 0 0 15px 0;
+            line-height: 1.15;
             color: white;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .hero-subtitle {
-            font-size: 1.3em;
-            margin: 0 0 30px 0;
+            font-size: 18px;
+            margin: 0;
             color: white;
-            opacity: 0.9;
+            opacity: 0.85;
             line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         .hero-features {
@@ -520,8 +556,8 @@
         /* BRANDS CONTAINER */
         #generationsContainer {
             max-width: 1400px;
-            width: 1400px;
-            margin: 40px auto 0 auto;
+            width: 100%;
+            margin: 40px auto;
             padding: 0 30px;
         }
         
@@ -530,84 +566,96 @@
             grid-template-columns: repeat(5, 1fr);
             gap: 25px;
             margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .brand-card {
             background: white;
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgba(31, 226, 178, 0.2);
             border-radius: 12px;
-            padding: 0;
-            text-align: left;
-            transition: all 0.3s;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.25s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             min-height: 180px;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
         
         .brand-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            border-color: rgb(61, 243, 187);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(31, 226, 178, 0.15);
+            border-color: #1fe2b2;
         }
         
-        .brand-logo {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            position: relative;
+        .brand-card.selected {
+            border-color: #1fe2b2;
+            box-shadow: 0 0 0 3px rgba(31, 226, 178, 0.2);
+            background: rgba(31, 226, 178, 0.05);
+        }
+        
+        .brand-card.empty {
+            border: 2px dashed rgba(0, 0, 0, 0.1);
+            color: rgba(0, 0, 0, 0.4);
+            background: transparent;
+        }
+        
+        .brand-card.empty:hover {
+            border-color: rgba(31, 226, 178, 0.3);
+            transform: translateY(-1px);
+            box-shadow: none;
         }
         
         .brand-logo-image {
-            width: 150px;
-            height: 80px;
+            width: auto;
+            max-width: 160px;
+            height: 55px;
             object-fit: contain;
             object-position: center;
-            margin-bottom: 10px;
         }
         
-        .brand-logo-text {
-            font-size: 1.5em;
-            font-weight: 600;
+        .brand-logo-image.larger {
+            height: 105px;
+            max-width: 250px;
+        }
+        
+        .brand-logo-image.medium {
+            height: 75px;
+            max-width: 200px;
+        }
+        
+        .brand-name {
             color: #1c2a3c;
-            text-align: center;
-            margin-top: 10px;
-        }
-        
-        .brand-banner {
-            background: #1c2a3c;
-            color: white;
-            padding: 12px 20px;
-            position: relative;
-            font-weight: 600;
             font-size: 1em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-weight: 600;
             text-align: center;
         }
         
-        .brand-arrow {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgb(61, 243, 187);
-            font-size: 1.2em;
-            font-weight: bold;
+        .brand-card.empty .brand-name {
+            color: rgba(0, 0, 0, 0.4);
         }
         
         /* BACK BUTTON CONTAINER */
         .back-button-container {
             max-width: 1400px;
-            width: 1400px;
+            width: 100%;
             margin: 20px auto;
             padding: 0 30px;
             text-align: center;
@@ -627,7 +675,7 @@
             overflow: hidden;
             transition: all 0.3s;
             max-width: 1340px;
-            width: 1340px;
+            width: 100%;
         }
         
         .series-card:hover {
@@ -820,15 +868,6 @@
         
         /* MOBILE RESPONSIVE */
         @media (max-width: 1400px) {
-            .container {
-                width: 100%;
-                margin: 10px;
-            }
-            
-            .breadcrumb {
-                width: 100%;
-            }
-            
             #generationsContainer {
                 width: 100%;
             }
@@ -842,16 +881,58 @@
         @media (max-width: 1400px) {
             .brands-grid {
                 grid-template-columns: repeat(4, 1fr);
+                gap: 22px;
             }
         }
         
-        @media (max-width: 1200px) {
+        @media (max-width: 1100px) {
             .brands-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
             }
         }
         
         @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 20px 40px;
+            }
+            
+            .hero-section h1,
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .eyebrow {
+                font-size: 12px;
+            }
+            
+            .breadcrumb {
+                padding: 6px 16px;
+                gap: 16px;
+            }
+            
+            .breadcrumb-step span,
+            .breadcrumb-step a {
+                font-size: 0.85em;
+            }
+            
+            .breadcrumb-number {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+            
             .header-container {
                 padding: 12px 15px;
             }
@@ -871,24 +952,27 @@
             
             .brands-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
             }
             
-            .container {
-                margin: 10px;
-                border-radius: 15px;
+            .brand-card {
+                padding: 25px 15px;
+                min-height: 150px;
             }
             
-            /* HERO SECTION MOBILE */
-            .hero-section {
-                padding: 100px 20px;
+            .brand-logo-image {
+                max-width: 140px;
+                height: 48px;
             }
             
-            .hero-title {
-                font-size: 2.2em;
+            .brand-logo-image.larger {
+                height: 90px;
+                max-width: 220px;
             }
             
-            .hero-subtitle {
-                font-size: 1.1em;
+            .brand-logo-image.medium {
+                height: 65px;
+                max-width: 180px;
             }
             
             .hero-features {
@@ -911,19 +995,6 @@
             
             .page-header-subtitle {
                 font-size: 0.95em;
-            }
-            
-            .breadcrumb {
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 8px;
-                text-align: center;
-                width: 100%;
-            }
-            
-            .breadcrumb-step {
-                flex-direction: column;
-                gap: 5px;
             }
             
             
@@ -1036,27 +1107,28 @@
     <!-- HERO SECTION -->
     <div class="hero-section">
         <div class="hero-content">
+            <span class="eyebrow">Конфигуратор оборудования</span>
             <h1 class="hero-title" id="heroTitle">HPE Proliant</h1>
-            <p class="hero-subtitle" id="heroSubtitle">Выберите модель для создания оптимальной конфигурации под ваши задачи</p>
-            
         </div>
     </div>
 
     <!-- BREADCRUMBS -->
-    <div class="breadcrumb">
-        <div class="breadcrumb-step completed">
-            <span class="breadcrumb-number">1</span>
-            <a href="web_configurator.html">Выбор платформы</a>
-        </div>
-        <span> → </span>
-        <div class="breadcrumb-step active">
-            <span class="breadcrumb-number">2</span>
-            <span>Выбор производителя</span>
-        </div>
-        <span> → </span>
-        <div class="breadcrumb-step">
-            <span class="breadcrumb-number">3</span>
-            <span>Выбор компонентов</span>
+    <div id="step2" style="position: sticky; top: 72px; z-index: 500; display: flex; justify-content: center; padding: 16px 0; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <div class="breadcrumb">
+            <div class="breadcrumb-step completed">
+                <span class="breadcrumb-number">1</span>
+                <a href="web_configurator.html">Выбор платформы</a>
+            </div>
+            <span> → </span>
+            <div class="breadcrumb-step active">
+                <span class="breadcrumb-number">2</span>
+                <span>Выбор производителя</span>
+            </div>
+            <span> → </span>
+            <div class="breadcrumb-step">
+                <span class="breadcrumb-number">3</span>
+                <span>Выбор компонентов</span>
+            </div>
         </div>
     </div>
     
@@ -1309,8 +1381,7 @@
         // Обновить заголовки страницы
         function updatePageHeaders(categoryType) {
             const categoryName = categoryType === 'servers' ? 'Серверы' : 'Системы хранения данных';
-            document.getElementById('heroTitle').textContent = 'Выбор производителя';
-            document.getElementById('heroSubtitle').textContent = `Выберите производителя для категории: ${categoryName}`;
+            document.getElementById('heroTitle').textContent = categoryName;
         }
         
         // Отрисовка карточек брендов
@@ -1321,30 +1392,46 @@
                 return;
             }
             
-            const brands = [
-                { id: 'hpe', name: 'HPE', logo: 'Files/configurator_brands/partners_1_hpe.svg' },
-                { id: 'dell', name: 'Dell', logo: 'Files/configurator_brands/partners_2_dell.svg' },
-                { id: 'ibm', name: 'IBM', logo: 'Files/configurator_brands/partners_4_ibm.svg' },
-                { id: 'h3c', name: 'H3C', logo: 'Files/configurator_brands/partners_6_h3c.svg' },
-                { id: 'lenovo', name: 'Lenovo', logo: 'Files/configurator_brands/partners_3_lenovo.svg' },
-                { id: 'xfusion', name: 'xFusion', logo: 'Files/configurator_brands/partners_5_xfusion.svg' },
-                { id: 'supermicro', name: 'Supermicro', logo: 'Files/configurator_brands/partners_7_supermicro.svg' },
-                { id: 'fujitsu', name: 'Fujitsu', logo: 'Files/configurator_brands/partners_3_fui.svg' },
-                { id: 'none', name: 'Не выбрано', logo: null }
-            ];
+            // Different brands for different categories
+            let brands = [];
+            
+            if (categoryType === 'storage') {
+                brands = [
+                    { id: 'hpe', name: 'HPE', logo: 'Files/configurator_brands/partners_1_hpe.svg' },
+                    { id: 'dell', name: 'DELL', logo: 'Files/configurator_brands/partners_2_dell.svg' },
+                    { id: 'lenovo', name: 'Lenovo', logo: 'Files/configurator_brands/Lenovo_logo_2015.svg' },
+                    { id: 'ibm', name: 'IBM', logo: 'Files/configurator_brands/partners_4_ibm.svg' },
+                    { id: 'huawei', name: 'Huawei', logo: 'Files/configurator_brands/Huawei_Standard_logo.svg.png' },
+                    { id: 'fujitsu', name: 'Fujitsu', logo: 'Files/configurator_brands/partners_3_fui.svg' },
+                    { id: 'qsan', name: 'QSAN', logo: 'Files/configurator_brands/QSAN_Logo-01.svg.png' },
+                    { id: 'infortrend', name: 'Infortrend', logo: 'Files/configurator_brands/Infortrend_logo.svg.png' },
+                    { id: 'none', name: 'Не выбрано', logo: null }
+                ];
+            } else {
+                // Servers
+                brands = [
+                    { id: 'hpe', name: 'HPE', logo: 'Files/configurator_brands/partners_1_hpe.svg' },
+                    { id: 'dell', name: 'Dell', logo: 'Files/configurator_brands/partners_2_dell.svg' },
+                    { id: 'ibm', name: 'IBM', logo: 'Files/configurator_brands/partners_4_ibm.svg' },
+                    { id: 'h3c', name: 'H3C', logo: 'Files/configurator_brands/partners_6_h3c.svg' },
+                    { id: 'lenovo', name: 'Lenovo', logo: 'Files/configurator_brands/Lenovo_logo_2015.svg' },
+                    { id: 'xfusion', name: 'xFusion', logo: 'Files/configurator_brands/partners_5_xfusion.svg' },
+                    { id: 'supermicro', name: 'Supermicro', logo: 'Files/configurator_brands/partners_7_supermicro.svg' },
+                    { id: 'fujitsu', name: 'Fujitsu', logo: 'Files/configurator_brands/partners_3_fui.svg' },
+                    { id: 'none', name: 'Не выбрано', logo: null }
+                ];
+            }
             
             let brandsHTML = '<div class="brands-grid">';
             
             brands.forEach(brand => {
+                const emptyClass = brand.id === 'none' ? ' empty' : '';
+                const largerClass = ['h3c', 'supermicro'].includes(brand.id) ? ' larger' : '';
+                const mediumClass = ['huawei', 'infortrend'].includes(brand.id) ? ' medium' : '';
+                const sizeClass = largerClass || mediumClass;
                 brandsHTML += `
-                    <div class="brand-card" onclick="selectBrand('${categoryType}', '${brand.id}')">
-                        <div class="brand-logo">
-                            ${brand.logo ? `<img src="${brand.logo}" alt="${brand.name} Logo" class="brand-logo-image">` : `<div class="brand-logo-text">${brand.name}</div>`}
-                        </div>
-                        <div class="brand-banner">
-                            <div>${brand.name}</div>
-                        </div>
-                        <div class="brand-arrow">›</div>
+                    <div class="brand-card${emptyClass}" onclick="selectBrand('${categoryType}', '${brand.id}')">
+                        ${brand.logo ? `<img src="${brand.logo}" alt="${brand.name}" class="brand-logo-image${sizeClass}">` : `<div class="brand-name">${brand.name}</div>`}
                     </div>
                 `;
             });
@@ -1659,10 +1746,10 @@
                 <p><strong>УНП:</strong> 191762563</p>
                 
                 <h3>Юридический Адрес:</h3>
-                <p>г. Минск , ул. Аранская, 8, блок 1, помещение 201 , БЦ "CASPIAN PLAZA"</p>
+                <p>г. Минск, ул. Аранская 8, блок 1, помещение 201, БЦ "CASPIAN PLAZA"</p>
                 
                 <h3>Почтовый Адрес:</h3>
-                <p>г. Минск , ул. Аранская, 8, блок 1, помещение 201 , БЦ "CASPIAN PLAZA"</p>
+                <p>г. Минск, ул. Аранская 8, блок 1, помещение 201, БЦ "CASPIAN PLAZA"</p>
                 
                 <p><strong>Свидетельство о государственной регистрации № 191762563 от 17 августа 2012 г.</strong></p>
                 <p><strong>Интернет-магазин зарегистрирован в Торговом реестре РБ за номером 505542</strong></p>

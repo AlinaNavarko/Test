@@ -21,7 +21,6 @@
             min-height: 100vh;
             padding: 0;
             margin: 0;
-            overflow-x: hidden;
         }
         
         /* TOP CONTACT HEADER */
@@ -29,10 +28,11 @@
             background: white;
             border-bottom: 1px solid #e0e0e0;
             padding: 8px 0;
-            font-size: 0.9em;
+            font-size: 0.85em;
             position: sticky;
             top: 0;
             z-index: 1001;
+            margin: 0;
         }
         
         .top-header-container {
@@ -54,13 +54,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: rgb(45, 45, 45);
+            color: #888;
         }
         
         .contact-icon {
             width: 16px;
             height: 16px;
-            fill: rgb(45, 45, 45);
+            fill: #888;
         }
         
         /* MAIN HEADER */
@@ -69,8 +69,9 @@
             color: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
-            top: 44px;
+            top: 33px;
             z-index: 1000;
+            margin: 0;
         }
         
         .header-container {
@@ -331,94 +332,101 @@
         }
         
         
+        /* STEPPER (BREADCRUMB) */
         .breadcrumb {
-            padding: 30px 30px;
-            background: white;
-            border-bottom: 1px solid rgb(61, 243, 187);
-            color: #666;
-            max-width: 1340px;
-            width: 1340px;
-            margin: 40px auto 0 auto;
             display: flex;
-            justify-content: center;
-            align-items: center;
             gap: 10px;
             position: sticky;
-            top: 0;
-            z-index: 100;
+            top: 72px;
+            z-index: 500;
+            padding: 16px 30px;
+            background: white;
+            border-bottom: 1px solid rgba(61, 243, 187, 0.2);
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         
         .breadcrumb span {
             margin: 0 5px;
-        }
-        
-        .breadcrumb .active {
-            color: #1c2a3c;
-            font-weight: 600;
+            color: rgba(169, 193, 210, 0.5);
         }
         
         .breadcrumb-step {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .breadcrumb-step.active {
+            background: rgba(31, 226, 178, 0.10);
+            border-color: #1fe2b2;
+        }
+        
+        .breadcrumb-step.done {
+            opacity: 0.8;
+            background: rgba(108, 117, 125, 0.1);
+        }
+        
+        .breadcrumb-step.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .breadcrumb-step span {
+            color: #666;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+        
+        .breadcrumb-step.active span {
+            color: #1c2a3c;
+            font-weight: 600;
+        }
+        
+        .breadcrumb-step a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .breadcrumb-step.done a:hover {
+            color: #495057;
+            text-decoration: underline;
         }
         
         .breadcrumb-number {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: rgb(61, 243, 187);
-            color: #1c2a3c;
+            width: 28px;
+            height: 28px;
+            background: #e9ecef;
+            color: #6c757d;
             border-radius: 50%;
             font-size: 0.9em;
             font-weight: bold;
+            transition: all 0.2s ease;
         }
         
-        .breadcrumb .active .breadcrumb-number {
+        .breadcrumb-step.active .breadcrumb-number {
             background: rgb(61, 243, 187);
             color: #1c2a3c;
         }
         
-        .breadcrumb .completed .breadcrumb-number {
+        .breadcrumb-step.done .breadcrumb-number {
             background: #6c757d;
             color: white;
         }
         
-        .breadcrumb .completed a {
-            color: #6c757d;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .breadcrumb .completed a:hover {
-            color: #495057;
-            text-decoration: underline;
-        }
-        
-        .breadcrumb .completed span {
-            color: #6c757d;
-        }
-        
-        .breadcrumb-step:not(.active):not(.completed) {
-            opacity: 0.6;
-        }
-        
-        .breadcrumb-step:not(.active):not(.completed) .breadcrumb-number {
+        .breadcrumb-step.disabled .breadcrumb-number {
             background: #e9ecef;
-            color: #6c757d;
-        }
-        
-        .breadcrumb a {
-            color: #666;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .breadcrumb a:hover {
-            text-decoration: underline;
-            color: rgb(61, 243, 187);
+            color: #adb5bd;
         }
         
         /* PAGE HEADER */
@@ -1779,7 +1787,7 @@
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
                     </svg>
-                    <span>г. Минск, ул. Аранская, 8, блок 1, помещение 201, БЦ "CASPIAN PLAZA"</span>
+                    <span>г. Минск, ул. Аранская 8, блок 1, помещение 201, БЦ "CASPIAN PLAZA"</span>
                 </div>
                 <div class="contact-item">
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1839,18 +1847,19 @@
     </div>
     
     <!-- Breadcrumb -->
+    <!-- STEPPER -->
     <div class="breadcrumb" id="breadcrumbBar">
-        <div class="breadcrumb-step completed">
+        <div class="breadcrumb-step done">
             <span class="breadcrumb-number">1</span>
             <a href="web_configurator.html">Выбор платформы</a>
         </div>
         <span> → </span>
-        <div class="breadcrumb-step completed">
+        <div class="breadcrumb-step done">
             <span class="breadcrumb-number">2</span>
-            <a href="web_configurator_generations.html">Выбор производителя</a>
+            <a href="web_configurator_brands.html">Выбор производителя</a>
         </div>
         <span> → </span>
-        <div class="breadcrumb-step completed">
+        <div class="breadcrumb-step done">
             <span class="breadcrumb-number">3</span>
             <a href="web_configurator_options.html">Выбор опций</a>
         </div>
@@ -3673,10 +3682,10 @@
                 <p><strong>УНП:</strong> 191762563</p>
                 
                 <h3>Юридический Адрес:</h3>
-                <p>г. Минск , ул. Аранская, 8, блок 1, помещение 201 , БЦ "CASPIAN PLAZA"</p>
+                <p>г. Минск, ул. Аранская 8, блок 1, помещение 201, БЦ "CASPIAN PLAZA"</p>
                 
                 <h3>Почтовый Адрес:</h3>
-                <p>г. Минск , ул. Аранская, 8, блок 1, помещение 201 , БЦ "CASPIAN PLAZA"</p>
+                <p>г. Минск, ул. Аранская 8, блок 1, помещение 201, БЦ "CASPIAN PLAZA"</p>
                 
                 <p><strong>Свидетельство о государственной регистрации № 191762563 от 17 августа 2012 г.</strong></p>
                 <p><strong>Интернет-магазин зарегистрирован в Торговом реестре РБ за номером 505542</strong></p>
